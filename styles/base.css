@@ -1,6 +1,6 @@
 /* Structural system: type scale, hairline grids, photos, section strips, buttons, cursor. */
 /* Macro type: heavy, tight, uppercase. Leading stays at .95 so stacked Vietnamese marks (Ẩ, Ễ) never collide. */
-.mega{font-family:var(--font-archivo),sans-serif;font-weight:900;font-stretch:100%;text-transform:uppercase;letter-spacing:-.045em;line-height:.95}
+.mega{font-family:var(--font-archivo),sans-serif;font-weight:900;text-transform:uppercase;letter-spacing:-.045em;line-height:.95}
 .hd{font-family:var(--font-archivo),sans-serif;font-weight:850;text-transform:uppercase;letter-spacing:-.03em;line-height:.98}
 /* Micro type: mono, uppercase, typewriter tracking */
 .mono{font-family:var(--font-plex),ui-monospace,monospace;text-transform:uppercase;letter-spacing:.08em;font-size:11px;line-height:1.35}

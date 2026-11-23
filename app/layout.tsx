@@ -4,11 +4,14 @@ import Script from 'next/script';
 import { SITE_URL } from '@/lib/site';
 import './globals.css';
 
-const archivo = Archivo({ subsets: ['latin', 'latin-ext', 'vietnamese'], axes: ['wdth'], variable: '--font-archivo', display: 'swap' });
-const vietnam = Be_Vietnam_Pro({ subsets: ['latin', 'latin-ext', 'vietnamese'], weight: ['400', '500', '600', '700'], variable: '--font-vietnam', display: 'swap' });
+// Vietnamese text needs only 'latin' (ASCII and à-ý) plus 'vietnamese' (ă đ ĩ ơ ư and the stacked tones);
+// 'latin-ext' added ~100KB on every page without covering anything we write. Archivo ships weight-only (no
+// width axis): the axis nearly doubled its files for one hover effect.
+const archivo = Archivo({ subsets: ['latin', 'vietnamese'], variable: '--font-archivo', display: 'swap' });
+const vietnam = Be_Vietnam_Pro({ subsets: ['latin', 'vietnamese'], weight: ['400', '500', '600', '700'], variable: '--font-vietnam', display: 'swap' });
 // Glyphs Plex lacks (→ ↑ ★ ●) must fall through to the system monospace (Consolas on Windows), not Next's Arial-based fallback.
 const plex = IBM_Plex_Mono({
-  subsets: ['latin', 'latin-ext', 'vietnamese'],
+  subsets: ['latin', 'vietnamese'],
   weight: ['400', '500', '600'],
   variable: '--font-plex',
   display: 'swap',

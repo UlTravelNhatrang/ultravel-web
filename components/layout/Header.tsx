@@ -1,6 +1,6 @@
 'use client';
 
-/* eslint-disable @next/next/no-img-element -- logo PNG renders at its exact intrinsic ratio */
+import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import { Suspense, useEffect, useRef, useState } from 'react';
@@ -71,12 +71,14 @@ export function Header() {
     if (todayRef.current) todayRef.current.textContent = todayLabel();
   }, []);
 
+  // --hh tracks the header's real height (resize, fonts, menu) without a window resize listener.
   useEffect(() => {
-    const setHH = () => document.documentElement.style.setProperty('--hh', `${headerRef.current?.offsetHeight ?? 120}px`);
-    setHH();
-    addEventListener('resize', setHH);
-    return () => removeEventListener('resize', setHH);
-  }, [menuOpen]);
+    const header = headerRef.current;
+    if (!header) return;
+    const ro = new ResizeObserver(() => document.documentElement.style.setProperty('--hh', `${header.offsetHeight}px`));
+    ro.observe(header);
+    return () => ro.disconnect();
+  }, []);
 
   // A white bubble glides under whichever nav link you point at.
   useEffect(() => {
@@ -131,7 +133,7 @@ export function Header() {
 
       <div className="max-w-[1440px] mx-auto px-4 md:px-6 h-[68px] flex items-center gap-4">
         <Link href="/" className="logo flex items-center gap-3 shrink-0" aria-label="Ultravel.vn, trang chủ">
-          <img src="/assets/ultravel-wordmark.png" alt="Ultravel.vn" width={981} height={160} className="logo-wm h-[28px] md:h-[32px] w-auto" />
+          <Image src="/assets/ultravel-wordmark.png" alt="Ultravel.vn" width={981} height={160} sizes="200px" preload className="logo-wm h-[28px] md:h-[32px] w-auto" />
           <span className="hidden 2xl:block mono text-[10px] leading-[1.35] text-ink2 pl-3 border-l border-ink">Cẩm nang<br />từ thổ địa</span>
         </Link>
 

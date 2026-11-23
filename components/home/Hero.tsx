@@ -1,4 +1,4 @@
-/* eslint-disable @next/next/no-img-element -- hero photo is animated as a raw element (shutter + zoom) */
+import Image from 'next/image';
 import type { ReactNode } from 'react';
 import { HeroSearch } from './HeroSearch';
 
@@ -42,7 +42,7 @@ export function Hero() {
         <figure className="lg:col-span-4 relative flex flex-col">
           {/* The frame itself is the .ht photo box so the shutter reveal clips the whole thing. */}
           <div className="hero-img ht flex-1 min-h-[320px] lg:min-h-[560px]">
-            <img className="absolute inset-0 w-full h-full object-cover" src={HERO_PHOTO} alt="Toàn cảnh vịnh biển Nha Trang" width={1200} height={1400} fetchPriority="high" />
+            <Image className="absolute inset-0 w-full h-full object-cover" src={HERO_PHOTO} alt="Toàn cảnh vịnh biển Nha Trang" width={1200} height={1400} sizes="(max-width: 1023px) 100vw, 45vw" preload fetchPriority="high" />
             <span className="absolute top-3 left-3 z-[2] mono bg-paper px-2 py-1">Fig. 01</span>
           </div>
           <figcaption className="mono flex justify-between gap-3 px-4 py-3 border-t border-ink">

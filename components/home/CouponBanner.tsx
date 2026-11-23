@@ -1,4 +1,4 @@
-/* eslint-disable @next/next/no-img-element -- remote placeholder photo */
+import Image from 'next/image';
 import { PHOTOS } from '@/content/photos';
 import { barcodeStyle } from '@/lib/barcode';
 
@@ -10,7 +10,7 @@ export function CouponBanner() {
     <section className="max-w-[1440px] mx-auto px-4 md:px-6 pt-20 md:pt-28">
       <a href="#" className="coupon group grid sm:grid-cols-[1fr_auto] border border-ink">
         <div className="p-5 md:px-8 flex items-center gap-5">
-          <div className="ht w-20 h-20 shrink-0"><img className="w-full h-full object-cover" src={PHOTOS.place3[3]} alt="" loading="lazy" width={200} height={200} /></div>
+          <div className="ht w-20 h-20 shrink-0"><Image className="w-full h-full object-cover" src={PHOTOS.place3[3]} alt="" width={80} height={80} sizes="80px" /></div>
           <div>
             <p className="mono text-ink2">Quảng cáo / 970×90</p>
             <p className="hd text-xl md:text-3xl mt-1">Vé VinWonders kèm xe đưa đón: giảm 15%</p>

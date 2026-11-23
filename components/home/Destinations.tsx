@@ -30,31 +30,41 @@ export function Destinations() {
       if (e.key === 'ArrowLeft') { e.preventDefault(); go(-1); }
     };
 
+    // Geometry only changes on resize, so it's measured then, not on every scroll frame.
+    let geo = { width: 0, scrollW: 0, step: 1, centres: [] as number[] };
+    const measure = () => {
+      geo = { width: track.clientWidth, scrollW: track.scrollWidth, step: step() || 1, centres: cards.map(c => c.offsetLeft + c.offsetWidth / 2) };
+    };
+    const parallax = motionOK();
+
     let raf = 0;
+    // Only scrollLeft is read per frame, before any write, so a scroll frame never forces a synchronous layout.
     const update = () => {
       raf = 0;
-      const max = track.scrollWidth - track.clientWidth;
-      const p = max > 0 ? track.scrollLeft / max : 1;
-      const vis = Math.min(1, track.clientWidth / track.scrollWidth);
+      const left = track.scrollLeft, { width, scrollW, centres } = geo;
+      const max = scrollW - width;
+      const p = max > 0 ? left / max : 1;
+      const vis = Math.min(1, width / scrollW);
       bar.style.width = `${vis * 100}%`;
       bar.style.transform = `translateX(${(p * (1 - vis)) / vis * 100}%)`;
-      prev.disabled = track.scrollLeft <= 2;
-      next.disabled = track.scrollLeft >= max - 2;
-      count.textContent = `${pad(Math.min(cards.length, Math.round(track.scrollLeft / step()) + 1))} / ${pad(cards.length)}`;
-      if (!motionOK()) return;
-      const mid = track.scrollLeft + track.clientWidth / 2;
-      cards.forEach(c => {
-        const off = (c.offsetLeft + c.offsetWidth / 2 - mid) / track.clientWidth;
-        c.style.setProperty('--px', `${Math.max(-1, Math.min(1, off)) * -7}%`);
-      });
+      prev.disabled = left <= 2;
+      next.disabled = left >= max - 2;
+      count.textContent = `${pad(Math.min(cards.length, Math.round(left / geo.step) + 1))} / ${pad(cards.length)}`;
+      if (!parallax) return;
+      const mid = left + width / 2;
+      cards.forEach((c, i) => c.style.setProperty('--px', `${Math.max(-1, Math.min(1, (centres[i] - mid) / width)) * -7}%`));
     };
     const queue = () => { if (!raf) raf = requestAnimationFrame(update); };
+    const remeasure = () => { measure(); queue(); };
 
     // Mouse drag (touch already swipes natively).
     let down = false, moved = false, startX = 0, startL = 0;
     const onDown = (e: PointerEvent) => {
       if (e.pointerType !== 'mouse' || e.button !== 0) return;
       down = true; moved = false; startX = e.clientX; startL = track.scrollLeft;
+      // Window listeners only for the length of a drag.
+      addEventListener('pointermove', onMove);
+      addEventListener('pointerup', onUp, { once: true });
     };
     const onMove = (e: PointerEvent) => {
       if (!down) return;
@@ -63,6 +73,7 @@ export function Destinations() {
       if (moved) track.scrollLeft = startL - dx;
     };
     const onUp = () => {
+      removeEventListener('pointermove', onMove);
       if (!down) return;
       down = false;
       if (moved) {
@@ -79,11 +90,10 @@ export function Destinations() {
     track.addEventListener('scroll', queue, { passive: true });
     track.addEventListener('pointerdown', onDown);
     track.addEventListener('click', onClick, true);
-    addEventListener('pointermove', onMove);
-    addEventListener('pointerup', onUp);
-    addEventListener('resize', queue);
-    const ro = new ResizeObserver(queue);
+    addEventListener('resize', remeasure);
+    const ro = new ResizeObserver(remeasure);
     ro.observe(cards[0]);
+    measure();
     update();
 
     return () => {
@@ -97,7 +107,7 @@ export function Destinations() {
       track.removeEventListener('click', onClick, true);
       removeEventListener('pointermove', onMove);
       removeEventListener('pointerup', onUp);
-      removeEventListener('resize', queue);
+      removeEventListener('resize', remeasure);
     };
   }, []);
 

@@ -1,4 +1,4 @@
-/* eslint-disable @next/next/no-img-element -- remote placeholder photo */
+import Image from 'next/image';
 import { PHOTOS } from '@/content/photos';
 
 /** Partner ad (970×90 slot) framed in the brand gradient. */
@@ -7,7 +7,7 @@ export function PromoBanner() {
     <section className="max-w-[1440px] mx-auto px-4 md:px-6 pt-20 md:pt-28">
       <a href="#" className="group block hazard p-[10px]">
         <div className="relative ht min-h-[130px] flex">
-          <img className="absolute inset-0 w-full h-full object-cover" src={PHOTOS.place3[1]} alt="" loading="lazy" width={1600} height={400} />
+          <Image className="absolute inset-0 w-full h-full object-cover" src={PHOTOS.place3[1]} alt="" width={1600} height={400} sizes="(max-width: 1440px) 100vw, 1400px" />
           <div className="absolute inset-0 bg-ink/65 z-[2]" />
           <div className="relative z-[3] flex-1 flex flex-col md:flex-row md:items-center justify-between gap-5 px-5 md:px-10 py-7 text-paper">
             <div>

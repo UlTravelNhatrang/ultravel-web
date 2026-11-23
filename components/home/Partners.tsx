@@ -1,4 +1,4 @@
-/* eslint-disable @next/next/no-img-element -- remote placeholder photo */
+import Image from 'next/image';
 import { PHOTOS } from '@/content/photos';
 import Link from 'next/link';
 import { ROUTES } from '@/lib/routes';
@@ -15,7 +15,7 @@ export function Partners() {
           <Link href={`${ROUTES.b2b}#bang-gia`} className="bx bx-red mt-9 px-7 py-4 mono text-[12px] font-semibold hover:!bg-paper hover:!text-ink hover:!border-paper">Xem bảng giá dịch vụ <span className="arr">→</span></Link>
         </div>
         <div className="lg:col-span-5 relative min-h-[260px] my-0 lg:my-12 rounded-[26px] overflow-hidden">
-          <div className="ht absolute inset-0"><img className="w-full h-full object-cover" src={PHOTOS.place2[0]} alt="Chủ quán cà phê tại Nha Trang" loading="lazy" width={900} height={700} /></div>
+          <div className="ht absolute inset-0"><Image className="w-full h-full object-cover" src={PHOTOS.place2[0]} alt="Chủ quán cà phê tại Nha Trang" width={900} height={700} sizes="(max-width: 1023px) 100vw, 40vw" /></div>
           <span className="absolute bottom-3 left-3 z-[2] mono bg-paper text-ink px-2 py-1">Fig. 10 / Đối tác tại Nha Trang</span>
         </div>
       </div>

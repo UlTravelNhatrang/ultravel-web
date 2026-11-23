@@ -90,7 +90,8 @@ function scrollReveals() {
   $$('.brand-word').forEach(b => {
     gsap.timeline({ scrollTrigger: { trigger: b, start: b.closest('.why-statement') ? 'top 62%' : 'top 85%' } })
       .fromTo(b.querySelector('.brand-bg'), { scaleX: 0 }, { scaleX: 1, duration: 0.9, ease: 'expo.out' })
-      .fromTo(b.querySelector('.brand-wave path'), { strokeDashoffset: 1 }, { strokeDashoffset: 0, duration: 1.1, ease: 'power2.inOut' }, 0.25)
+      // autoRound off: GSAP rounds px values by default, which made the 1 to 0 draw jump in a single step.
+      .fromTo(b.querySelector('.brand-wave path'), { strokeDashoffset: 1 }, { strokeDashoffset: 0, duration: 1.1, ease: 'power2.inOut', autoRound: false }, 0.25)
       .fromTo(b.querySelector('sup'), { opacity: 0, y: 6 }, { opacity: 1, y: 0, duration: 0.6, ease: 'back.out(3)' }, 0.7);
   });
 }
@@ -126,17 +127,15 @@ export function MotionProvider() {
         scrollReveals();
         return stopHero;
       });
-      // Re-measure once fonts and images have settled.
-      document.fonts?.ready.then(refresh);
-      if (document.readyState === 'complete') refresh();
-      else addEventListener('load', refresh, { once: true });
+      // Re-measure once, after fonts and images have both settled (each refresh re-lays-out every trigger).
+      const loaded = document.readyState === 'complete' ? Promise.resolve() : new Promise(r => addEventListener('load', r, { once: true }));
+      Promise.all([document.fonts?.ready, loaded]).then(refresh);
     };
     const cancel = afterLayout(start);
 
     return () => {
       disposed = true;
       cancel();
-      removeEventListener('load', refresh);
       mm?.revert();
       stopUnderline();
     };

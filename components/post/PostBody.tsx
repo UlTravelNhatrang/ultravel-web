@@ -12,7 +12,7 @@ function PlaceCard({ slug, note }: { slug: string; note: string }) {
   if (!r) return null;
   return (
     <Link href={reviewPath(r)} className="post-place group">
-      {photo ? <Photo src={photo.src} alt={photo.alt} width={480} height={360} className="post-place-img" /> : <span className="post-place-img bg-paper2" aria-hidden="true" />}
+      {photo ? <Photo src={photo.src} alt={photo.alt} width={480} height={360} sizes="(max-width: 767px) 40vw, 240px" className="post-place-img" /> : <span className="post-place-img bg-paper2" aria-hidden="true" />}
       <span className="p-4 md:p-5 min-w-0 flex flex-col justify-center">
         <span className="mono text-ink2 text-[10px]">{note}</span>
         <span className="font-display font-extrabold text-xl tracking-[-0.02em] mt-1 group-hover:text-red-t transition-colors">{r.name}</span>

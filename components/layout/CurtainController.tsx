@@ -8,8 +8,8 @@ import { LEGACY_DEMO, ROUTES } from '@/lib/routes';
 
 /** Panels sit this far past the viewport edge when hidden, so their curved caps are off-screen too (see .cap). */
 const CAP = 90;
-/** After the panel has covered, keep the words on screen at least this long, even if the page is ready. */
-const MIN_HOLD_MS = 1100;
+/** Once the words and wave have finished coming in, keep them still on screen at least this long. */
+const MIN_HOLD_MS = 450;
 /** First visit: the loader stays at least this long (and waits for fonts, up to BOOT_MAX_MS). */
 const BOOT_MIN_MS = 2200;
 const BOOT_MAX_MS = 3600;
@@ -81,8 +81,21 @@ export function CurtainController({ titles }: { titles: Record<string, PageTitle
     const a = q('.curtain-a'), b = q('.curtain-b'), logo = q('.curtain-logo');
     const kicker = q('.curtain-kicker'), kickerText = q('[data-curtain-kicker]'), title = q('[data-curtain-title]');
     const tip = q('.curtain-tip'), tipText = q('[data-curtain-tip]'), bar = q('.curtain-bar > i'), count = q('[data-curtain-count]');
-    const wave = q<SVGPathElement>('.curtain-wave path');
+    const wave = q<SVGSVGElement>('.curtain-wave');
     let barTween: gsap.core.Tween | null = null;
+    let waveAnim: Animation | null = null;
+
+    /**
+     * The wave draws on as a left-to-right clip wipe run by the browser (Web Animations), not by GSAP:
+     * clip-path animations stay smooth while React renders the next page on the main thread.
+     * Negative insets keep the round line caps from being cut.
+     */
+    const SHOWN = 'inset(-6px -6px -6px -6px)';
+    const animateWave = (from: string, to: string, duration: number, delay: number, easing: string) => {
+      waveAnim?.cancel();
+      waveAnim = wave.animate({ clipPath: [from, to] }, { duration, delay, easing, fill: 'both' });
+      return waveAnim.finished.catch(() => {});
+    };
 
     const hidden = { yPercent: 100, y: CAP };
     const fill = (t: PageTitle) => {
@@ -92,15 +105,15 @@ export function CurtainController({ titles }: { titles: Record<string, PageTitle
       return setTitle(title, t.title);
     };
 
-    /** Words, wave, tip and the slow progress line, once the panel is in place. */
+    /** Logo, kicker, words, wave and tip, once the panel is (nearly) in place. Resolves when all are still. */
     const wordsIn = (words: HTMLElement[], at = 0) => {
+      const drawn = animateWave('inset(-6px 100% -6px -6px)', SHOWN, 1100, (at + 0.35) * 1000, 'cubic-bezier(.65,0,.35,1)');
       const tl = gsap.timeline({ delay: at });
       tl.fromTo(logo, { opacity: 0, y: -10 }, { opacity: 1, y: 0, duration: 0.6, ease: 'power3.out' }, 0)
         .fromTo(kicker, { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.6, ease: 'power3.out' }, 0.05)
         .fromTo(words, { yPercent: 115, rotate: 4 }, { yPercent: 0, rotate: 0, duration: 1, ease: 'expo.out', stagger: 0.08 }, 0.12)
-        .fromTo(wave, { strokeDashoffset: 1 }, { strokeDashoffset: 0, duration: 0.9, ease: 'power2.inOut' }, 0.45)
         .fromTo(tip, { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.7, ease: 'power3.out' }, 0.6);
-      return tl;
+      return Promise.all([tl.then(), drawn]);
     };
 
     const reveal = () => {
@@ -118,6 +131,8 @@ export function CurtainController({ titles }: { titles: Record<string, PageTitle
         .to(bar, { scaleX: 1, duration: 0.35, ease: 'power2.out' })
         .to(words, { yPercent: -115, duration: 0.55, ease: 'power3.in', stagger: 0.05 }, 0.2)
         .to([kicker, tip, logo], { opacity: 0, y: -12, duration: 0.4, ease: 'power2.in' }, 0.2)
+        // The wave carries on along the curve and off its far end.
+        .add(() => { animateWave(SHOWN, 'inset(-6px -6px -6px 100%)', 600, 0, 'cubic-bezier(.55,0,1,.45)'); }, 0.1)
         .to(b, { yPercent: -100, y: -CAP, duration: 1.05, ease: EASE }, 0.55)
         .to(a, { yPercent: -100, y: -CAP, duration: 1.05, ease: EASE }, 0.68)
         // The page's own entrance starts while the panels are still lifting.
@@ -154,14 +169,14 @@ export function CurtainController({ titles }: { titles: Record<string, PageTitle
       gsap.set([logo, kicker, tip], { opacity: 0 });
       gsap.set(words, { yPercent: 115 });
       gsap.set(bar, { scaleX: 0 });
-      gsap.set(wave, { strokeDashoffset: 1 });
-      const tl = gsap.timeline()
+      const panels = gsap.timeline()
         .fromTo(a, hidden, { yPercent: 0, y: 0, duration: 0.95, ease: EASE })
         .fromTo(b, hidden, { yPercent: 0, y: 0, duration: 0.95, ease: EASE }, 0.14);
-      wordsIn(words, 0.75);
+      const intro = wordsIn(words, 0.6);
       // The line creeps forward while the page loads, and completes on reveal.
       barTween = gsap.to(bar, { scaleX: 0.85, duration: 2.4, ease: 'power1.out', delay: 0.8 });
-      return tl.then(() => { coveredAt.current = performance.now(); });
+      // Navigate only once everything is still, so rendering the new page can't make the intro stutter.
+      return Promise.all([panels.then(), intro]).then(() => { coveredAt.current = performance.now(); });
     };
 
     // Capture phase, so this runs before Next's <Link> (which skips clicks already handled).

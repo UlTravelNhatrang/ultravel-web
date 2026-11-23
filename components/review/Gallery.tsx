@@ -1,6 +1,8 @@
 'use client';
 
-/* eslint-disable @next/next/no-img-element -- remote placeholder photos, animated as raw elements */
+/* eslint-disable @next/next/no-img-element -- the lightbox shows the full photo at its own size */
+
+import Image from 'next/image';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { ArrowLeft, ArrowRight, X } from '@phosphor-icons/react';
 import type { Review } from '@/types/review';
@@ -18,7 +20,7 @@ export function Gallery({ photos, total }: { photos: Review['photos']; total: nu
       <div className="gallery">
         {shown.map((p, i) => (
           <button key={p.src} type="button" onClick={() => setOpen(i)} className={`gallery-cell ${i === 0 ? 'hero-img is-big' : ''}`} data-cursor="Xem ảnh" aria-label={`Xem ảnh: ${p.alt}`}>
-            <img src={p.src} alt={p.alt} width={i ? 600 : 1200} height={i ? 450 : 900} loading={i ? 'lazy' : 'eager'} fetchPriority={i ? undefined : 'high'} draggable={false} />
+            <Image src={p.src} alt={p.alt} width={i ? 600 : 1200} height={i ? 450 : 900} sizes={i ? '(max-width: 767px) 50vw, 25vw' : '(max-width: 767px) 100vw, 50vw'} preload={!i} loading={i ? 'lazy' : 'eager'} fetchPriority={i ? undefined : 'high'} draggable={false} />
             {i === shown.length - 1 && <span className="gallery-more mono">Xem {total} ảnh</span>}
           </button>
         ))}

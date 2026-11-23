@@ -18,15 +18,16 @@
 .curtain-logo{position:absolute;left:clamp(16px,4vw,48px);top:clamp(18px,4vw,40px);width:clamp(120px,12vw,170px);height:auto}
 
 .curtain-in{position:relative;display:flex;flex-direction:column;align-items:center;gap:clamp(14px,2vw,22px);padding:0 20px;max-width:min(1100px,100%);text-align:center}
-.curtain-kicker{display:inline-flex;align-items:center;gap:10px;padding:8px 14px;border-radius:99px;font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:rgb(var(--paper)/.85);background:rgb(255 255 255/.07);box-shadow:inset 0 0 0 1px rgb(255 255 255/.12)}
-.curtain-dot{width:8px;height:8px;border-radius:99px;background:#4fd1a5;box-shadow:0 0 0 0 rgb(79 209 165/.6);animation:curtain-ping 1.2s ease-out infinite}
-@keyframes curtain-ping{to{box-shadow:0 0 0 10px rgb(79 209 165/0)}}
+/* Plain label between two short orange rules, like a section mark in a printed guide. */
+.curtain-kicker{display:inline-flex;align-items:center;gap:14px;font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:rgb(var(--paper)/.8)}
+.curtain-rule{display:block;width:clamp(28px,4vw,48px);height:2px;border-radius:2px;background:rgb(var(--red))}
 .curtain-title{font:800 clamp(2.6rem,8vw,7.5rem)/1 var(--font-archivo),sans-serif;letter-spacing:-.045em;text-wrap:balance}
 /* Each word rises out of its own mask */
 .curtain-title .w{display:inline-block;overflow:hidden;padding:.08em .02em .12em;margin:-.08em 0 -.12em;vertical-align:top}
 .curtain-title .w>span{display:inline-block;will-change:transform}
-.curtain-wave{width:clamp(140px,16vw,220px);height:16px;overflow:visible}
-.curtain-wave path{fill:none;stroke:rgb(var(--red));stroke-width:3.5;stroke-linecap:round;vector-effect:non-scaling-stroke;stroke-dasharray:1;stroke-dashoffset:1}
+/* Drawn on by a clip-path wipe (CurtainController animateWave); hidden until then. */
+.curtain-wave{width:clamp(140px,16vw,220px);aspect-ratio:200/16;height:auto;overflow:visible;clip-path:inset(-6px 100% -6px -6px)}
+.curtain-wave path{fill:none;stroke:rgb(var(--red));stroke-width:3.5;stroke-linecap:round}
 .curtain-tip{display:flex;flex-direction:column;align-items:center;gap:6px;max-width:44ch;font-size:clamp(.95rem,1.3vw,1.1rem);line-height:1.5;color:rgb(var(--paper)/.78)}
 .curtain-tip .mono{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:#FF9A3C}
 /* Hidden until the controller brings them in (it sets inline opacity). */

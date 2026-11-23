@@ -4,14 +4,20 @@ import Lenis from 'lenis';
 import { useEffect } from 'react';
 import { gsap, headerHeight, motionOK, ScrollTrigger, smoothTo } from '@/lib/motion';
 
-/** Smooth wheel scrolling with inertia; in-page anchors and back-to-top glide instead of jumping. */
-function setupSmoothScroll() {
-  const lenis = new Lenis({ duration: 1.2, easing: t => Math.min(1, 1.001 - Math.pow(2, -10 * t)), smoothWheel: true, wheelMultiplier: 0.9 });
-  window.__lenis = lenis;
-  lenis.on('scroll', ScrollTrigger.update);
-  const raf = (time: number) => lenis.raf(time * 1000);
-  gsap.ticker.add(raf);
-  gsap.ticker.lagSmoothing(0);
+/**
+ * Smooth wheel scrolling with inertia; in-page anchors and back-to-top glide instead of jumping.
+ * Lenis only smooths the wheel, so touch devices (already smooth natively) skip it and save its per-frame
+ * work; their anchors and back-to-top use native smooth scrolling through smoothTo().
+ */
+function setupSmoothScroll(wheel: boolean) {
+  const lenis = wheel ? new Lenis({ duration: 1.2, easing: t => Math.min(1, 1.001 - Math.pow(2, -10 * t)), smoothWheel: true, wheelMultiplier: 0.9 }) : null;
+  const raf = (time: number) => lenis?.raf(time * 1000);
+  if (lenis) {
+    window.__lenis = lenis;
+    lenis.on('scroll', ScrollTrigger.update);
+    gsap.ticker.add(raf);
+    gsap.ticker.lagSmoothing(0);
+  }
 
   const onClick = (e: MouseEvent) => {
     // A component that handled the click itself (e.g. the review section tabs) has already prevented the default.
@@ -19,7 +25,7 @@ function setupSmoothScroll() {
     const a = (e.target as HTMLElement).closest<HTMLAnchorElement>('a[href^="#"]');
     const href = a?.getAttribute('href');
     if (!a || !href || href.length < 2) return;
-    if (a.classList.contains('totop')) {
+    if (a.classList.contains('totop') && lenis) {
       // Long trip home: ease in, cruise, ease out; a longer distance gets a little more time.
       e.preventDefault();
       a.classList.add('go');
@@ -46,7 +52,7 @@ function setupSmoothScroll() {
   const onNavigate = (e: MouseEvent) => {
     const a = (e.target as HTMLElement).closest<HTMLAnchorElement>('a[href]');
     const href = a?.getAttribute('href');
-    if (a && href && !href.startsWith('#') && a.origin === location.origin && lenis.isScrolling) lenis.scrollTo(scrollY, { immediate: true, force: true });
+    if (lenis && a && href && !href.startsWith('#') && a.origin === location.origin && lenis.isScrolling) lenis.scrollTo(scrollY, { immediate: true, force: true });
   };
   document.addEventListener('click', onClick);
   document.addEventListener('click', onNavigate, true);
@@ -54,9 +60,11 @@ function setupSmoothScroll() {
   return () => {
     document.removeEventListener('click', onClick);
     document.removeEventListener('click', onNavigate, true);
-    gsap.ticker.remove(raf);
-    lenis.destroy();
-    window.__lenis = undefined;
+    if (lenis) {
+      gsap.ticker.remove(raf);
+      lenis.destroy();
+      window.__lenis = undefined;
+    }
   };
 }
 
@@ -108,8 +116,9 @@ function customCursor() {
 export function SiteMotion() {
   useEffect(() => {
     if (!motionOK()) return;
-    const stopScroll = setupSmoothScroll();
-    const stopCursor = matchMedia('(hover: hover) and (pointer: fine)').matches ? customCursor() : () => {};
+    const fine = matchMedia('(hover: hover) and (pointer: fine)').matches;
+    const stopScroll = setupSmoothScroll(fine);
+    const stopCursor = fine ? customCursor() : () => {};
     return () => { stopCursor(); stopScroll(); };
   }, []);
   return null;

@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { memo } from 'react';
 import { Photo } from '@/components/ui/Photo';
 import { reviewHrefForPlace } from '@/lib/reviews';
 import { PHOTOS } from '@/content/photos';
@@ -34,8 +35,11 @@ type PlaceCardProps = {
   onHover?: (i: number | null) => void;
 };
 
-/** Tabs 02-04: compact horizontal place card with live open/closed status. */
-export function PlaceCard({ place, index, photoIndex, tab, hour, onHover }: PlaceCardProps) {
+/**
+ * Tabs 02-04: compact horizontal place card with live open/closed status. Memoised: hovering a card
+ * re-renders the hub (to light its map pin), and the other cards' props haven't changed.
+ */
+export const PlaceCard = memo(function PlaceCard({ place, index, photoIndex, tab, hour, onHover }: PlaceCardProps) {
   const [name, kind, area, price, opensAt, closesAt, tip, , , rating] = place;
   const open = hour !== null && isOpenAt(hour, opensAt, closesAt);
   const hours = `${pad(opensAt)}-${pad(closesAt)}h`;
@@ -43,7 +47,7 @@ export function PlaceCard({ place, index, photoIndex, tab, hour, onHover }: Plac
   const reviewHref = reviewHrefForPlace(name);
   return (
     <article className="hc group flex gap-4 p-3 bg-white/60 hover:bg-white/90 rounded-[var(--card-r)] shadow-[inset_0_0_0_1px_rgb(1_44_121/.06),0_18px_40px_-30px_rgb(1_44_121/.45)]" onMouseEnter={() => onHover?.(index)} onMouseLeave={() => onHover?.(null)}>
-      <Photo src={placePhotos[tab - 1][photoIndex]} alt={name} width={400} height={400} className="w-28 h-28 xl:w-32 xl:h-32 shrink-0 rounded-2xl" />
+      <Photo src={placePhotos[tab - 1][photoIndex]} alt={name} width={128} height={128} sizes="128px" className="w-28 h-28 xl:w-32 xl:h-32 shrink-0 rounded-2xl" />
       <div className="min-w-0 flex-1 flex flex-col py-0.5">
         <div className="flex items-start gap-2">
           <span className="num w-6 h-6 rounded-full bg-ink text-paper text-[11px] grid place-items-center shrink-0 mt-0.5">{pad(index + 1)}</span>
@@ -64,4 +68,4 @@ export function PlaceCard({ place, index, photoIndex, tab, hour, onHover }: Plac
       </div>
     </article>
   );
-}
+});

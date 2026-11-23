@@ -1,6 +1,6 @@
 'use client';
 
-/* eslint-disable @next/next/no-img-element -- slides are animated as raw elements (clip-path wipes) */
+import Image from 'next/image';
 import Link from 'next/link';
 import { useEffect, useRef } from 'react';
 import { Arrow, AsideLink, Section, SectionHeader, SectionTitle } from '@/components/ui/Section';
@@ -34,8 +34,8 @@ export function Tours() {
       const rTo = gsap.quickTo(fl, 'rotation', { duration: 0.5, ease: 'power2' });
       let current = -1, z = 1, open = false, lastX = 0;
 
+      // The tilt follows horizontal speed; it only ticks while the preview is open.
       const tilt = () => { const x = gsap.getProperty(fl, 'x') as number; rTo(gsap.utils.clamp(-7, 7, (x - lastX) * 0.4)); lastX = x; };
-      gsap.ticker.add(tilt);
       const pos = (e: PointerEvent) => { const r = wrap.getBoundingClientRect(); return [e.clientX - r.left + 40, e.clientY - r.top] as const; };
       const move = (e: PointerEvent) => { const [x, y] = pos(e); xTo(x); yTo(y); };
       const caption = (k: number) => {
@@ -59,11 +59,12 @@ export function Tours() {
       const enter = (e: PointerEvent) => {
         if (!open) { const [x, y] = pos(e); gsap.set(fl, { x, y, rotation: 0 }); lastX = x; }
         show(Number((e.currentTarget as HTMLElement).dataset.k));
-        if (!open) { open = true; gsap.to(frame, { clipPath: SHOW, duration: 0.9, ease: 'expo.out', overwrite: true }); }
+        if (!open) { open = true; gsap.ticker.add(tilt); gsap.to(frame, { clipPath: SHOW, duration: 0.9, ease: 'expo.out', overwrite: true }); }
       };
       const leave = () => {
         open = false;
         current = -1;
+        gsap.ticker.remove(tilt);
         gsap.to(frame, { clipPath: HIDE, duration: 0.5, ease: 'power3.inOut', overwrite: true });
       };
 
@@ -91,7 +92,7 @@ export function Tours() {
         <div id="tours">
           {TOURS.map(([title, price, duration, , photo], k) => (
             <Link key={title} href={ROUTES.services} data-k={k} className="tour-row group grid grid-cols-[4.5rem_1fr] md:grid-cols-[5rem_1fr_9rem_10rem_4rem] gap-x-4 md:gap-6 gap-y-1 items-center py-5 md:py-6 border-b border-ink">
-              <div className="ht md:hidden w-[4.5rem] h-[4.5rem] row-span-2"><img className="absolute inset-0 w-full h-full object-cover" src={photo} alt="" loading="lazy" width={80} height={80} /></div>
+              <div className="ht md:hidden w-[4.5rem] h-[4.5rem] row-span-2"><Image className="absolute inset-0 w-full h-full object-cover" src={photo} alt="" width={72} height={72} sizes="72px" /></div>
               <span className="mono hidden md:block">T-{pad(k + 1)}</span>
               <h3 className="hd text-xl md:text-4xl group-hover:text-red">{title}</h3>
               <span className="mono text-ink2 hidden md:block">{duration}</span>
@@ -106,7 +107,7 @@ export function Tours() {
             <div className="relative aspect-[4/5] ht">
               <div className="tf-slides absolute inset-0 z-0">
                 {TOURS.map(t => (
-                  <div key={t[0]} className="tf-slide absolute inset-0 overflow-hidden"><img className="w-full h-full object-cover" src={t[4]} alt="" loading="lazy" /></div>
+                  <div key={t[0]} className="tf-slide absolute inset-0 overflow-hidden"><Image className="w-full h-full object-cover" src={t[4]} alt="" width={320} height={400} sizes="320px" /></div>
                 ))}
               </div>
               <span className="absolute top-2 left-2 z-[3] mono bg-paper px-2 py-1 tf-code" />

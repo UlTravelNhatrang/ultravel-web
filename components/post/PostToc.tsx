@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { headerHeight, smoothTo } from '@/lib/motion';
 import { pad } from '@/lib/format';
 
@@ -12,7 +12,8 @@ export type TocItem = { id: string; label: string };
  */
 export function PostToc({ items, articleId }: { items: TocItem[]; articleId: string }) {
   const [active, setActive] = useState(items[0]?.id);
-  const [progress, setProgress] = useState(0);
+  const pctRef = useRef<HTMLSpanElement>(null);
+  const barRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
     let raf = 0;
@@ -28,8 +29,10 @@ export function PostToc({ items, articleId }: { items: TocItem[]; articleId: str
       const art = document.getElementById(articleId);
       if (art) {
         const r = art.getBoundingClientRect();
-        const done = (innerHeight * 0.6 - r.top) / r.height;
-        setProgress(Math.round(Math.min(1, Math.max(0, done)) * 100));
+        const pct = Math.round(Math.min(1, Math.max(0, (innerHeight * 0.6 - r.top) / r.height)) * 100);
+        // Written directly: as React state this re-rendered the whole list on every scroll frame.
+        if (pctRef.current) pctRef.current.textContent = `Đã đọc ${pct}%`;
+        if (barRef.current) barRef.current.style.transform = `scaleX(${pct / 100})`;
       }
     };
     const queue = () => { if (!raf) raf = requestAnimationFrame(update); };
@@ -53,9 +56,9 @@ export function PostToc({ items, articleId }: { items: TocItem[]; articleId: str
     <nav className="post-toc soft-card" aria-label="Mục lục bài viết">
       <div className="flex items-center justify-between gap-3">
         <p className="font-display font-extrabold text-lg tracking-[-0.02em]">Trong bài này</p>
-        <span className="mono text-ink2 tabular-nums">Đã đọc {progress}%</span>
+        <span ref={pctRef} className="mono text-ink2 tabular-nums">Đã đọc 0%</span>
       </div>
-      <span className="post-toc-bar" aria-hidden="true"><i style={{ transform: `scaleX(${progress / 100})` }} /></span>
+      <span className="post-toc-bar" aria-hidden="true"><i ref={barRef} style={{ transform: 'scaleX(0)' }} /></span>
       <ol className="mt-3">
         {items.map((it, i) => (
           <li key={it.id}>
