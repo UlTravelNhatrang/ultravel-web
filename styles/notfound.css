@@ -1,0 +1,58 @@
+/* 404 page (components/layout/NotFoundView.tsx): sea card with a compass "0" and a route that wanders off the map. */
+.nf-card{position:relative;overflow:hidden;padding:28px 24px 22px;border-radius:32px;color:rgb(var(--paper));background:radial-gradient(70% 60% at 85% 0,#0A3E9E 0,transparent 60%),linear-gradient(180deg,rgb(var(--ink)),rgb(var(--deep)));box-shadow:0 40px 80px -45px rgb(1 26 77/.9)}
+.nf-card::before{content:"";position:absolute;inset:0;pointer-events:none;opacity:.45;background-image:linear-gradient(rgb(255 255 255/.05) 1px,transparent 1px),linear-gradient(90deg,rgb(255 255 255/.05) 1px,transparent 1px);background-size:44px 44px;mask-image:radial-gradient(80% 70% at 50% 30%,#000,transparent)}
+.nf-card>*{position:relative}
+@media (min-width:768px){.nf-card{padding:40px 36px 28px}}
+
+.nf-code{display:flex;align-items:center;justify-content:center;gap:clamp(6px,1.5vw,18px);font:900 clamp(7rem,15vw,12.5rem)/.82 var(--font-archivo),sans-serif;letter-spacing:-.06em}
+.nf-code .hero-line{padding-top:.08em}
+.nf-compass{width:.82em;height:.82em;flex:none;overflow:visible}
+.nf-ring{fill:rgb(255 255 255/.06);stroke:rgb(var(--red));stroke-width:5}
+.nf-ring2{fill:none;stroke:rgb(255 255 255/.15);stroke-width:1.5;stroke-dasharray:2 4}
+.nf-tick{stroke:rgb(255 255 255/.55);stroke-width:2;stroke-linecap:round}
+.nf-n{font:700 13px var(--font-plex),monospace;fill:rgb(var(--red))}
+.nf-needle{transform-origin:60px 60px;transform-box:view-box}
+.nf-needle-n{fill:rgb(var(--red))}
+.nf-needle-s{fill:rgb(255 255 255/.85)}
+.nf-pin{fill:rgb(var(--paper));stroke:rgb(var(--ink));stroke-width:2}
+
+.nf-map{display:block;width:100%;height:auto;margin-top:18px}
+.nf-land{fill:rgb(255 255 255/.07)}
+.nf-coast{fill:none;stroke:rgb(255 255 255/.3);stroke-width:1.5}
+/* Map fades out to the left so the land doesn't end in a hard edge */
+.nf-map{mask-image:linear-gradient(90deg,transparent,#000 18%)}
+.nf-swell{fill:none;stroke:rgb(255 255 255/.12);stroke-width:1.5;stroke-linecap:round}
+.nf-route{fill:none;stroke:rgb(var(--red));stroke-width:2.5;stroke-linecap:round;stroke-dasharray:.012 .018}
+.nf-you{fill:#4fd1a5}
+.nf-you-ring{fill:none;stroke:#4fd1a5;stroke-width:2;opacity:.5}
+.nf-you-t{font:600 11px var(--font-plex),monospace;fill:rgb(var(--paper)/.75)}
+.nf-boat path{fill:none;stroke:rgb(var(--paper));stroke-width:2;stroke-linejoin:round;stroke-linecap:round}
+.nf-boat path:first-child{fill:rgb(var(--paper))}
+.nf-q{fill:rgb(var(--red))}
+.nf-q-t{font:800 18px var(--font-archivo),sans-serif;fill:rgb(var(--ink))}
+.nf-coord{margin-top:12px;font-size:11px;color:rgb(var(--paper)/.5)}
+
+.nf-ways{display:grid;gap:8px}
+@media (min-width:640px){.nf-ways{grid-template-columns:1fr 1fr}.nf-ways>li:last-child:nth-child(odd){grid-column:span 2}}
+.nf-way{display:grid;grid-template-columns:40px 1fr auto;align-items:center;gap:12px;padding:10px 14px 10px 10px;border-radius:16px;background:rgb(255 255 255/.55);box-shadow:inset 0 0 0 1px rgb(var(--ink)/.08);transition:background-color .3s var(--ease),translate .4s var(--ease)}
+.nf-way-ico{display:grid;place-items:center;width:40px;height:40px;border-radius:12px;background:rgb(var(--ink)/.06);transition:background-color .3s var(--ease),color .3s var(--ease)}
+.nf-way-arr{color:rgb(var(--ink)/.35);transition:translate .4s var(--ease),color .3s var(--ease)}
+.nf-way:hover{background:#fff;translate:0 -2px}
+.nf-way:hover .nf-way-ico{background:rgb(var(--ink));color:#fff}
+.nf-way:hover .nf-way-arr{color:rgb(var(--red-t));translate:3px 0}
+
+@media (prefers-reduced-motion:no-preference){
+  /* Needle spins, then keeps hunting for north. */
+  .nf-needle{animation:nf-spin 1.6s cubic-bezier(.2,.8,.2,1) .4s both,nf-hunt 3.2s ease-in-out 2s infinite}
+  .nf-route{animation:nf-march 1.4s linear infinite}
+  .nf-boat{animation:nf-bob 2.6s ease-in-out infinite}
+  .nf-swell{animation:nf-swell 6s linear infinite}
+  .nf-swell:nth-of-type(2){animation-duration:8s}
+  .nf-you-ring{animation:nf-ping 1.8s ease-out infinite;transform-box:fill-box;transform-origin:center}
+}
+@keyframes nf-spin{from{rotate:-540deg}to{rotate:28deg}}
+@keyframes nf-hunt{0%,100%{rotate:28deg}30%{rotate:-36deg}60%{rotate:14deg}80%{rotate:-8deg}}
+@keyframes nf-march{to{stroke-dashoffset:-.03}}
+@keyframes nf-bob{0%,100%{translate:0 0;rotate:-3deg}50%{translate:0 -5px;rotate:3deg}}
+@keyframes nf-swell{to{translate:-40px 0}}
+@keyframes nf-ping{from{scale:.6;opacity:.7}to{scale:1.6;opacity:0}}

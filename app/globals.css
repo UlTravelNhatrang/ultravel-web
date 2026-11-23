@@ -1,0 +1,17 @@
+/* Order matters: later partials refine earlier ones, and Tailwind utilities come last. */
+@import '../styles/tokens.css';
+@import '../styles/base.css';
+@import '../styles/theme.css';
+@import '../styles/header.css';
+@import '../styles/sections.css';
+@import '../styles/components.css';
+@import '../styles/review.css';
+@import '../styles/post.css';
+@import '../styles/b2b.css';
+@import '../styles/transitions.css';
+@import '../styles/notfound.css';
+@import '../styles/motion.css';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;

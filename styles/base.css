@@ -1,0 +1,95 @@
+/* Structural system: type scale, hairline grids, photos, section strips, buttons, cursor. */
+/* Macro type: heavy, tight, uppercase. Leading stays at .95 so stacked Vietnamese marks (Ẩ, Ễ) never collide. */
+.mega{font-family:var(--font-archivo),sans-serif;font-weight:900;font-stretch:100%;text-transform:uppercase;letter-spacing:-.045em;line-height:.95}
+.hd{font-family:var(--font-archivo),sans-serif;font-weight:850;text-transform:uppercase;letter-spacing:-.03em;line-height:.98}
+/* Micro type: mono, uppercase, typewriter tracking */
+.mono{font-family:var(--font-plex),ui-monospace,monospace;text-transform:uppercase;letter-spacing:.08em;font-size:11px;line-height:1.35}
+.mono button,button.mono{text-transform:uppercase}
+.num{font-family:var(--font-archivo),sans-serif;font-weight:900;letter-spacing:-.04em;font-variant-numeric:tabular-nums lining-nums}
+
+/* Hairline grids: gap-px on an ink parent = perfect 1px rules */
+.grid-ink{display:grid;gap:1px;background:rgb(var(--ink));border:1px solid rgb(var(--ink))}
+.grid-ink>*{background:rgb(var(--paper))}
+
+/* Photos: full colour, extra contrast, halftone dot screen on top */
+.ht{position:relative;overflow:hidden;background:rgb(var(--ink))}
+.ht img{filter:contrast(1.14) saturate(1.1)}
+.ht::after{content:"";position:absolute;inset:0;pointer-events:none;z-index:1;opacity:.5;mix-blend-mode:multiply;
+  background-image:radial-gradient(rgb(1 44 121/.6) .9px,transparent 1.3px);background-size:4px 4px}
+
+/* Paper grain over everything (fixed layer, never on scrolling content) */
+body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:60;opacity:.07;mix-blend-mode:multiply;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+
+/* Unit header strip that opens every section */
+.unit{position:relative;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:.5rem 1.5rem;padding:.6rem 0;border-top:2px solid rgb(var(--ink))}
+.unit .rule{position:absolute;left:0;right:0;top:-2px;height:2px;background:rgb(var(--red));transform-origin:0 50%;transform:scaleX(0)}
+
+/* Buttons: square, inverted on hover with a stepped (mechanical) change */
+.bx{display:inline-flex;align-items:center;justify-content:center;gap:.6rem;border:1.5px solid rgb(var(--ink));transition:background-color .5s cubic-bezier(.22,1,.36,1),color .5s cubic-bezier(.22,1,.36,1)}
+.bx:hover{background:rgb(var(--ink));color:rgb(var(--paper))}
+.bx:active{transform:translateY(1px)}
+.bx-red{background:rgb(var(--red));border-color:rgb(var(--red));color:rgb(var(--ink))}
+.bx-red:hover{background:rgb(var(--ink));border-color:rgb(var(--ink));color:rgb(var(--paper))}
+.arr{display:inline-block;transition:transform .5s cubic-bezier(.22,1,.36,1)}
+a:hover .arr,button:hover .arr,.group:hover .arr{transform:translateX(5px)}
+
+.field{width:100%;background:rgb(var(--paper));border:1.5px solid rgb(var(--ink));padding:.7rem .85rem;font-size:.95rem;color:rgb(var(--ink))}
+.field:focus{outline:none;box-shadow:inset 0 0 0 1.5px rgb(var(--red));border-color:rgb(var(--red))}
+.field[aria-invalid="true"]{border-color:rgb(var(--red))}
+
+.hazard{background:repeating-linear-gradient(-45deg,rgb(var(--ink)) 0 10px,rgb(var(--paper)) 10px 20px)}
+.barcode{height:34px;background-repeat:no-repeat}
+.snap::-webkit-scrollbar{display:none}.snap{scrollbar-width:none}
+
+/* Hero line mask: padding keeps stacked diacritics inside the mask */
+.hero-line{display:block;overflow:hidden;padding-top:.2em;margin-top:-.2em}
+.hero-line>span{display:inline-block}
+.js-motion .hero-line>span{transform:translateY(105%)}
+.js-motion .hero-fade{opacity:0}
+.js-motion .hero-img{clip-path:inset(100% 0 0 0)}
+
+/* Search suggestions */
+.suggest{display:none}
+.hero-form:focus-within .suggest{display:block}
+
+/* Tabs */
+#tabs button[aria-selected="true"]{background:rgb(var(--ink));color:rgb(var(--paper))}
+
+/* Map pins */
+.pin{transform-box:fill-box;transform-origin:center;transition:transform .5s cubic-bezier(.22,1,.36,1)}
+.pin.on{transform:scale(1.35)}
+.pin.on rect{fill:rgb(var(--red))!important}
+
+/* Destinations carousel */
+#dest{--gut:max(1rem,calc((100vw - 1440px)/2 + 1.5rem));padding-left:var(--gut);padding-right:var(--gut);scroll-padding-left:var(--gut);overscroll-behavior-x:contain}
+@media (max-width:767px){#dest{--gut:1rem}}
+#dest.dragging{scroll-snap-type:none;user-select:none}
+#dest.dragging a{pointer-events:none}
+.dest-card .ht img{translate:var(--px,0) 0;scale:1.14}
+.car-btn:disabled{opacity:.25;pointer-events:none}
+
+/* Tours */
+#tourFloat{visibility:hidden}
+#tours .tour-row>*{transition:opacity .5s cubic-bezier(.22,1,.36,1)}
+@media (hover:hover) and (pointer:fine){#tours:hover .tour-row:not(:hover)>*{opacity:.25}}
+.tf-frame{clip-path:inset(50% 50% 50% 50% round 26px)}
+
+/* Custom cursor: red crosshair + mono tag. Only mouse/trackpad with motion allowed (html.has-cursor). */
+#cur{display:none}
+html.has-cursor #cur{display:block}
+html.has-cursor,html.has-cursor *{cursor:none!important}
+html.has-cursor :is(input,textarea,select){cursor:text!important}
+.cur-x,.cur-tag{position:fixed;left:0;top:0;pointer-events:none;z-index:200}
+.cur-in{position:absolute;left:0;top:0;transition:transform .5s cubic-bezier(.22,1,.36,1),opacity .1s}
+.cur-in i{position:absolute;background:rgb(var(--red))}
+.cur-in .h{width:24px;height:2px;left:-12px;top:-1px}
+.cur-in .v{width:2px;height:24px;left:-1px;top:-12px}
+.cur-in .b{left:-17px;top:-17px;width:34px;height:34px;background:none;border:1.5px solid rgb(var(--ink));opacity:0;transition:opacity .1s}
+.cur-tag{margin:16px 0 0 16px;background:rgb(var(--ink));color:rgb(var(--paper));padding:5px 8px;opacity:0;transition:opacity .1s;white-space:nowrap}
+#cur.is-link .cur-in{transform:rotate(45deg)}
+#cur.is-link .cur-in .b{opacity:1}
+#cur.is-label .cur-tag{opacity:1}
+#cur.is-down .cur-in{transform:scale(.7)}
+#cur.is-down.is-link .cur-in{transform:rotate(45deg) scale(.7)}
+#cur.is-text .cur-in,#cur.is-text .cur-tag,#cur.is-out .cur-in,#cur.is-out .cur-tag{opacity:0}

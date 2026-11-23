@@ -1,0 +1,25 @@
+/* Header: live dot, logo, nav bubble, search, CTA. */
+/* ---------- Header ---------- */
+.live{width:7px;height:7px;border-radius:99px;background:currentColor;position:relative}
+.live::after{content:"";position:absolute;inset:0;border-radius:99px;background:currentColor;animation:ping 2s cubic-bezier(0,0,.2,1) infinite}
+@keyframes ping{75%,100%{transform:scale(2.6);opacity:0}}
+.logo-wm{display:block;transform-origin:0 60%;transition:transform .6s var(--ease)}
+.logo:hover .logo-wm{transform:scale(1.04)}
+#dnav{background:rgb(255 255 255/.42);box-shadow:inset 0 0 0 1px rgb(var(--ink)/.08),inset 0 1px 0 rgb(255 255 255/.7)}
+#dnav .nl{position:relative;z-index:1;display:flex;align-items:center;gap:6px;padding:.55rem 1rem;border-radius:999px;font-size:14px;font-weight:500;color:rgb(var(--ink)/.78);white-space:nowrap;transition:color .35s var(--ease)}
+#dnav .nl .ico{flex:none;color:rgb(var(--ink)/.45);transition:color .35s var(--ease),transform .5s cubic-bezier(.34,1.56,.64,1)}
+#dnav .nl:hover .ico,#dnav .nl:focus-visible .ico,#dnav .nl.on .ico{color:rgb(var(--red));transform:translateY(-2px) rotate(-10deg) scale(1.12)}
+#dnav .nl:hover,#dnav .nl.on{color:rgb(var(--ink))}
+.nav-blob{position:absolute;left:0;top:6px;bottom:6px;width:0;border-radius:999px;background:#fff;opacity:0;
+  box-shadow:0 8px 20px -8px rgb(1 44 121/.35),inset 0 -2px 0 rgb(0 120 224/.25)}
+.search-pill,.burger-pill{height:42px;display:inline-flex;align-items:center;gap:.55rem;padding:0 .8rem;border-radius:999px;background:rgb(255 255 255/.42);box-shadow:inset 0 0 0 1px rgb(var(--ink)/.08);font-size:13px;color:rgb(var(--ink)/.75)}
+.search-pill{min-width:42px;justify-content:center}
+.search-pill:hover,.burger-pill:hover{background:#fff;color:rgb(var(--ink))}
+.search-pill kbd{place-items:center;width:20px;height:20px;border-radius:6px;font:500 11px var(--font-plex),monospace;background:rgb(var(--ink)/.07)}
+.burger-pill{padding:0 1rem;font-size:12px}
+.cta-pill{height:42px;align-items:center;gap:.6rem;padding:0 .4rem 0 1.1rem;border-radius:999px;background:rgb(var(--red));color:rgb(var(--ink));font-size:13px;font-weight:700;white-space:nowrap;box-shadow:0 10px 20px -10px rgb(247 128 10/.7)}
+.cta-pill:hover{background:rgb(var(--ink));color:#fff}
+.cta-dot{width:32px;height:32px;display:grid;place-items:center;border-radius:999px;background:rgb(255 255 255/.18);transition:transform .5s var(--ease)}
+.cta-pill:hover .cta-dot{transform:translateX(3px) rotate(-45deg)}
+#mnav{background:rgb(255 255 255/.5)}
+@media (prefers-reduced-motion: reduce){.live::after{animation:none!important}}

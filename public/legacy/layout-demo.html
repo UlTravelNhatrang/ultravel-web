@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>uTravel – Layout Homepage, Bài viết & B2B</title>
+<script src="https://cdn.tailwindcss.com/3.4.17"></script>
+<style>
+:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+html{scroll-behavior:smooth;scroll-padding-top:120px}
+body{background:#fff;color:#0f172a;font-family:Inter,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+.ph{background:linear-gradient(135deg,var(--a,#0ea5e9),var(--b,#0c4a6e))}
+.snap::-webkit-scrollbar{display:none}
+details[open] summary svg{transform:rotate(180deg)}
+.view{display:none}.view.on{display:block}
+</style>
+</head>
+<body>
+
+<!-- HEADER (sticky) -->
+<header class="sticky top-0 z-40 bg-white/95 backdrop-blur border-b border-slate-200" style="top:env(safe-area-inset-top,0px)">
+  <div class="max-w-7xl mx-auto px-4 h-16 flex items-center gap-4">
+    <a href="#home" class="text-2xl font-extrabold tracking-tight text-slate-900">u<span class="text-sky-600">Travel</span></a>
+    <nav aria-label="Menu chính" class="hidden xl:flex gap-5 text-sm font-medium text-slate-700 ml-6">
+      <a class="hover:text-sky-600" href="/cam-nang/">Cẩm Nang Du Lịch</a>
+      <a class="hover:text-sky-600" href="/am-thuc/">Ẩm Thực &amp; Đặc Sản</a>
+      <a class="hover:text-sky-600" href="/diem-den/">Điểm Đến &amp; Vui Chơi</a>
+      <a class="hover:text-sky-600" href="/lich-trinh/">Lịch Trình Tự Túc</a>
+      <a class="hover:text-sky-600" href="/dich-vu/">Tour &amp; Lưu Trú</a>
+      <a class="hover:text-sky-600" href="#b2b">Marketing Du Lịch</a>
+    </nav>
+    <div class="ml-auto flex items-center gap-3">
+      <label class="hidden md:flex items-center gap-2 bg-slate-100 rounded-full px-3 py-1.5 text-sm">
+        <svg class="w-4 h-4 text-slate-500" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+        <input type="search" placeholder="Tìm kiếm…" class="bg-transparent outline-none w-36" aria-label="Tìm kiếm">
+      </label>
+      <a href="#b2b" class="hidden sm:inline-block bg-sky-600 hover:bg-sky-700 text-white text-sm font-semibold rounded-full px-4 py-2">Hợp Tác Truyền Thông</a>
+      <button id="burger" class="xl:hidden p-2" aria-label="Mở menu"><svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button>
+    </div>
+  </div>
+  <nav id="mnav" class="hidden xl:hidden border-t border-slate-200 bg-white px-4 py-3 grid gap-2 text-sm font-medium">
+    <a href="/cam-nang/">Cẩm Nang Du Lịch</a><a href="/am-thuc/">Ẩm Thực &amp; Đặc Sản</a><a href="/diem-den/">Điểm Đến &amp; Vui Chơi</a><a href="/lich-trinh/">Lịch Trình Tự Túc</a><a href="/dich-vu/">Tour &amp; Lưu Trú</a><a href="#b2b">Marketing Du Lịch</a>
+    <a href="#b2b" class="bg-sky-600 text-white text-center rounded-full py-2">Hợp Tác Truyền Thông</a>
+  </nav>
+  <!-- Template switcher (chỉ dùng để xem mẫu) -->
+  <div class="bg-slate-900 text-xs text-slate-300 px-4 py-1.5 flex gap-4 justify-center">
+    <span class="text-slate-500">Xem mẫu:</span>
+    <a data-v="home" href="#home">1. Trang chủ</a><a data-v="review" href="#review">2. Review chi tiết</a><a data-v="post" href="#post">3. Bài viết</a><a data-v="b2b" href="#b2b">4. B2B</a>
+  </div>
+</header>
+
+<main>
+<!-- ================= HOMEPAGE ================= -->
+<div id="v-home" class="view">
+  <!-- Hero -->
+  <section class="ph relative text-white" style="--a:#38bdf8;--b:#075985">
+    <div class="absolute inset-0 bg-gradient-to-t from-slate-900/70 to-transparent"></div>
+    <div class="relative max-w-4xl mx-auto px-4 py-20 md:py-32 text-center">
+      <p class="text-sky-100 text-sm mb-3">[Ảnh nền full-width: toàn cảnh biển Nha Trang · WebP/AVIF, preload, fetchpriority="high"]</p>
+      <h1 class="text-3xl md:text-5xl font-extrabold leading-tight">uTravel – Cẩm nang du lịch thực tế từ thổ địa</h1>
+      <form class="mt-8 flex bg-white rounded-full p-1.5 shadow-xl text-slate-900" role="search" onsubmit="return false">
+        <input type="search" class="flex-1 px-5 py-3 outline-none bg-transparent text-base" placeholder="Bạn muốn đi đâu, ăn gì ở Nha Trang?" aria-label="Tìm kiếm">
+        <button class="bg-sky-600 hover:bg-sky-700 text-white font-semibold rounded-full px-6">Tìm</button>
+      </form>
+      <div class="mt-4 flex flex-wrap justify-center gap-2 text-sm">
+        <a class="bg-white/20 hover:bg-white/30 rounded-full px-3 py-1" href="#">#ĂnGìNhaTrang</a>
+        <a class="bg-white/20 hover:bg-white/30 rounded-full px-3 py-1" href="#">#LịchTrình3N2Đ</a>
+        <a class="bg-white/20 hover:bg-white/30 rounded-full px-3 py-1" href="#">#VéVinWonders</a>
+        <a class="bg-white/20 hover:bg-white/30 rounded-full px-3 py-1" href="#">#ĐàLạt</a>
+        <a class="bg-white/20 hover:bg-white/30 rounded-full px-3 py-1" href="#">#PhúQuốc</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Voucher strip -->
+  <section class="max-w-7xl mx-auto px-4 -mt-8 relative z-10" aria-label="Voucher ưu đãi"><div id="vouchers" class="snap flex gap-3 overflow-x-auto snap-x pb-3" style="scrollbar-width:none"></div></section>
+
+  <!-- Local Hub -->
+  <section class="max-w-7xl mx-auto px-4 py-12">
+    <div class="flex flex-wrap items-end justify-between gap-3 mb-6">
+      <div><p class="text-sky-600 text-sm font-semibold uppercase">Local Hub</p><h2 class="text-2xl md:text-3xl font-bold">Nha Trang – Khánh Hòa</h2></div>
+      <div id="tabs" role="tablist" class="flex gap-1 bg-slate-100 p-1 rounded-full text-sm font-medium overflow-x-auto">
+        <button role="tab" data-t="0" class="px-4 py-2 rounded-full whitespace-nowrap">Kinh Nghiệm Mới Nhất</button>
+        <button role="tab" data-t="1" class="px-4 py-2 rounded-full whitespace-nowrap">Ăn Gì</button>
+        <button role="tab" data-t="2" class="px-4 py-2 rounded-full whitespace-nowrap">Uống Gì</button>
+        <button role="tab" data-t="3" class="px-4 py-2 rounded-full whitespace-nowrap">Chơi Gì &amp; Giá Vé</button>
+      </div>
+    </div>
+    <div id="hubfilter" class="hidden flex flex-wrap gap-2 mb-5 text-sm" aria-label="Lọc theo khu vực"></div>
+    <div id="hubgrid" class="grid sm:grid-cols-2 lg:grid-cols-4 gap-5"></div>
+    <div id="hublist" class="hidden">
+      <div class="grid lg:grid-cols-12 gap-6">
+        <div class="hidden lg:block lg:col-span-5"><div class="lg:sticky lg:top-32">
+          <svg viewBox="0 0 400 460" class="w-full rounded-2xl border border-slate-200" role="img" aria-label="Bản đồ minh họa Nha Trang">
+            <rect width="400" height="460" fill="#e0f2fe"/>
+            <path d="M0 0H150C170 60 140 110 165 170 185 230 150 290 175 350 190 400 165 430 180 460H0Z" fill="#f1f5e9" stroke="#bae6fd" stroke-width="6"/>
+            <circle cx="310" cy="120" r="34" fill="#f1f5e9"/><circle cx="350" cy="260" r="22" fill="#f1f5e9"/><circle cx="290" cy="370" r="28" fill="#f1f5e9"/>
+            <text x="40" y="40" font-size="13" fill="#64748b">Khánh Hòa</text>
+            <text x="270" y="220" font-size="13" fill="#0369a1" font-style="italic">Biển Đông</text>
+            <text x="288" y="124" font-size="11" fill="#64748b">Hòn Tre</text>
+            <g id="pins"></g>
+          </svg>
+          <div class="flex justify-between items-center mt-2 text-xs text-slate-500"><span>Bản đồ minh họa · bản đồ thật chỉ tải khi bấm</span><a href="#" class="text-sky-600 font-semibold">Mở Google Maps ↗</a></div>
+        </div></div>
+        <div id="hubcards" class="lg:col-span-7 grid sm:grid-cols-2 gap-4 content-start"></div>
+      </div>
+      <a href="/diem-den/" class="inline-block mt-5 text-sky-600 font-semibold text-sm">Xem tất cả địa điểm ở Nha Trang →</a>
+    </div>
+  </section>
+
+  <!-- Destinations -->
+  <section class="bg-slate-50 py-12">
+    <div class="max-w-7xl mx-auto px-4">
+      <h2 class="text-2xl md:text-3xl font-bold mb-6">Khám phá điểm đến</h2>
+      <div id="dest" class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-4"></div>
+    </div>
+  </section>
+
+  <!-- Ad banner ngang #1 -->
+  <section class="max-w-7xl mx-auto px-4 py-6"><a href="#" class="ph relative flex flex-col sm:flex-row items-center justify-between gap-3 rounded-2xl px-6 py-5 text-white min-h-[90px]" style="--a:#f97316;--b:#be123c"><span class="absolute top-1 right-3 text-[10px] uppercase opacity-70">Quảng cáo · 970×90</span><p class="font-bold text-lg text-center sm:text-left">Mùa hè Nha Trang – Combo resort 4★ giảm đến 30%</p><span class="bg-white text-rose-700 font-bold rounded-full px-5 py-2 text-sm shrink-0">Đặt ngay</span></a></section>
+
+  <!-- Ẩm thực & Đặc sản (card vuông) -->
+  <section class="max-w-7xl mx-auto px-4 py-12">
+    <div class="flex justify-between items-end mb-6"><div><p class="text-sky-600 text-sm font-semibold uppercase">Món ngon &amp; Đặc sản</p><h2 class="text-2xl md:text-3xl font-bold">Món phải thử &amp; đặc sản làm quà</h2></div><a href="/am-thuc/" class="text-sky-600 text-sm font-semibold">Xem tất cả</a></div>
+    <div id="food" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4"></div>
+  </section>
+
+  <!-- Editorial feed -->
+  <section class="max-w-7xl mx-auto px-4 py-12 grid lg:grid-cols-10 gap-8">
+    <div class="lg:col-span-7">
+      <h2 class="text-2xl md:text-3xl font-bold mb-6">Bài viết mới cập nhật</h2>
+      <div id="feed" class="divide-y divide-slate-200"></div>
+      <a href="/cam-nang/" class="inline-block mt-6 text-sky-600 font-semibold">Xem tất cả bài viết →</a>
+    </div>
+    <aside class="lg:col-span-3">
+      <div class="lg:sticky lg:top-32 space-y-6">
+        <div class="border border-slate-200 rounded-2xl p-5">
+          <h3 class="font-bold mb-3">🔥 Top Trending Reads</h3>
+          <ol id="trend" class="space-y-3 text-sm list-decimal list-inside marker:font-bold marker:text-sky-600"></ol>
+        </div>
+        <form class="bg-sky-50 border border-sky-100 rounded-2xl p-5 space-y-3" onsubmit="return false">
+          <h3 class="font-bold">Nhận lịch trình &amp; tư vấn chuyến đi</h3>
+          <input class="w-full rounded-lg border border-slate-300 px-3 py-2 text-sm" placeholder="Họ tên" aria-label="Họ tên">
+          <input type="email" class="w-full rounded-lg border border-slate-300 px-3 py-2 text-sm" placeholder="Email hoặc Zalo" aria-label="Email hoặc Zalo">
+          <select class="w-full rounded-lg border border-slate-300 px-3 py-2 text-sm bg-white" aria-label="Điểm đến"><option>Nha Trang</option><option>Đà Lạt</option><option>Phú Quốc</option></select>
+          <button class="w-full bg-sky-600 hover:bg-sky-700 text-white font-semibold rounded-lg py-2">Đăng ký miễn phí</button>
+        </form>
+      </div>
+    </aside>
+  </section>
+
+  <!-- B2C strip -->
+  <section class="bg-slate-50 py-12">
+    <div class="max-w-7xl mx-auto px-4">
+      <div class="flex justify-between items-end mb-5"><h2 class="text-2xl font-bold">Tour &amp; combo chọn lọc</h2><a href="/dich-vu/" class="text-sky-600 text-sm font-semibold">Xem tất cả</a></div>
+      <div id="tours" class="snap flex gap-4 overflow-x-auto snap-x snap-mandatory pb-2" style="scrollbar-width:none"></div>
+    </div>
+  </section>
+
+  <!-- Vì sao chọn uTravel -->
+  <section class="bg-sky-50 py-14">
+    <div class="max-w-7xl mx-auto px-4">
+      <h2 class="text-2xl md:text-3xl font-bold text-center">Vì sao chọn uTravel?</h2>
+      <p class="text-center text-slate-600 mt-2 mb-8">Thông tin từ người sống và làm du lịch tại Nha Trang.</p>
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+        <div class="bg-white rounded-2xl p-6"><div class="text-3xl mb-3">📍</div><h3 class="font-bold">Thổ địa review thật</h3><p class="text-sm text-slate-600 mt-1">Đi thực tế, ăn thật, chấm điểm minh bạch.</p></div>
+        <div class="bg-white rounded-2xl p-6"><div class="text-3xl mb-3">🔄</div><h3 class="font-bold">Cập nhật liên tục</h3><p class="text-sm text-slate-600 mt-1">Giá vé, giờ mở cửa được kiểm tra và ghi ngày cập nhật.</p></div>
+        <div class="bg-white rounded-2xl p-6"><div class="text-3xl mb-3">🎟️</div><h3 class="font-bold">Ưu đãi độc quyền</h3><p class="text-sm text-slate-600 mt-1">Voucher và combo thương lượng trực tiếp với đối tác.</p></div>
+        <div class="bg-white rounded-2xl p-6"><div class="text-3xl mb-3">🤝</div><h3 class="font-bold">Tư vấn 1-1</h3><p class="text-sm text-slate-600 mt-1">Lên lịch trình riêng qua Zalo, miễn phí.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Review từ cộng đồng (social) -->
+  <section class="max-w-7xl mx-auto px-4 py-12">
+    <div class="flex justify-between items-end mb-6"><div><p class="text-sky-600 text-sm font-semibold uppercase">Cộng đồng</p><h2 class="text-2xl md:text-3xl font-bold">Review du lịch từ mạng xã hội</h2></div><a href="#" class="text-sky-600 text-sm font-semibold">#uTravelReview</a></div>
+    <div id="social" class="grid grid-cols-2 lg:grid-cols-4 gap-4"></div>
+  </section>
+
+  <!-- Ad banner ngang #2 -->
+  <section class="max-w-7xl mx-auto px-4 pb-6"><a href="#" class="ph relative flex flex-col sm:flex-row items-center justify-between gap-3 rounded-2xl px-6 py-5 text-white min-h-[90px]" style="--a:#0ea5e9;--b:#4c1d95"><span class="absolute top-1 right-3 text-[10px] uppercase opacity-70">Quảng cáo · 970×90</span><p class="font-bold text-lg text-center sm:text-left">Vé VinWonders + xe đưa đón – nhập mã UTRAVEL15 giảm 15%</p><span class="bg-white text-sky-700 font-bold rounded-full px-5 py-2 text-sm shrink-0">Nhận ưu đãi</span></a></section>
+
+  <!-- B2B banner -->
+  <section class="max-w-7xl mx-auto px-4 py-12">
+    <div class="rounded-3xl bg-slate-900 text-white p-8 md:p-12 flex flex-col md:flex-row md:items-center gap-6 justify-between">
+      <p class="text-xl md:text-2xl font-bold max-w-3xl leading-snug">Bạn là chủ nhà hàng, khách sạn hoặc lữ hành tại Nha Trang? Gia tăng khách hàng bền vững cùng giải pháp SEO, Google Maps &amp; Review thực tế từ uTravel.</p>
+      <a href="#b2b" class="shrink-0 bg-amber-400 hover:bg-amber-300 text-slate-900 font-bold rounded-full px-6 py-3 text-center">Xem Bảng Giá Dịch Vụ</a>
+    </div>
+  </section>
+</div>
+
+<!-- ================= REVIEW CHI TIẾT ================= -->
+<div id="v-review" class="view">
+<div class="max-w-7xl mx-auto px-4 py-6" itemscope itemtype="https://schema.org/CafeOrCoffeeShop">
+  <nav aria-label="Breadcrumb" class="text-sm text-slate-500"><a href="#home" class="hover:text-sky-600">Trang chủ</a> › <a href="#" class="hover:text-sky-600">Nha Trang</a> › <a href="#" class="hover:text-sky-600">Uống gì</a> › <a href="#" class="hover:text-sky-600">Cà phê view biển</a> › Sóng Xanh Cafe</nav>
+  <div class="mt-4 flex flex-wrap items-start justify-between gap-4">
+    <div>
+      <h1 class="text-3xl md:text-4xl font-extrabold" itemprop="name">Review chi tiết Sóng Xanh Cafe Nha Trang</h1>
+      <div class="flex flex-wrap items-center gap-x-3 gap-y-1 mt-2 text-sm">
+        <span class="font-bold text-lg">4.5</span><span class="text-amber-500">★★★★☆</span><a href="#rv" class="text-sky-600 underline">128 đánh giá</a><span class="text-slate-500">#3 trong Cà phê view biển Nha Trang</span><span>$$</span><span class="text-emerald-600">● Đang mở · đến 22:00</span>
+      </div>
+      <p class="text-sm text-slate-600 mt-1" itemprop="address">📍 Số nhà, đường Trần Phú, Nha Trang</p>
+    </div>
+    <div class="flex gap-2 text-sm"><button class="border border-slate-300 rounded-full px-4 py-2">♡ Lưu</button><button class="border border-slate-300 rounded-full px-4 py-2">Chia sẻ</button><a href="#rv" class="bg-sky-600 text-white font-semibold rounded-full px-4 py-2">✎ Viết đánh giá</a></div>
+  </div>
+  <div id="gal" class="grid grid-cols-4 grid-rows-2 gap-2 h-64 md:h-[420px] mt-5 rounded-2xl overflow-hidden"></div>
+
+  <div class="grid lg:grid-cols-12 gap-8 mt-6">
+    <div class="lg:col-span-8 min-w-0">
+      <nav class="sticky z-30 bg-white border-b border-slate-200 flex gap-5 overflow-x-auto text-sm font-medium whitespace-nowrap" style="top:calc(env(safe-area-inset-top,0px) + 92px)" aria-label="Mục trong trang">
+        <a class="py-3 hover:text-sky-600" href="#ov">Tổng quan</a><a class="py-3 hover:text-sky-600" href="#ut">uTravel chấm</a><a class="py-3 hover:text-sky-600" href="#mn">Menu &amp; giá</a><a class="py-3 hover:text-sky-600" href="#rv">Đánh giá khách</a><a class="py-3 hover:text-sky-600" href="#lc">Vị trí</a><a class="py-3 hover:text-sky-600" href="#qa">Hỏi đáp</a>
+      </nav>
+
+      <section id="ov" class="py-8 border-b border-slate-200">
+        <h2 class="text-2xl font-bold mb-3">Tổng quan</h2>
+        <p class="text-slate-700">Quán cà phê sát biển với tầm nhìn thoáng ra vịnh, phù hợp ngồi thư thả buổi sáng hoặc ngắm hoàng hôn. (Đoạn giới thiệu 3–4 dòng từ biên tập viên, nêu rõ điểm khác biệt.)</p>
+        <dl class="grid sm:grid-cols-2 gap-x-8 gap-y-4 mt-5 text-sm">
+          <div><dt class="font-semibold">Loại hình</dt><dd class="text-slate-600">Cà phê, Trà, Bánh ngọt</dd></div>
+          <div><dt class="font-semibold">Mức giá</dt><dd class="text-slate-600" itemprop="priceRange">35.000 – 80.000đ</dd></div>
+          <div><dt class="font-semibold">Tiện nghi</dt><dd class="text-slate-600">Máy lạnh · Wifi · Giữ xe · Thanh toán QR</dd></div>
+          <div><dt class="font-semibold">Phù hợp với</dt><dd class="text-slate-600">Cặp đôi · Nhóm bạn · Làm việc nhẹ</dd></div>
+        </dl>
+        <div class="flex flex-wrap gap-2 mt-5 text-xs"><span class="bg-sky-50 text-sky-700 rounded-full px-3 py-1">View biển</span><span class="bg-sky-50 text-sky-700 rounded-full px-3 py-1">Check-in</span><span class="bg-sky-50 text-sky-700 rounded-full px-3 py-1">Hoàng hôn</span><span class="bg-sky-50 text-sky-700 rounded-full px-3 py-1">Có chỗ đậu xe</span></div>
+      </section>
+
+      <section id="ut" class="py-8 border-b border-slate-200">
+        <h2 class="text-2xl font-bold mb-1">uTravel chấm điểm</h2>
+        <p class="text-sm text-slate-500 mb-5">Đi thực tế · ẩn danh · cập nhật 12/11/2026</p>
+        <div class="grid md:grid-cols-5 gap-6">
+          <div class="md:col-span-2 bg-slate-900 text-white rounded-2xl p-6 text-center"><div class="text-6xl font-extrabold text-amber-400">4.5</div><div class="text-amber-400 mt-1">★★★★☆</div><p class="text-sm text-slate-300 mt-2">Rất đáng thử</p></div>
+          <div id="sub" class="md:col-span-3 space-y-3 text-sm"></div>
+        </div>
+        <div class="grid sm:grid-cols-2 gap-4 mt-6 text-sm">
+          <div class="bg-emerald-50 rounded-2xl p-5"><h3 class="font-bold text-emerald-800 mb-2">👍 Điểm cộng</h3><ul class="list-disc pl-5 space-y-1"><li>View biển thoáng, ghế sát cửa kính</li><li>Đồ uống ổn định, pha chuẩn</li><li>Nhân viên nhiệt tình</li></ul></div>
+          <div class="bg-rose-50 rounded-2xl p-5"><h3 class="font-bold text-rose-800 mb-2">⚠️ Cần lưu ý</h3><ul class="list-disc pl-5 space-y-1"><li>Đông vào 17h–18h30</li><li>Bãi xe nhỏ giờ cao điểm</li><li>Cuối tuần nên đặt bàn</li></ul></div>
+        </div>
+      </section>
+
+      <section id="mn" class="py-8 border-b border-slate-200">
+        <h2 class="text-2xl font-bold mb-4">Menu &amp; giá nổi bật</h2>
+        <ul id="menu" class="divide-y divide-slate-200 text-sm"></ul>
+      </section>
+
+      <aside class="my-8 flex flex-col sm:flex-row gap-4 items-center bg-amber-50 border border-amber-200 rounded-2xl p-5">
+        <div class="ph w-full sm:w-32 h-20 rounded-xl shrink-0" style="--a:#fbbf24;--b:#ea580c"></div>
+        <p class="text-sm flex-1">Ở gần đây? Xem <a class="font-semibold text-sky-700 underline" href="/dich-vu/">khách sạn view biển Trần Phú</a> hoặc nhận <b>voucher UTRAVEL15</b> khi đặt tour qua uTravel.</p>
+      </aside>
+
+      <section id="rv" class="py-4 border-b border-slate-200 pb-8">
+        <div class="flex justify-between items-center mb-5"><h2 class="text-2xl font-bold">Đánh giá từ khách</h2><button class="bg-sky-600 text-white text-sm font-semibold rounded-full px-4 py-2">Viết đánh giá</button></div>
+        <div class="grid md:grid-cols-3 gap-6">
+          <div><div class="text-5xl font-extrabold">4.5</div><div class="text-amber-500">★★★★☆</div><p class="text-sm text-slate-500">128 đánh giá</p></div>
+          <div id="hist" class="md:col-span-2 space-y-1.5 text-sm"></div>
+        </div>
+        <div class="flex flex-wrap gap-2 mt-6 text-sm"><span class="text-slate-500 py-1.5">Loại khách:</span><button class="px-3 py-1.5 rounded-full bg-slate-900 text-white">Tất cả</button><button class="px-3 py-1.5 rounded-full border border-slate-300">Cặp đôi</button><button class="px-3 py-1.5 rounded-full border border-slate-300">Gia đình</button><button class="px-3 py-1.5 rounded-full border border-slate-300">Nhóm bạn</button><button class="px-3 py-1.5 rounded-full border border-slate-300">Đi một mình</button></div>
+        <div id="revs" class="divide-y divide-slate-200 mt-2"></div>
+        <button class="mt-4 w-full border border-slate-300 rounded-full py-2.5 text-sm font-semibold">Xem thêm đánh giá</button>
+      </section>
+
+      <section id="lc" class="py-8 border-b border-slate-200">
+        <h2 class="text-2xl font-bold mb-4">Vị trí &amp; xung quanh</h2>
+        <div class="ph h-56 rounded-2xl flex items-center justify-center text-white/90 text-sm" style="--a:#bae6fd;--b:#0284c7">[Bản đồ tĩnh · bấm để tải Google Maps]</div>
+        <div class="grid sm:grid-cols-2 gap-6 mt-5 text-sm">
+          <div><h3 class="font-bold mb-2">Quán ăn gần đây</h3><ul id="nr1" class="space-y-2"></ul></div>
+          <div><h3 class="font-bold mb-2">Điểm tham quan gần đây</h3><ul id="nr2" class="space-y-2"></ul></div>
+        </div>
+      </section>
+
+      <section id="qa" class="py-8" itemscope itemtype="https://schema.org/FAQPage">
+        <h2 class="text-2xl font-bold mb-4">Hỏi &amp; đáp</h2>
+        <div id="faq1" class="space-y-2"></div>
+      </section>
+    </div>
+
+    <aside class="lg:col-span-4"><div class="lg:sticky space-y-4" style="top:calc(env(safe-area-inset-top,0px) + 108px)">
+      <div class="border border-slate-200 rounded-2xl p-5 text-sm shadow-sm">
+        <h3 class="font-bold text-base mb-3">Thông tin liên hệ</h3>
+        <div class="ph h-28 rounded-xl mb-3" style="--a:#e0f2fe;--b:#7dd3fc"></div>
+        <p>📍 Số nhà, đường Trần Phú, Nha Trang</p>
+        <p class="mt-2">📞 <a href="#" class="text-sky-600">0900 000 000</a> · <a href="#" class="text-sky-600">Zalo</a></p>
+        <p class="mt-2">🌐 <a href="#" class="text-sky-600">songxanhcafe.vn</a></p>
+        <details class="mt-3"><summary class="cursor-pointer font-semibold text-emerald-600">● Đang mở · đến 22:00</summary><ul class="mt-2 space-y-1 text-slate-600"><li>Thứ 2 – Thứ 6: 06:30 – 22:00</li><li>Thứ 7 – CN: 06:00 – 23:00</li></ul></details>
+        <a href="#" class="mt-4 block text-center bg-sky-600 text-white font-semibold rounded-lg py-2.5">Chỉ đường Google Maps</a>
+        <a href="#" class="mt-2 block text-center border border-sky-600 text-sky-700 font-semibold rounded-lg py-2.5">Đặt bàn qua Zalo</a>
+      </div>
+      <div class="rounded-2xl p-5 text-white ph" style="--a:#f97316;--b:#be123c"><p class="text-xs uppercase opacity-80">Voucher uTravel</p><p class="text-xl font-extrabold mt-1">Giảm 10% tổng bill</p><p class="text-xs mt-1 opacity-90">Xuất trình mã SX10 · HSD 31/12</p></div>
+      <div class="border border-dashed border-slate-300 rounded-2xl p-5 text-sm"><b>Bạn là chủ quán?</b><p class="text-slate-600 mt-1">Nhận quyền quản lý hồ sơ, trả lời đánh giá và đưa quán lên vị trí nổi bật.</p><a href="#b2b" class="text-sky-600 font-semibold">Tìm hiểu dịch vụ →</a></div>
+    </div></aside>
+  </div>
+
+  <section class="mt-10">
+    <h2 class="text-2xl font-bold mb-4">Quán tương tự ở Nha Trang</h2>
+    <div id="sim" class="grid grid-cols-2 md:grid-cols-4 gap-4"></div>
+  </section>
+</div>
+</div>
+
+<!-- ================= BÀI VIẾT MỚI ================= -->
+<div id="v-post" class="view">
+<div class="max-w-7xl mx-auto px-4 py-6">
+  <nav aria-label="Breadcrumb" class="text-sm text-slate-500"><a href="#home" class="hover:text-sky-600">Trang chủ</a> › <a href="#" class="hover:text-sky-600">Chuyên mục</a> › <a href="#" class="hover:text-sky-600">Chuyên mục con</a> › Tiêu đề bài viết</nav>
+  <div class="grid lg:grid-cols-12 gap-8 mt-4">
+    <article class="lg:col-span-8 min-w-0" itemscope itemtype="https://schema.org/Article">
+      <a href="#" class="inline-block bg-sky-100 text-sky-700 text-xs font-bold uppercase rounded-full px-3 py-1">Chuyên mục</a>
+      <h1 class="text-3xl md:text-4xl font-extrabold leading-tight mt-3" itemprop="headline">Tiêu đề bài viết rõ ý, chứa từ khóa chính và con số nếu có</h1>
+      <div class="flex flex-wrap items-center gap-x-4 gap-y-2 mt-4 text-sm text-slate-500">
+        <span class="flex items-center gap-2"><span class="ph w-8 h-8 rounded-full inline-block" style="--a:#fbbf24;--b:#b45309"></span><a rel="author" href="#" class="font-semibold text-slate-800" itemprop="author">Tên tác giả</a></span>
+        <span>Cập nhật <time itemprop="dateModified" datetime="2026-11-12">12/11/2026</time></span><span>6 phút đọc</span><span>👁 411 lượt xem</span><button class="ml-auto border border-slate-300 rounded-full px-3 py-1">Sao chép liên kết</button>
+      </div>
+      <p class="mt-5 text-lg italic text-slate-600">Sapo 2–3 câu: nói rõ bài viết giải quyết điều gì và vì sao người đọc nên đọc tiếp.</p>
+
+      <!-- Overview -->
+      <section class="mt-6 rounded-2xl border border-sky-100 bg-sky-50 p-5" aria-label="Tổng quan bài viết">
+        <h2 class="font-bold text-sky-800">Tổng quan bài viết</h2>
+        <div class="grid sm:grid-cols-3 gap-4 mt-3 text-sm">
+          <div class="sm:col-span-2"><p class="font-semibold mb-1">Bạn sẽ nắm được</p><ul class="list-disc pl-5 space-y-1 text-slate-700"><li>Ý chính thứ nhất của bài, viết thành một câu</li><li>Ý chính thứ hai, có thể kèm con số</li><li>Ý chính thứ ba hoặc lưu ý quan trọng</li></ul></div>
+          <dl class="space-y-2"><div><dt class="text-slate-500 text-xs">Dành cho</dt><dd class="font-medium">Nhóm người đọc phù hợp</dd></div><div><dt class="text-slate-500 text-xs">Khu vực</dt><dd class="font-medium">Nha Trang – Khánh Hòa</dd></div><div><dt class="text-slate-500 text-xs">Kiểm chứng</dt><dd class="font-medium">Thực tế · 12/11/2026</dd></div></dl>
+        </div>
+      </section>
+
+      <figure class="mt-6"><div class="ph aspect-[16/9] rounded-2xl" style="--a:#34d399;--b:#065f46"></div><figcaption class="text-xs text-slate-500 mt-2 text-center">Chú thích ảnh · Nguồn: uTravel</figcaption></figure>
+
+      <details class="mt-6 border border-slate-200 rounded-2xl p-4" open><summary class="font-bold cursor-pointer">Nội dung bài viết</summary><ol class="list-decimal pl-5 mt-2 space-y-1 text-sm text-sky-700"><li><a href="#p1">Ý chính thứ nhất</a></li><li><a href="#p2">Ý chính thứ hai</a></li><li><a href="#p3">Ý chính thứ ba</a></li><li><a href="#p4">Kết luận</a></li></ol></details>
+
+      <h2 id="p1" class="text-2xl font-bold mt-8">1. Ý chính thứ nhất</h2>
+      <p class="mt-3 text-slate-700 leading-relaxed">Đoạn thân bài ngắn, câu ngắn, có số liệu và trải nghiệm thật. Mỗi H2 trả lời một câu hỏi của người đọc. Có thể chèn <a href="#" class="text-sky-700 underline">liên kết nội bộ</a> tới bài liên quan.</p>
+      <figure class="mt-4"><div class="ph aspect-[16/9] rounded-2xl" style="--a:#38bdf8;--b:#0c4a6e"></div><figcaption class="text-xs text-slate-500 mt-2 text-center">Ảnh minh họa kèm chú thích</figcaption></figure>
+      <blockquote class="mt-4 border-l-4 border-amber-400 bg-amber-50 rounded-r-xl p-4 text-sm"><b>Lưu ý:</b> thông tin về giá, giờ mở cửa hoặc chính sách nên xác nhận lại trước khi đi.</blockquote>
+
+      <h2 id="p2" class="text-2xl font-bold mt-8">2. Ý chính thứ hai</h2>
+      <p class="mt-3 text-slate-700 leading-relaxed">Dùng danh sách hoặc bảng khi nội dung có nhiều mục song song.</p>
+      <ol class="mt-3 space-y-2 list-decimal pl-5 text-slate-700"><li>Bước hoặc mục thứ nhất</li><li>Bước hoặc mục thứ hai</li><li>Bước hoặc mục thứ ba</li></ol>
+      <div class="overflow-x-auto mt-4"><table class="w-full min-w-[480px] text-sm border border-slate-200 rounded-xl overflow-hidden"><thead class="bg-slate-900 text-white text-left"><tr><th class="p-3">Hạng mục</th><th class="p-3">Thông tin</th><th class="p-3">Ghi chú</th></tr></thead><tbody class="divide-y divide-slate-200"><tr><td class="p-3">Mục A</td><td>—</td><td>—</td></tr><tr><td class="p-3">Mục B</td><td>—</td><td>—</td></tr></tbody></table></div>
+
+      <!-- Địa điểm được nhắc (tùy chọn) -->
+      <div class="mt-6 flex gap-4 border border-slate-200 rounded-2xl overflow-hidden"><div class="ph w-32 sm:w-44 shrink-0" style="--a:#fbbf24;--b:#b45309"></div><div class="p-4 text-sm"><span class="text-[10px] uppercase bg-slate-100 text-slate-500 rounded px-1.5 py-0.5">Địa điểm được nhắc · tùy chọn</span><h3 class="font-bold text-base mt-1">Tên địa điểm</h3><p class="text-slate-500">★ 4.5 · Loại hình · Khu vực</p><a href="#review" class="inline-block mt-2 font-semibold text-sky-600">Xem review chi tiết →</a></div></div>
+
+      <aside class="my-8 flex flex-col sm:flex-row gap-4 items-center bg-sky-50 border border-sky-100 rounded-2xl p-5"><div class="ph w-full sm:w-32 h-20 rounded-xl shrink-0" style="--a:#38bdf8;--b:#075985"></div><p class="text-sm flex-1"><span class="text-[10px] uppercase bg-white text-slate-500 rounded px-1.5 py-0.5">CTA · tùy chọn</span><br>Gợi ý một <a class="font-semibold text-sky-700 underline" href="/dich-vu/">tour, combo hoặc lịch trình</a> liên quan đến nội dung bài.</p></aside>
+
+      <h2 id="p3" class="text-2xl font-bold">3. Ý chính thứ ba</h2>
+      <p class="mt-3 text-slate-700 leading-relaxed">Có thể dùng hộp mẹo hoặc nhận định từ tác giả để tăng độ tin cậy.</p>
+      <div class="mt-4 bg-emerald-50 border border-emerald-200 rounded-2xl p-4 text-sm"><b class="text-emerald-800">💡 Mẹo từ thổ địa:</b> chia sẻ kinh nghiệm thực tế mà người ngoài khó biết.</div>
+
+      <h2 id="p4" class="text-2xl font-bold mt-8">4. Kết luận</h2>
+      <div class="mt-3 bg-slate-900 text-white rounded-2xl p-6"><p>Tóm tắt 2–3 câu và gợi ý bước tiếp theo cho người đọc.</p><a href="#" class="inline-block mt-3 bg-amber-400 text-slate-900 font-bold rounded-full px-5 py-2 text-sm">Xem cẩm nang liên quan</a></div>
+
+      <section class="mt-10" itemscope itemtype="https://schema.org/FAQPage"><h2 class="text-2xl font-bold mb-3">Câu hỏi thường gặp <span class="text-[10px] uppercase bg-slate-100 text-slate-500 rounded px-1.5 py-0.5 align-middle">tùy chọn</span></h2><div id="faq2" class="space-y-2"></div></section>
+
+      <div class="flex flex-wrap gap-2 mt-8 text-xs"><a href="#" class="bg-slate-100 rounded-full px-3 py-1">#từ khóa 1</a><a href="#" class="bg-slate-100 rounded-full px-3 py-1">#từ khóa 2</a><a href="#" class="bg-slate-100 rounded-full px-3 py-1">#từ khóa 3</a></div>
+      <div class="mt-8 flex gap-4 items-start border border-slate-200 rounded-2xl p-5"><span class="ph w-14 h-14 rounded-full shrink-0" style="--a:#fbbf24;--b:#b45309"></span><div class="text-sm"><b>Tên tác giả</b><p class="text-slate-600 mt-1">Giới thiệu ngắn về tác giả và kinh nghiệm thực tế liên quan đến chủ đề.</p><a href="#" class="text-sky-600 font-semibold">Xem các bài của tác giả →</a></div></div>
+    </article>
+
+    <aside class="lg:col-span-4"><div class="lg:sticky space-y-6" style="top:calc(env(safe-area-inset-top,0px) + 108px)">
+      <div class="border border-slate-200 rounded-2xl p-5"><h3 class="font-bold mb-3">🔥 Được quan tâm nhiều nhất</h3><ol id="top8" class="space-y-3 text-sm"></ol></div>
+      <div class="border border-slate-200 rounded-2xl p-5"><h3 class="font-bold mb-3">Ưu đãi hot</h3><div id="deals" class="space-y-3"></div></div>
+      <div class="bg-sky-600 text-white rounded-2xl p-5"><h3 class="font-bold">Cần lịch trình riêng?</h3><p class="text-sm text-sky-100 mt-1">Thổ địa tư vấn miễn phí qua Zalo.</p><a href="#" class="mt-3 block text-center bg-white text-sky-700 font-semibold rounded-lg py-2">Nhắn Zalo</a></div>
+      <div class="ph rounded-2xl aspect-[3/4] flex items-end p-4 text-white relative" style="--a:#f97316;--b:#be123c"><span class="absolute top-2 right-3 text-[10px] uppercase opacity-70">Quảng cáo · 300×400</span><p class="font-bold text-lg">Combo 3N2Đ giảm 30%</p></div>
+    </div></aside>
+  </div>
+  <section class="mt-12"><h2 class="text-2xl font-bold mb-4">Bài viết liên quan</h2><div id="rel" class="grid sm:grid-cols-3 gap-5"></div></section>
+</div>
+</div>
+
+<!-- ================= B2B LANDING ================= -->
+<div id="v-b2b" class="view">
+  <nav class="sticky z-30 bg-white/95 backdrop-blur border-b border-slate-200" style="top:calc(env(safe-area-inset-top,0px) + 92px)"><div class="max-w-7xl mx-auto px-4 flex gap-6 overflow-x-auto text-sm font-medium whitespace-nowrap items-center">
+    <a class="py-3 hover:text-sky-600" href="#sv">Dịch vụ</a><a class="py-3 hover:text-sky-600" href="#ind">Theo ngành</a><a class="py-3 hover:text-sky-600" href="#pc">Quy trình</a><a class="py-3 hover:text-sky-600" href="#cs">Case study</a><a class="py-3 hover:text-sky-600" href="#pr">Bảng giá</a><a class="py-3 hover:text-sky-600" href="#fq">FAQ</a>
+    <a href="#lead" class="ml-auto my-1.5 bg-sky-600 text-white rounded-full px-4 py-1.5">Nhận audit miễn phí</a></div></nav>
+
+  <section class="bg-slate-950 text-white" style="background:#020617"><div class="max-w-7xl mx-auto px-4 py-16 md:py-24 grid lg:grid-cols-2 gap-12 items-center">
+    <div>
+      <p class="inline-block bg-white/10 text-amber-300 text-xs font-semibold uppercase rounded-full px-3 py-1">uTravel Marketing · Đối tác du lịch Nha Trang</p>
+      <h1 class="text-4xl md:text-5xl font-extrabold mt-4 leading-tight">Marketing du lịch trọn gói cho nhà hàng, khách sạn &amp; lữ hành</h1>
+      <p class="mt-4 text-slate-300 text-lg">SEO, Google Maps, Media, quảng cáo, website, ấn phẩm và OTA – một đội ngũ, một báo cáo KPI minh bạch.</p>
+      <div class="mt-7 flex flex-wrap gap-3"><a href="#lead" class="bg-amber-400 hover:bg-amber-300 text-slate-900 font-bold rounded-full px-6 py-3">Nhận audit miễn phí</a><a href="#pr" class="border border-white/30 rounded-full px-6 py-3">Xem bảng giá</a></div>
+      <ul class="mt-8 flex flex-wrap gap-x-6 gap-y-2 text-sm text-slate-400"><li>✓ Hiểu thị trường Nha Trang</li><li>✓ Có kênh truyền thông riêng</li><li>✓ Báo cáo KPI hàng tháng</li></ul>
+    </div>
+    <div class="bg-white text-slate-900 rounded-3xl p-6 shadow-2xl">
+      <div class="flex justify-between items-center"><b>Báo cáo hiệu quả · 90 ngày</b><span class="text-xs bg-emerald-100 text-emerald-700 rounded-full px-2 py-0.5">Dữ liệu mẫu</span></div>
+      <div class="grid grid-cols-3 gap-3 mt-4 text-center"><div class="bg-sky-50 rounded-xl p-3"><div class="text-2xl font-extrabold text-sky-700">+180%</div><div class="text-xs text-slate-500">Chỉ đường</div></div><div class="bg-sky-50 rounded-xl p-3"><div class="text-2xl font-extrabold text-sky-700">+95%</div><div class="text-xs text-slate-500">Cuộc gọi</div></div><div class="bg-sky-50 rounded-xl p-3"><div class="text-2xl font-extrabold text-sky-700">Top 3</div><div class="text-xs text-slate-500">Từ khóa Maps</div></div></div>
+      <svg viewBox="0 0 400 120" class="w-full mt-4"><polyline fill="none" stroke="#0284c7" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" points="0,100 60,90 120,80 180,70 240,48 300,32 360,15 400,8"/><polyline fill="none" stroke="#cbd5e1" stroke-width="3" stroke-dasharray="6 6" points="0,100 400,85"/></svg>
+      <div class="flex justify-between text-xs text-slate-400"><span>Tháng 1</span><span>Tháng 2</span><span>Tháng 3</span></div>
+    </div>
+  </div></section>
+
+  <section class="border-b border-slate-200"><div class="max-w-7xl mx-auto px-4 py-8 grid grid-cols-2 md:grid-cols-4 gap-6 text-center"><div><div class="text-3xl font-extrabold text-sky-600">120+</div><div class="text-sm text-slate-500">Đối tác Nha Trang</div></div><div><div class="text-3xl font-extrabold text-sky-600">500+</div><div class="text-sm text-slate-500">Bài review thực tế</div></div><div><div class="text-3xl font-extrabold text-sky-600">7</div><div class="text-sm text-slate-500">Nhóm dịch vụ</div></div><div><div class="text-3xl font-extrabold text-sky-600">90 ngày</div><div class="text-sm text-slate-500">Lộ trình KPI</div></div></div><p class="text-center text-xs text-slate-400 pb-4">Số liệu mẫu – thay bằng số thật</p></section>
+
+  <section id="sv" class="max-w-7xl mx-auto px-4 py-16"><p class="text-sky-600 text-sm font-semibold uppercase">Dịch vụ</p><h2 class="text-3xl font-bold">Một đội ngũ, đủ 7 mảng marketing du lịch</h2><div id="svc" class="grid sm:grid-cols-2 lg:grid-cols-4 gap-5 mt-8"></div></section>
+
+  <section id="ind" class="bg-slate-50 py-16"><div class="max-w-7xl mx-auto px-4"><h2 class="text-3xl font-bold">Giải pháp theo từng ngành</h2>
+    <div id="itabs" class="flex gap-2 mt-5 text-sm font-medium overflow-x-auto"></div><div id="ibody" class="mt-5 bg-white rounded-2xl border border-slate-200 p-6 grid md:grid-cols-3 gap-6"></div></div></section>
+
+  <section id="pc" class="max-w-7xl mx-auto px-4 py-16"><h2 class="text-3xl font-bold">Quy trình làm việc</h2><div id="steps" class="grid md:grid-cols-4 gap-5 mt-8"></div></section>
+
+  <section id="cs" class="bg-slate-50 py-16"><div class="max-w-7xl mx-auto px-4"><h2 class="text-3xl font-bold">Kết quả với đối tác</h2><div id="cases" class="grid md:grid-cols-3 gap-5 mt-8"></div></div></section>
+
+  <section id="pr" class="max-w-7xl mx-auto px-4 py-16"><h2 class="text-3xl font-bold">Gói dịch vụ &amp; cách tính giá</h2><p class="text-slate-500 text-sm mt-1">Giá minh họa – báo giá chính thức sau buổi audit.</p><div id="plans" class="grid md:grid-cols-3 gap-5 mt-8"></div>
+    <div class="overflow-x-auto mt-10"><table class="w-full min-w-[620px] text-sm border border-slate-200 rounded-xl overflow-hidden"><thead class="bg-slate-900 text-white text-left"><tr><th class="p-3">Dịch vụ lẻ</th><th class="p-3">Hình thức tính giá</th><th class="p-3">Thời gian</th></tr></thead><tbody class="divide-y divide-slate-200"><tr><td class="p-3">SEO Local &amp; Google Maps</td><td>Theo tháng</td><td>Tối thiểu 3 tháng</td></tr><tr><td class="p-3">Media &amp; review</td><td>Theo bài / video</td><td>Theo chiến dịch</td></tr><tr><td class="p-3">Chạy quảng cáo</td><td>Phí quản lý + ngân sách ads</td><td>Theo tháng</td></tr><tr><td class="p-3">Website · Ấn phẩm · OTA setup</td><td>Trọn gói theo hạng mục</td><td>7–30 ngày</td></tr></tbody></table></div></section>
+
+  <section id="fq" class="bg-slate-50 py-16"><div class="max-w-3xl mx-auto px-4"><h2 class="text-3xl font-bold mb-6">Câu hỏi thường gặp</h2><div id="faq3" class="space-y-2"></div></div></section>
+
+  <section id="lead" class="bg-slate-950 text-white py-16" style="background:#020617"><div class="max-w-5xl mx-auto px-4 grid md:grid-cols-2 gap-10">
+    <div><h2 class="text-3xl font-bold">Nhận audit miễn phí trong 24h</h2><p class="text-slate-300 mt-3">Chúng tôi kiểm tra hồ sơ Google Maps, website và hiện diện online của bạn, sau đó đề xuất lộ trình 90 ngày.</p><ul class="mt-5 space-y-2 text-slate-300 text-sm"><li>✓ Không ràng buộc</li><li>✓ Phản hồi qua Zalo trong giờ hành chính</li><li>✓ Báo giá rõ ràng</li></ul></div>
+    <form class="bg-white text-slate-900 rounded-2xl p-6 space-y-3" onsubmit="return false">
+      <input class="w-full rounded-lg border border-slate-300 px-4 py-3" placeholder="Họ tên" aria-label="Họ tên"><input class="w-full rounded-lg border border-slate-300 px-4 py-3" placeholder="SĐT / Zalo" aria-label="SĐT"><input class="w-full rounded-lg border border-slate-300 px-4 py-3" placeholder="Tên cơ sở + link Google Maps" aria-label="Cơ sở">
+      <div class="flex flex-wrap gap-2 text-xs"><label class="border border-slate-300 rounded-full px-3 py-1.5"><input type="checkbox"> SEO</label><label class="border border-slate-300 rounded-full px-3 py-1.5"><input type="checkbox"> Maps</label><label class="border border-slate-300 rounded-full px-3 py-1.5"><input type="checkbox"> Media</label><label class="border border-slate-300 rounded-full px-3 py-1.5"><input type="checkbox"> Ads</label><label class="border border-slate-300 rounded-full px-3 py-1.5"><input type="checkbox"> Website</label><label class="border border-slate-300 rounded-full px-3 py-1.5"><input type="checkbox"> Ấn phẩm</label><label class="border border-slate-300 rounded-full px-3 py-1.5"><input type="checkbox"> OTA</label></div>
+      <select class="w-full rounded-lg border border-slate-300 px-4 py-3 bg-white" aria-label="Ngân sách"><option>Ngân sách/tháng: dưới 5 triệu</option><option>5–15 triệu</option><option>Trên 15 triệu</option></select>
+      <button class="w-full bg-sky-600 hover:bg-sky-700 text-white font-bold rounded-lg py-3">Gửi yêu cầu</button></form>
+  </div></section>
+</div>
+
+</main>
+
+<!-- FOOTER -->
+<footer class="bg-slate-950 text-slate-400 text-sm" style="background:#020617">
+  <div class="max-w-7xl mx-auto px-4 py-12 grid grid-cols-2 md:grid-cols-4 gap-8">
+    <div class="col-span-2 md:col-span-1"><div class="text-2xl font-extrabold text-white">u<span class="text-sky-500">Travel</span></div><p class="mt-3">Cẩm nang du lịch thực tế từ thổ địa Nha Trang.</p><p class="mt-3 text-xs">Tên pháp nhân · MST · Địa chỉ · Hotline · Email</p></div>
+    <div><h4 class="text-white font-semibold mb-3">Chuyên mục</h4><ul class="space-y-2"><li><a href="/cam-nang/">Cẩm nang</a></li><li><a href="/am-thuc/">Ẩm thực</a></li><li><a href="/diem-den/">Điểm đến</a></li><li><a href="/lich-trinh/">Lịch trình</a></li></ul></div>
+    <div><h4 class="text-white font-semibold mb-3">Dịch vụ</h4><ul class="space-y-2"><li><a href="/dich-vu/">Tour &amp; lưu trú</a></li><li><a href="#b2b">Marketing du lịch</a></li><li><a href="#">Liên hệ</a></li></ul></div>
+    <div><h4 class="text-white font-semibold mb-3">Pháp lý &amp; MXH</h4><ul class="space-y-2"><li><a href="#">Về chúng tôi</a></li><li><a href="#">Chính sách bảo mật</a></li><li><a href="#">Điều khoản</a></li><li><a href="#">Facebook · YouTube · TikTok</a></li></ul></div>
+  </div>
+  <div class="border-t border-slate-800 text-center py-4 text-xs">© 2026 uTravel. All rights reserved.</div>
+</footer>
+
+<script>
+const $=s=>document.querySelector(s);
+const g=(a,b)=>`style="--a:${a};--b:${b}"`;
+const pal=[['#38bdf8','#0c4a6e'],['#34d399','#065f46'],['#fbbf24','#b45309'],['#f472b6','#9d174d'],['#a78bfa','#4c1d95'],['#fb923c','#9a3412'],['#2dd4bf','#134e4a']];
+// Local hub
+const hub=[
+ [['Kinh nghiệm du lịch Nha Trang 2026','Mẹo tiết kiệm'],['Lịch trình 3N2Đ tự túc','Chi tiết từng ngày'],['Thời điểm đẹp nhất để đi','Theo mùa'],['Di chuyển từ sân bay Cam Ranh','Taxi, xe buýt, shuttle']],
+ [['Top quán hải sản','Bản đồ 10 quán'],['Bún sứa, bánh canh chả cá','Ăn sáng bản địa'],['Đặc sản mua về làm quà','Nem nướng, yến sào'],['Quán cà phê view biển','Check-in đẹp']],
+ [['Vé VinWonders Nha Trang','Giá & cách mua'],['Tour 4 đảo','Giá, lịch trình'],['Tắm bùn I-Resort','Bảng giá'],['Lặn ngắm san hô','Điểm lặn tốt nhất']]];
+function tabOld(i){
+  document.querySelectorAll('#tabs button').forEach(b=>{const on=+b.dataset.t===i;b.className='px-4 py-2 rounded-full whitespace-nowrap '+(on?'bg-white shadow text-sky-700':'text-slate-600');b.setAttribute('aria-selected',on)});
+  $('#hubgrid').innerHTML=hub[i].map((c,k)=>`<a href="#" class="group block"><div class="ph aspect-[4/3] rounded-2xl group-hover:opacity-90" ${g(...pal[(k+i)%7])}></div><h3 class="font-semibold mt-3 group-hover:text-sky-600">${c[0]}</h3><p class="text-sm text-slate-500">${c[1]}</p></a>`).join('');
+}
+// Local Hub: danh sách địa điểm + bản đồ (dữ liệu mẫu)
+const HL={
+1:[['Ốc Tối Trần Phú','Quán ốc','Trung tâm','80–200k',16,1,'Ốc xào me chuẩn vị, đi sau 19h là phải xếp hàng.',150,150,4.4,2],['Lẩu Mực Biển Xanh','Lẩu mực','Trung tâm','150–300k',15,23,'Nước lẩu thanh, mực tươi giao trong ngày.',120,260,4.5,5],['Hải sản Vĩnh Hải','Hải sản','Vĩnh Hải','200–400k',10,22,'Chọn hải sản tại bể, hỏi giá trước khi gọi.',170,70,4.2,0],['Bún sứa Nam Thành','Ăn sáng','Nam Nha Trang','30–50k',6,11,'Tô bún sứa 40k, ăn sáng đúng kiểu dân địa phương.',130,380,4.6,1]],
+2:[['Cà phê Sóng Xanh','Cà phê view biển','Trung tâm','35–60k',6,22,'Ngồi sát biển lúc hoàng hôn, nên đến trước 17h.',160,170,4.5,0],['Rooftop Sky Lounge','Rooftop','Trung tâm','90–180k',16,2,'Toàn cảnh vịnh về đêm, nên đặt bàn cuối tuần.',130,230,4.3,4],['Trà chiều Vườn Cau','Trà & bánh','Vĩnh Hải','40–80k',8,21,'Không gian vườn yên tĩnh, hợp ngồi làm việc.',180,60,4.4,1],['Sinh tố Cô Ba','Nước ép','Nam Nha Trang','20–40k',7,21,'Quán vỉa hè lâu năm, giá bình dân.',140,360,4.1,2]],
+3:[['Tour 4 đảo cano','Tour biển','Trung tâm','Từ 450k',7,16,'Chọn tour có bữa trưa trên đảo, tránh gói dồn khách.',170,200,4.4,0],['Tắm bùn khoáng','Thư giãn','Nam Nha Trang','Từ 380k',8,19,'Đi buổi sáng để tránh đông, mang theo đồ thay.',120,400,4.3,5],['Lặn ngắm san hô','Hoạt động nước','Vĩnh Hải','Từ 600k',8,15,'Đi mùa biển lặng (tháng 3–9) để nhìn rõ san hô.',190,90,4.5,1],['Công viên giải trí','Vui chơi','Vĩnh Hải','Từ 880k',9,21,'Mua vé online qua uTravel để rẻ hơn quầy.',200,40,4.4,3]]};
+const AREAS=['Tất cả','Trung tâm','Vĩnh Hải','Nam Nha Trang'];
+let cur=0,area='Tất cả';
+const isOpen=(o,c)=>{const h=new Date().getHours();return o<c?(h>=o&&h<c):(h>=o||h<c)};
+function renderFilter(){
+  $('#hubfilter').innerHTML=AREAS.map(a=>`<button data-a="${a}" class="px-3 py-1.5 rounded-full border ${a===area?'bg-sky-600 border-sky-600 text-white':'border-slate-300 text-slate-600 hover:border-sky-600'}">${a}</button>`).join('');
+  document.querySelectorAll('#hubfilter button').forEach(b=>b.onclick=()=>{area=b.dataset.a;renderFilter();renderList()});
+}
+function renderList(){
+  const it=HL[cur].filter(x=>area==='Tất cả'||x[2]===area);
+  $('#hubcards').innerHTML=it.length?it.map((x,i)=>{const op=isOpen(x[4],x[5]);return `<article data-i="${i}" class="hc group bg-white rounded-2xl border border-slate-200 overflow-hidden hover:shadow-lg transition"><div class="ph relative aspect-[4/3]" ${g(...pal[x[10]])}><span class="absolute top-3 left-3 w-7 h-7 rounded-full bg-white text-sky-700 font-bold text-sm flex items-center justify-center shadow">${i+1}</span><span class="absolute top-3 right-3 bg-slate-900/80 text-white text-xs rounded-full px-2 py-1">★ ${x[9]}</span></div><div class="p-4"><p class="text-xs text-slate-500">${x[1]} · ${x[2]}</p><h3 class="font-bold mt-0.5 group-hover:text-sky-600"><a href="#review">${x[0]}</a></h3><p class="text-sm text-slate-600 mt-2 border-l-2 border-amber-400 pl-2 line-clamp-2"><b class="text-amber-600">Thổ địa nói:</b> “${x[6]}”</p><div class="flex items-center justify-between mt-3 text-xs"><span class="font-semibold">${x[3]}</span><span class="${op?'text-emerald-600':'text-slate-400'}">● ${op?'Đang mở':'Đã đóng'} · ${x[4]}:00–${x[5]}:00</span></div></div></article>`}).join(''):'<p class="text-slate-500 text-sm">Chưa có địa điểm trong khu vực này.</p>';
+  $('#pins').innerHTML=it.map((x,i)=>`<g data-p="${i}" transform="translate(${x[7]},${x[8]})"><circle r="15" fill="#0284c7" stroke="#fff" stroke-width="3"/><text y="5" text-anchor="middle" fill="#fff" font-size="14" font-weight="700">${i+1}</text></g>`).join('');
+  document.querySelectorAll('.hc').forEach(c=>{const p=document.querySelector(`[data-p="${c.dataset.i}"] circle`);c.onmouseenter=()=>{p.setAttribute('fill','#f59e0b');p.setAttribute('r',19)};c.onmouseleave=()=>{p.setAttribute('fill','#0284c7');p.setAttribute('r',15)}});
+}
+function tab(i){
+  cur=i;area='Tất cả';
+  document.querySelectorAll('#tabs button').forEach(b=>{const on=+b.dataset.t===i;b.className='px-4 py-2 rounded-full whitespace-nowrap '+(on?'bg-white shadow text-sky-700':'text-slate-600');b.setAttribute('aria-selected',on)});
+  const list=i>0;
+  $('#hubgrid').classList.toggle('hidden',list);$('#hublist').classList.toggle('hidden',!list);$('#hubfilter').classList.toggle('hidden',!list);
+  if(!list){tabOld(0);return}
+  renderFilter();renderList();
+}
+document.querySelectorAll('#tabs button').forEach(b=>b.onclick=()=>tab(+b.dataset.t));tab(0);
+// Destinations
+const d=[['Nha Trang',128],['Đà Lạt',86],['Phú Quốc',74],['Quy Nhơn',41],['Đà Nẵng',63],['Hà Nội',57],['Sa Pa',32]];
+$('#dest').innerHTML=d.map((x,k)=>`<a href="#" class="ph relative aspect-[3/4] rounded-2xl overflow-hidden flex items-end p-3 text-white" ${g(...pal[k])}><span class="absolute top-2 right-2 bg-white/90 text-slate-900 text-xs font-semibold rounded-full px-2 py-0.5">${x[1]} bài</span><span class="font-bold text-lg drop-shadow">${x[0]}</span></a>`).join('');
+// Feed
+const f=[['Review resort Nha Trang đáng ở','Excerpt 2 dòng tóm tắt nội dung bài viết, chứa từ khóa chính.','12/11/2026','Thổ địa A'],['Ăn gì ở Nha Trang: 15 món nhất định phải thử','Excerpt 2 dòng tóm tắt nội dung bài viết, chứa từ khóa chính.','10/11/2026','Thổ địa B'],['Kinh nghiệm đi Đà Lạt 4N3Đ','Excerpt 2 dòng tóm tắt nội dung bài viết, chứa từ khóa chính.','08/11/2026','Thổ địa A'],['Cách mua vé VinWonders rẻ nhất','Excerpt 2 dòng tóm tắt nội dung bài viết, chứa từ khóa chính.','05/11/2026','Thổ địa C']];
+$('#feed').innerHTML=f.map((x,k)=>`<article class="py-5 flex gap-4"><div class="ph w-28 sm:w-52 aspect-[4/3] rounded-xl shrink-0" ${g(...pal[k+2])}></div><div><h3 class="font-bold text-lg leading-snug"><a href="#post">${x[0]}</a></h3><p class="text-sm text-slate-600 mt-1 line-clamp-3">${x[1]} Bổ sung thông tin giá, địa chỉ và mẹo thực tế từ thổ địa để bạn quyết định nhanh hơn trước khi lên đường.</p><p class="text-xs text-slate-500 mt-2">${x[3]} · Cập nhật <time itemprop="dateModified" datetime="${x[2].split('/').reverse().join('-')}">${x[2]}</time></p></div></article>`).join('');
+$('#trend').innerHTML=['Lịch trình Nha Trang 3N2Đ','Top quán hải sản','Vé VinWonders 2026','Tour 4 đảo giá bao nhiêu','Đà Lạt tháng 12 có gì'].map(t=>`<li><a class="hover:text-sky-600" href="#">${t}</a></li>`).join('');
+// Vouchers
+const vc=[['-15%','Vé VinWonders','UTRAVEL15','HSD 31/12',2],['-200K','Combo 3N2Đ','NT200','HSD 31/12',5],['-10%','Tour 4 đảo','DAO10','HSD 15/12',0],['Tặng 1','Ly cà phê đối tác','CAFE1','HSD 30/11',1]];
+$('#vouchers').innerHTML=vc.map(v=>`<div class="snap-start shrink-0 w-72 flex bg-white rounded-xl shadow-lg overflow-hidden border border-slate-200"><div class="ph w-24 flex items-center justify-center text-white font-extrabold text-xl text-center p-2" ${g(...pal[v[4]])}>${v[0]}</div><div class="p-3 flex-1 border-l-2 border-dashed border-slate-300"><p class="font-semibold text-sm">${v[1]}</p><p class="text-xs text-slate-500">${v[3]}</p><button data-c="${v[2]}" class="cp mt-2 text-xs font-bold text-sky-700 border border-sky-600 rounded px-2 py-1">Mã: ${v[2]}</button></div></div>`).join('');
+document.querySelectorAll('.cp').forEach(b=>b.onclick=()=>{try{navigator.clipboard.writeText(b.dataset.c)}catch(e){}b.textContent='Đã chép ✓'});
+// Food (card vuông)
+const fd=[['Nem nướng Ninh Hòa','Đặc sản'],['Bún sứa','Ăn sáng'],['Bánh canh chả cá','Món nước'],['Yến sào Khánh Hòa','Quà biếu'],['Hải sản tươi sống','Nhà hàng'],['Cà phê view biển','Cafe']];
+$('#food').innerHTML=fd.map((x,k)=>`<a href="/am-thuc/" class="ph relative aspect-square rounded-2xl overflow-hidden flex items-end p-3 text-white" ${g(...pal[(k+3)%7])}><div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div><div class="relative"><span class="text-xs bg-white/90 text-slate-900 rounded-full px-2 py-0.5">${x[1]}</span><h3 class="font-bold mt-1 leading-snug">${x[0]}</h3></div></a>`).join('');
+// Social reviews
+const so=[['Facebook','@huong.review','Quán nằm trong hẻm nhỏ nhưng hải sản tươi, nước chấm đậm đà. Mình gọi 3 món hết 280k cho hai người, nhân viên nhiệt tình…'],['TikTok','@minh.dilung','Check-in cà phê view biển lúc hoàng hôn, ghế ngồi thoải mái, đồ uống ổn. Nên đến trước 17h để có chỗ đẹp…'],['Instagram','@lan.travel','Tour 4 đảo trọn gói, cano đẹp, lặn ngắm san hô rất đã. Lịch trình thoải mái, phù hợp gia đình có trẻ nhỏ…'],['Facebook','@nam.phuot','Homestay gần biển, sạch sẽ, chủ nhà chỉ đường ăn uống rất kỹ. Giá hợp lý vào mùa thấp điểm…']];
+$('#social').innerHTML=so.map((x,k)=>`<a href="#" class="block rounded-2xl overflow-hidden border border-slate-200 bg-white hover:shadow-md"><div class="ph relative aspect-square" ${g(...pal[(k+1)%7])}><span class="absolute top-2 left-2 bg-white/90 text-xs font-semibold rounded-full px-2 py-0.5">${x[0]}</span></div><div class="p-3"><p class="text-xs font-semibold text-sky-700">${x[1]}</p><p class="text-sm text-slate-600 mt-1 line-clamp-3">${x[2]}</p><p class="text-xs text-sky-600 font-semibold mt-2">Xem bài gốc ↗</p></div></a>`).join('');
+// Tours
+const t=[['Combo 3N2Đ Nha Trang + khách sạn 4★','2.990.000đ'],['Tour 4 đảo trong ngày','450.000đ'],['Combo VinWonders + xe đưa đón','890.000đ'],['Tắm bùn khoáng + spa','380.000đ']];
+$('#tours').innerHTML=t.map((x,k)=>`<a href="/dich-vu/" class="ph snap-start shrink-0 w-60 sm:w-64 aspect-[3/4] relative rounded-2xl overflow-hidden flex items-end text-white" ${g(...pal[k])}><div class="absolute inset-0 bg-gradient-to-t from-black/75 via-black/10 to-transparent"></div><span class="absolute top-3 left-3 bg-amber-400 text-slate-900 text-xs font-bold rounded-full px-2 py-0.5">Hot</span><div class="relative p-4"><h3 class="font-semibold leading-snug">${x[0]}</h3><p class="mt-1 font-bold text-amber-300">Từ ${x[1]}</p></div></a>`).join('');
+// ===== Review chi tiết =====
+const star=n=>'★'.repeat(Math.round(n))+'☆'.repeat(5-Math.round(n));
+$('#gal').innerHTML=[0,1,2,3,4].map(i=>`<div class="ph relative ${i?'':'col-span-2 row-span-2'}" ${g(...pal[[0,1,2,3,5][i]])}>${i===4?'<button class="absolute inset-0 bg-black/45 text-white font-semibold text-sm">Xem 48 ảnh</button>':''}</div>`).join('');
+$('#sub').innerHTML=[['Đồ uống',4.6],['Không gian',4.8],['Phục vụ',4.3],['Giá trị',4.2],['Vị trí',4.7]].map(s=>`<div class="flex items-center gap-3"><span class="w-24">${s[0]}</span><div class="flex-1 h-2 bg-slate-200 rounded-full"><div class="h-2 bg-amber-400 rounded-full" style="width:${s[1]*20}%"></div></div><b class="w-8 text-right">${s[1]}</b></div>`).join('');
+$('#menu').innerHTML=[['Cà phê muối','35k','Bán chạy'],['Cold brew cam','49k',''],['Matcha dừa','55k','Gợi ý'],['Trà vải hoa hồng','45k',''],['Bánh flan caramel','29k','']].map(m=>`<li class="flex justify-between py-3"><span>${m[0]} ${m[2]?`<span class="ml-2 text-xs bg-amber-100 text-amber-700 rounded-full px-2 py-0.5">${m[2]}</span>`:''}</span><b>${m[1]}</b></li>`).join('');
+$('#hist').innerHTML=[['Tuyệt vời',82],['Rất tốt',30],['Trung bình',10],['Tệ',4],['Rất tệ',2]].map(h=>`<div class="flex items-center gap-3"><span class="w-20">${h[0]}</span><div class="flex-1 h-2.5 bg-slate-200 rounded-full"><div class="h-2.5 bg-amber-400 rounded-full" style="width:${h[1]/128*100}%"></div></div><span class="w-8 text-right text-slate-500">${h[1]}</span></div>`).join('');
+$('#revs').innerHTML=[['Lan P.','Cặp đôi',5,'Ngồi ngắm hoàng hôn rất đã','Ghế sát cửa kính, nhạc nhẹ, đồ uống ngon. Nên đến trước 17h để có chỗ đẹp.','Tháng 10/2026',12,''],['Minh T.','Nhóm bạn',4,'View đẹp, hơi đông cuối tuần','Cà phê muối ổn, nhân viên nhiệt tình. Cuối tuần phải đợi bàn khoảng 15 phút.','Tháng 9/2026',5,'Cảm ơn bạn! Quán đã bổ sung khu ngồi ngoài trời cuối tuần. — Chủ quán'],['Hoa N.','Đi một mình',5,'Chỗ làm việc yên tĩnh buổi sáng','Wifi mạnh, sáng sớm vắng, ngồi làm việc rất thoải mái.','Tháng 8/2026',8,'']].map(r=>`<article class="py-5"><div class="flex items-center gap-3"><span class="ph w-10 h-10 rounded-full" ${g(...pal[r[2]])}></span><div><b class="text-sm">${r[0]}</b><div class="text-xs text-slate-500">${r[1]} · ${r[5]}</div></div></div><div class="mt-2 text-amber-500 text-sm">${star(r[2])}</div><h3 class="font-bold mt-1">${r[3]}</h3><p class="text-sm text-slate-700 mt-1">${r[4]}</p>${r[7]?`<p class="mt-3 text-sm bg-slate-50 rounded-xl p-3"><b>Phản hồi từ chủ quán:</b> ${r[7]}</p>`:''}<p class="text-xs text-slate-500 mt-3">👍 Hữu ích (${r[6]})</p></article>`).join('');
+$('#nr1').innerHTML=['Lẩu Mực Biển Xanh · 350m','Ốc Tối Trần Phú · 500m','Bún sứa Nam Thành · 1,2km'].map(t=>`<li><a href="#" class="text-sky-700 hover:underline">${t}</a></li>`).join('');
+$('#nr2').innerHTML=['Quảng trường 2/4 · 400m','Tháp Bà Ponagar · 3km','Chùa Long Sơn · 3,5km'].map(t=>`<li><a href="#" class="text-sky-700 hover:underline">${t}</a></li>`).join('');
+$('#sim').innerHTML=[['Rooftop Sky Lounge','4.3'],['Trà chiều Vườn Cau','4.4'],['Sinh tố Cô Ba','4.1'],['Cà phê Hải Đăng','4.6']].map((s,i)=>`<a href="#review" class="group"><div class="ph aspect-[4/3] rounded-2xl" ${g(...pal[i+2])}></div><h3 class="font-semibold mt-2 text-sm group-hover:text-sky-600">${s[0]}</h3><p class="text-xs text-amber-500">★ ${s[1]}</p></a>`).join('');
+const faqHTML=(a,id)=>$(id).innerHTML=a.map(q=>`<details class="border border-slate-200 bg-white rounded-xl p-4" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question"><summary class="cursor-pointer font-semibold flex justify-between" itemprop="name">${q[0]}<svg class="w-5 h-5 transition shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></svg></summary><div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer"><p class="mt-2 text-slate-700 text-sm" itemprop="text">${q[1]}</p></div></details>`).join('');
+faqHTML([['Sóng Xanh Cafe ở đâu?','Số nhà, đường Trần Phú, Nha Trang, gần Quảng trường 2/4.'],['Quán mở cửa mấy giờ?','06:30–22:00 các ngày trong tuần, cuối tuần mở đến 23:00.'],['Có chỗ đậu xe không?','Có bãi xe máy trước quán, giờ cao điểm có thể đầy.'],['Có nên đặt bàn không?','Nên đặt trước vào cuối tuần và khung 17h–18h30.']],'#faq1');
+// ===== Bài viết mới =====
+faqHTML([['Câu hỏi thường gặp thứ nhất?','Trả lời ngắn gọn 40–60 từ, đi thẳng vào ý.'],['Câu hỏi thường gặp thứ hai?','Trả lời kèm số liệu hoặc địa chỉ cụ thể nếu có.']],'#faq2');
+$('#top8').innerHTML=['32+ cafe view biển Nha Trang','Du lịch Nha Trang 2/9 đi đâu?','Review đài thiên văn Nha Trang','Bờ kè làng Chụt ngắm biển','Nha Trang 2/9 ăn gì? 16 món'].map((t,i)=>`<li class="flex gap-3"><b class="text-sky-600 w-5">${i+1}</b><a href="#" class="hover:text-sky-600">${t}</a></li>`).join('');
+$('#deals').innerHTML=[['Combo 3N2Đ Nha Trang','2.990.000đ',0],['Tour 4 đảo','450.000đ',1],['Vé VinWonders','-15%',2]].map(d=>`<a href="/dich-vu/" class="flex gap-3 items-center"><span class="ph w-16 h-16 rounded-xl shrink-0" ${g(...pal[d[2]])}></span><span class="text-sm"><b class="block leading-snug">${d[0]}</b><span class="text-rose-600 font-bold">${d[1]}</span></span></a>`).join('');
+$('#rel').innerHTML=['Tiêu đề bài viết liên quan 1','Tiêu đề bài viết liên quan 2','Tiêu đề bài viết liên quan 3'].map((t,i)=>`<a href="#post" class="group"><div class="ph aspect-[4/3] rounded-2xl" ${g(...pal[i+3])}></div><h3 class="font-semibold mt-2 group-hover:text-sky-600">${t}</h3></a>`).join('');
+// ===== B2B =====
+$('#svc').innerHTML=[['🔎','SEO Local & Website','Lên top từ khóa “quán + khu vực”, tối ưu nội dung và schema.'],['📍','Google Maps','Tối ưu hồ sơ, ảnh, đánh giá, bài đăng để tăng gọi và chỉ đường.'],['🎬','Media & Review','Review thực tế, video ngắn, KOC, đăng trên uTravel và social.'],['📣','Chạy quảng cáo','Google, Meta, TikTok Ads theo mục tiêu đặt bàn, đặt phòng.'],['💻','Thiết kế website','Website/landing chuẩn SEO, tải nhanh, tích hợp đặt chỗ.'],['🖼️','Ấn phẩm & Poster','Menu, poster, standee, banner nhận diện đồng bộ.'],['🏨','OTA Setup','Booking, Agoda, Traveloka, Google Hotels: tạo hồ sơ và tối ưu hạng.']].map(s=>`<div class="border border-slate-200 rounded-2xl p-6 hover:shadow-lg hover:border-sky-300 transition"><div class="w-12 h-12 rounded-xl bg-sky-50 flex items-center justify-center text-2xl">${s[0]}</div><h3 class="font-bold mt-4">${s[1]}</h3><p class="text-sm text-slate-600 mt-1">${s[2]}</p></div>`).join('')+'<a href="#lead" class="rounded-2xl p-6 text-white ph flex flex-col justify-between" style="--a:#0ea5e9;--b:#075985"><div class="text-2xl">🧩</div><div><h3 class="font-bold mt-4">Combo tùy chỉnh</h3><p class="text-sm text-sky-100">Ghép dịch vụ theo ngân sách. Nhận tư vấn →</p></div></a>';
+const IND=[['Nhà hàng / Cafe','Tăng khách vãng lai và đặt bàn','Maps · SEO Local · Media · Ấn phẩm','Chỉ đường, cuộc gọi, lượt đặt bàn'],['Khách sạn / Homestay','Tăng booking trực tiếp và hạng OTA','OTA Setup · Website · Maps · Ads','Booking, tỷ lệ lấp đầy, hạng OTA'],['Lữ hành / Tour','Tăng lead tour và combo','Website · SEO · Ads · Media','Lead, chi phí/lead, doanh thu tour']];
+function ind(i){$('#itabs').innerHTML=IND.map((x,k)=>`<button data-k="${k}" class="px-4 py-2 rounded-full whitespace-nowrap ${k===i?'bg-sky-600 text-white':'bg-white border border-slate-300'}">${x[0]}</button>`).join('');document.querySelectorAll('#itabs button').forEach(b=>b.onclick=()=>ind(+b.dataset.k));const x=IND[i];$('#ibody').innerHTML=`<div><p class="text-xs uppercase text-slate-400">Mục tiêu</p><p class="font-semibold mt-1">${x[1]}</p></div><div><p class="text-xs uppercase text-slate-400">Gói dịch vụ đề xuất</p><p class="font-semibold mt-1">${x[2]}</p></div><div><p class="text-xs uppercase text-slate-400">KPI theo dõi</p><p class="font-semibold mt-1">${x[3]}</p></div>`}ind(0);
+$('#steps').innerHTML=[['Audit miễn phí','Kiểm tra Maps, website, đối thủ'],['Chiến lược & KPI','Chốt mục tiêu và lộ trình 90 ngày'],['Triển khai','Tối ưu, sản xuất nội dung, chạy ads'],['Báo cáo & tối ưu','Báo cáo hàng tháng, điều chỉnh']].map((s,i)=>`<div class="relative border border-slate-200 rounded-2xl p-6"><div class="w-9 h-9 rounded-full bg-sky-600 text-white font-bold flex items-center justify-center">${i+1}</div><h3 class="font-bold mt-3">${s[0]}</h3><p class="text-sm text-slate-600 mt-1">${s[1]}</p></div>`).join('');
+$('#cases').innerHTML=[['Nhà hàng hải sản','+180%','lượt chỉ đường Google Maps','Maps + SEO Local + Media · 90 ngày'],['Khách sạn boutique','+42%','booking trực tiếp','OTA Setup + Website · 4 tháng'],['Đơn vị tour 4 đảo','+65%','lead từ tìm kiếm tự nhiên','SEO + Ads · 3 tháng']].map(c=>`<div class="bg-white border border-slate-200 rounded-2xl p-6"><p class="text-sm text-slate-500">${c[0]}</p><p class="text-5xl font-extrabold text-sky-600 my-2">${c[1]}</p><p class="font-medium">${c[2]}</p><p class="text-xs text-slate-500 mt-3 pt-3 border-t border-slate-100">${c[3]}</p><p class="text-xs text-slate-400 mt-1">(số liệu mẫu)</p></div>`).join('');
+$('#plans').innerHTML=[['Maps Starter','Từ 3 triệu/tháng',['Tối ưu Google Business Profile','1 bài review trên uTravel','Báo cáo hàng tháng'],0],['Growth','Từ 8 triệu/tháng',['SEO Local + Maps','3 bài review + video ngắn','Poster / ấn phẩm cơ bản','Báo cáo KPI 90 ngày'],1],['Full Stack','Báo giá riêng',['SEO + Maps + Media','Chạy quảng cáo','Website / OTA setup','Quản lý dự án riêng'],0]].map(p=>`<div class="rounded-2xl p-7 bg-white border ${p[3]?'border-sky-600 ring-2 ring-sky-600 shadow-lg':'border-slate-200'}">${p[3]?'<span class="text-xs bg-sky-600 text-white rounded-full px-2 py-0.5">Phổ biến nhất</span>':''}<h3 class="text-xl font-bold mt-2">${p[0]}</h3><p class="text-3xl font-extrabold text-sky-700 my-3">${p[1]}</p><ul class="space-y-2 text-sm mb-6">${p[2].map(i=>`<li>✓ ${i}</li>`).join('')}</ul><a href="#lead" class="block text-center rounded-lg py-2.5 font-semibold ${p[3]?'bg-sky-600 text-white':'border border-slate-300'}">Chọn gói</a></div>`).join('');
+faqHTML([['Bao lâu thì thấy kết quả?','Maps thường có tín hiệu sau 4–8 tuần, SEO ổn định sau 3–6 tháng.'],['Có cam kết thứ hạng không?','Không cam kết thứ hạng cụ thể; cam kết quy trình và báo cáo minh bạch.'],['Tôi có cần ký hợp đồng dài hạn?','Gói tháng tối thiểu 3 tháng, dịch vụ trọn gói theo hạng mục.'],['uTravel có hỗ trợ ngoài Nha Trang?','Tập trung Nha Trang – Khánh Hòa, có thể mở rộng theo dự án.']],'#faq3');
+// Nav + view switch
+$('#burger').onclick=()=>$('#mnav').classList.toggle('hidden');
+function route(){
+  const h=(location.hash||'#home').slice(1);
+  const v=['home','review','post','b2b'].includes(h)?h:null;
+  if(v){document.querySelectorAll('.view').forEach(e=>e.classList.toggle('on',e.id==='v-'+v));
+    document.querySelectorAll('[data-v]').forEach(a=>a.style.color=a.dataset.v===v?'#fff':'');window.scrollTo(0,0);}
+  else if(!document.querySelector('.view.on'))$('#v-home').classList.add('on');
+}
+addEventListener('hashchange',route);route();
+</script>
+</body>
+</html>

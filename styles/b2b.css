@@ -1,0 +1,95 @@
+/* B2B page ("Marketing du lịch"): navy hero with sample report, services, industry tabs, steps, cases, plans, audit form. */
+
+/* Hero band */
+.b2b-hero{position:relative;color:rgb(var(--paper));background:radial-gradient(70% 90% at 85% 10%,#0A3E9E 0,transparent 60%),linear-gradient(180deg,rgb(var(--ink)) 0,rgb(var(--deep)) 100%);border-radius:0 0 40px 40px;overflow:hidden}
+.b2b-hero::before{content:"";position:absolute;inset:0;pointer-events:none;opacity:.5;background-image:linear-gradient(rgb(255 255 255/.05) 1px,transparent 1px),linear-gradient(90deg,rgb(255 255 255/.05) 1px,transparent 1px);background-size:56px 56px;mask-image:radial-gradient(80% 70% at 70% 30%,#000,transparent)}
+.b2b-hero>*{position:relative}
+@media (min-width:768px){.b2b-hero{border-radius:0 0 56px 56px}}
+.b2b-ghost{display:inline-flex;align-items:center;height:48px;padding:0 22px;border-radius:99px;font-weight:600;font-size:15px;box-shadow:inset 0 0 0 1.5px rgb(255 255 255/.35);transition:background-color .3s var(--ease),box-shadow .3s var(--ease)}
+.b2b-ghost:hover{background:rgb(255 255 255/.1);box-shadow:inset 0 0 0 1.5px rgb(255 255 255/.7)}
+
+.b2b-report{padding:22px;border-radius:24px;color:rgb(var(--ink));background:#fff;box-shadow:0 40px 80px -40px rgb(0 0 0/.6),0 0 0 6px rgb(255 255 255/.08);rotate:1.2deg}
+.b2b-metric{padding:12px;border-radius:14px;background:rgb(var(--paper))}
+.b2b-metric dt{font-size:10px;color:rgb(var(--ink2))}
+.b2b-metric dd{font-size:1.6rem;line-height:1.1;margin-top:4px;color:rgb(var(--red-t))}
+.b2b-sample{display:inline-flex;align-items:center;padding:4px 9px;border-radius:99px;font-size:10.5px;color:#0f7a5a;background:rgb(15 122 90/.1);white-space:nowrap}
+.b2b-line{stroke-dasharray:1;stroke-dashoffset:0}
+@media (prefers-reduced-motion:no-preference){
+  .js-motion .b2b-line{animation:b2b-draw 1.8s cubic-bezier(.65,0,.35,1) .7s both}
+  .js-motion .b2b-area{animation:b2b-fade 1s ease 1.6s both}
+  .js-motion .b2b-dot{animation:b2b-pop .5s cubic-bezier(.34,1.56,.64,1) 2.3s both;transform-box:fill-box;transform-origin:center}
+}
+@keyframes b2b-draw{from{stroke-dashoffset:1}}
+@keyframes b2b-fade{from{opacity:0}}
+@keyframes b2b-pop{from{scale:0}}
+
+.b2b-stats{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;border-radius:20px;overflow:hidden;background:rgb(255 255 255/.12)}
+.b2b-stats>div{display:flex;flex-direction:column-reverse;justify-content:flex-end;gap:6px;padding:20px;background:rgb(1 26 77/.6)}
+.b2b-stats dd{font-size:clamp(2.2rem,4vw,3.2rem);line-height:1;color:#FF9A3C}
+.b2b-stats dt{font-size:14px;color:rgb(var(--paper)/.7)}
+@media (min-width:768px){.b2b-stats{grid-template-columns:repeat(4,1fr)}.b2b-stats>div{padding:24px 26px}}
+
+/* Services */
+.b2b-svc{display:flex;flex-direction:column;padding:22px;min-height:15rem;transition:translate .45s var(--ease),box-shadow .45s var(--ease)}
+.b2b-svc-ico{display:grid;place-items:center;width:46px;height:46px;border-radius:14px;background:rgb(var(--ink));color:#fff;transition:background-color .4s var(--ease),color .4s var(--ease),rotate .6s cubic-bezier(.34,1.56,.64,1)}
+.b2b-svc:hover{translate:0 -4px;box-shadow:inset 0 0 0 1px rgb(var(--ink)/.12),0 26px 50px -30px rgb(1 44 121/.6)}
+.b2b-svc:hover .b2b-svc-ico{background:rgb(var(--red));color:rgb(var(--ink));rotate:-8deg}
+.b2b-svc-combo{border-radius:var(--card-r);color:rgb(var(--paper));background:rgb(var(--ink));background-image:radial-gradient(90% 90% at 100% 100%,rgb(247 128 10/.35),transparent 60%)}
+.b2b-svc-combo .b2b-svc-ico{background:rgb(var(--red));color:rgb(var(--ink))}
+
+/* Industry tabs */
+.b2b-tabs{display:inline-flex;flex-wrap:wrap;gap:4px;padding:5px;border-radius:99px;background:rgb(255 255 255/.6);box-shadow:inset 0 0 0 1px rgb(var(--ink)/.08)}
+.b2b-tab{padding:.6rem 1.1rem;border-radius:99px;font-size:14.5px;font-weight:600;color:rgb(var(--ink)/.7);transition:background-color .35s var(--ease),color .35s var(--ease)}
+.b2b-tab:hover{color:rgb(var(--ink))}
+.b2b-tab[aria-selected="true"]{background:rgb(var(--ink));color:rgb(var(--paper))}
+.b2b-ind{display:grid;gap:16px;padding:12px}
+.b2b-ind-img{border-radius:14px;aspect-ratio:16/9}
+.b2b-ind-cell{padding:18px;background:rgb(255 255 255/.85)}
+@media (min-width:1024px){.b2b-ind{grid-template-columns:minmax(0,22rem) 1fr;gap:20px}.b2b-ind-img{aspect-ratio:auto;height:100%;min-height:13rem}}
+@media (prefers-reduced-motion:no-preference){.b2b-ind{animation:b2b-in .5s var(--ease) both}}
+@keyframes b2b-in{from{opacity:0;translate:0 10px}}
+
+/* Steps */
+.b2b-steps{position:relative;display:grid;gap:28px}
+.b2b-steps li{position:relative}
+.b2b-step-n{position:relative;z-index:1;display:grid;place-items:center;width:52px;height:52px;border-radius:16px;font-size:1.5rem;background:rgb(var(--ink));color:#fff;box-shadow:0 0 0 6px rgb(var(--paper))}
+.b2b-steps li:first-child .b2b-step-n{background:rgb(var(--red));color:rgb(var(--ink))}
+@media (min-width:768px){
+  .b2b-steps{grid-template-columns:repeat(4,1fr);gap:24px}
+  .b2b-steps::before{content:"";position:absolute;left:26px;right:12%;top:26px;border-top:2px dashed rgb(var(--ink)/.22)}
+}
+
+/* Cases */
+.b2b-case{border-radius:var(--card-r);overflow:hidden;background:rgb(255 255 255/.65);box-shadow:inset 0 0 0 1px rgb(var(--ink)/.06),0 18px 40px -30px rgb(1 44 121/.45)}
+
+/* Plans */
+.b2b-plan{display:flex;flex-direction:column;padding:26px;border-radius:var(--card-r)}
+.b2b-plan-note{color:rgb(var(--ink2))}
+.b2b-plan.is-hot{color:rgb(var(--paper));background:rgb(var(--ink));background-image:radial-gradient(100% 60% at 100% 0,#0A3E9E,transparent 70%);box-shadow:0 30px 60px -30px rgb(1 26 77/.8),0 0 0 3px rgb(var(--red))}
+.b2b-plan.is-hot .b2b-plan-note{color:rgb(var(--paper)/.65)}
+.b2b-hot{padding:5px 10px;border-radius:99px;font-size:10.5px;background:rgb(var(--red));color:rgb(var(--ink));white-space:nowrap}
+.b2b-check{display:grid;place-items:center;flex:none;width:20px;height:20px;margin-top:2px;border-radius:99px;background:rgb(247 128 10/.15);color:rgb(var(--red-t))}
+.b2b-plan.is-hot .b2b-check,.b2b-check.is-light{background:rgb(var(--red));color:rgb(var(--ink))}
+@media (min-width:768px){.b2b-plan.is-hot{translate:0 -10px}}
+
+/* Lead section and audit form */
+.b2b-lead{margin-top:5rem;padding:4.5rem 0;color:rgb(var(--paper));background:radial-gradient(60% 80% at 0 100%,rgb(247 128 10/.2),transparent 60%),linear-gradient(180deg,rgb(var(--ink)),rgb(var(--deep)));border-radius:40px 40px 0 0}
+@media (min-width:768px){.b2b-lead{margin-top:7rem;padding:6rem 0;border-radius:56px 56px 0 0}}
+.b2b-form{padding:22px;border-radius:24px;color:rgb(var(--ink));background:rgb(var(--paper));box-shadow:0 40px 80px -40px rgb(0 0 0/.6)}
+@media (min-width:768px){.b2b-form{padding:30px}}
+.b2b-sent{display:flex;flex-direction:column;align-items:flex-start;padding:36px}
+.b2b-field label,.b2b-legend{display:block;font:600 11px/1.3 var(--font-plex),monospace;letter-spacing:.04em;color:rgb(var(--ink2));margin-bottom:6px}
+.b2b-field input{width:100%;height:50px;padding:0 16px;border-radius:14px;font-size:16px;background:#fff;box-shadow:inset 0 0 0 1px rgb(var(--ink)/.15);transition:box-shadow .3s var(--ease)}
+.b2b-field input::placeholder{color:rgb(var(--ink)/.35)}
+.b2b-field input:focus{outline:none;box-shadow:inset 0 0 0 2px rgb(var(--ink))}
+.b2b-field input[aria-invalid="true"]{box-shadow:inset 0 0 0 2px #C0392B}
+.b2b-err{margin-top:6px;font-size:13px;color:#A8261A}
+.b2b-chip{position:relative;cursor:pointer}
+.b2b-chip input{position:absolute;opacity:0;pointer-events:none}
+.b2b-chip span{display:flex;align-items:center;justify-content:center;gap:6px;min-height:40px;padding:0 15px;border-radius:99px;font-size:14px;font-weight:500;background:#fff;box-shadow:inset 0 0 0 1px rgb(var(--ink)/.15);transition:background-color .25s var(--ease),color .25s var(--ease),box-shadow .25s var(--ease)}
+.b2b-chip:hover span{box-shadow:inset 0 0 0 1.5px rgb(var(--ink)/.45)}
+.b2b-chip input:checked+span{background:rgb(var(--ink));color:#fff;box-shadow:none}
+.b2b-chip:not(.is-radio) input:checked+span::before{content:"✓";font-size:12px}
+.b2b-chip.is-radio input:checked+span{background:rgb(var(--red));color:rgb(var(--ink))}
+.b2b-chip input:focus-visible+span{outline:2px solid rgb(var(--red));outline-offset:2px}
+.b2b-promise{padding:26px;border-radius:var(--card-r);color:rgb(var(--paper));background:rgb(var(--ink));background-image:radial-gradient(90% 90% at 100% 100%,rgb(247 128 10/.3),transparent 60%)}

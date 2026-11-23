@@ -1,0 +1,76 @@
+/* Shared by every inner page: soft card, chips, the "ask a local" FAQ board, the in-page section tabs. */
+
+/* Shared soft card (same look as the homepage card grids) */
+.soft-card{background:rgb(255 255 255/.6);border-radius:var(--card-r);box-shadow:inset 0 0 0 1px rgb(var(--ink)/.06),0 18px 40px -30px rgb(1 44 121/.45)}
+.tag-chip{display:inline-flex;align-items:center;padding:5px 12px;border-radius:99px;font-size:13px;font-weight:500;background:rgb(255 255 255/.75);box-shadow:inset 0 0 0 1px rgb(var(--ink)/.1)}
+
+/* FAQ: "ask a local". One board of numbered questions; answers arrive as chat replies. */
+.faq-board{overflow:hidden;interpolate-size:allow-keywords}
+.faq{position:relative;border-top:1px solid rgb(var(--ink)/.08);transition:background-color .4s var(--ease)}
+.faq:first-child{border-top:0}
+/* Orange rail on the open question */
+.faq::before{content:"";position:absolute;left:0;top:18px;bottom:18px;width:3px;border-radius:0 3px 3px 0;background:rgb(var(--red));scale:1 0;transition:scale .5s var(--ease)}
+.faq[open]{background:linear-gradient(90deg,rgb(247 128 10/.07),rgb(247 128 10/0) 70%)}
+.faq[open]::before{scale:1 1}
+.faq summary{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:14px;padding:18px 18px;cursor:pointer;list-style:none}
+.faq summary::-webkit-details-marker{display:none}
+.faq-n{font-size:12px;font-weight:600;color:rgb(var(--ink)/.35);transition:color .35s var(--ease),translate .5s var(--ease)}
+.faq-q{font:750 clamp(1.02rem,1.5vw,1.2rem)/1.3 var(--font-archivo),sans-serif;letter-spacing:-.015em;font-variation-settings:"wdth" 100;transition:font-variation-settings .5s var(--ease)}
+.faq[open] .faq-n{color:rgb(var(--red-t))}
+.faq-icon{position:relative;flex:none;width:34px;height:34px;border-radius:99px;background:rgb(var(--ink)/.06);transition:background-color .35s var(--ease),rotate .5s cubic-bezier(.34,1.56,.64,1)}
+.faq-icon::before,.faq-icon::after{content:"";position:absolute;left:50%;top:50%;width:12px;height:2px;border-radius:2px;background:rgb(var(--ink));translate:-50% -50%;transition:background-color .35s var(--ease)}
+.faq-icon::after{rotate:90deg}
+/* Plus turns into a close cross */
+.faq[open] .faq-icon{rotate:135deg;background:rgb(var(--red))}
+.faq[open] .faq-icon::before,.faq[open] .faq-icon::after{background:#fff}
+@media (hover:hover){
+  .faq summary:hover .faq-n{color:rgb(var(--red-t));translate:3px 0}
+  .faq summary:hover .faq-q{font-variation-settings:"wdth" 112}
+  .faq:not([open]) summary:hover .faq-icon{background:rgb(var(--ink)/.12)}
+}
+/* Smooth open/close where the browser supports animating <details> (others just snap open). */
+.faq::details-content{block-size:0;overflow:hidden;transition:block-size .5s var(--ease),content-visibility .5s allow-discrete}
+.faq[open]::details-content{block-size:auto}
+
+.faq-a{display:grid;grid-template-columns:32px 1fr;gap:12px;padding:0 18px 22px 18px}
+.faq-avatar{width:32px;height:32px;border-radius:10px;box-shadow:0 0 0 2px #fff,0 6px 14px -6px rgb(1 44 121/.5);margin-top:18px}
+.faq-bubble{position:relative;display:inline-block;max-width:60ch;padding:12px 16px;border-radius:4px 18px 18px 18px;background:rgb(var(--ink));color:rgb(var(--paper));line-height:1.6;box-shadow:0 14px 28px -18px rgb(1 44 121/.7)}
+.faq-typing{position:absolute;left:16px;top:50%;translate:0 -50%;display:flex;gap:4px;opacity:0}
+.faq-typing i{width:6px;height:6px;border-radius:99px;background:rgb(var(--paper)/.8)}
+@media (min-width:768px){
+  .faq summary{padding:22px 26px;gap:20px}
+  .faq-a{grid-template-columns:36px 1fr;gap:14px;padding:0 26px 26px calc(26px + 1.6rem)}
+  .faq-avatar{width:36px;height:36px}
+}
+/* Each time a question opens: the bubble pops up, dots type for a beat, then the answer appears. */
+@media (prefers-reduced-motion:no-preference){
+  .faq[open] .faq-bubble{animation:faq-pop .5s cubic-bezier(.34,1.56,.64,1) both;transform-origin:0 0}
+  .faq[open] .faq-bubble p{animation:faq-text .45s var(--ease) .55s both}
+  .faq[open] .faq-typing{animation:faq-dots .6s linear both}
+  .faq[open] .faq-typing i{animation:faq-dot .6s ease-in-out infinite}
+  .faq[open] .faq-typing i:nth-child(2){animation-delay:.12s}
+  .faq[open] .faq-typing i:nth-child(3){animation-delay:.24s}
+}
+@keyframes faq-pop{from{opacity:0;scale:.85;translate:0 8px}}
+@keyframes faq-text{from{opacity:0;translate:0 4px}}
+@keyframes faq-dots{0%,80%{opacity:1}100%{opacity:0}}
+@keyframes faq-dot{0%,100%{translate:0 0;opacity:.45}50%{translate:0 -3px;opacity:1}}
+
+.faq-ask{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:14px 24px;padding:20px 18px;border-top:1px dashed rgb(var(--ink)/.2);background:rgb(var(--ink)/.03)}
+.faq-ask-btn{display:inline-flex;align-items:center;gap:8px;padding:11px 18px;border-radius:99px;background:rgb(var(--red));color:rgb(var(--ink));font-weight:600;font-size:14px;white-space:nowrap;box-shadow:0 12px 24px -14px rgb(247 128 10/.9);transition:translate .4s var(--ease),box-shadow .4s var(--ease)}
+.faq-ask-btn:hover{translate:0 -2px;box-shadow:0 16px 28px -14px rgb(247 128 10/1)}
+.faq-ask-btn:active{translate:0 1px}
+@media (min-width:768px){.faq-ask{padding:22px 26px}}
+
+/* In-page section tabs (review body, B2B page) */
+.rv-nav-wrap{position:sticky;top:calc(var(--hh) + 8px);z-index:20}
+.rv-nav{position:relative;display:flex;gap:2px;overflow-x:auto;padding:5px;border-radius:99px;background:rgb(241 245 251/.96);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);box-shadow:inset 0 0 0 1px rgb(var(--ink)/.08),0 12px 30px -22px rgb(1 44 121/.5)}
+.rv-nav-blob{position:absolute;left:0;top:5px;bottom:5px;width:0;opacity:0;border-radius:99px;background:rgb(var(--ink))}
+.rv-tab{position:relative;z-index:1;flex:none;padding:.6rem 1.05rem;border-radius:99px;font-size:14px;font-weight:500;white-space:nowrap;color:rgb(var(--ink)/.75);transition:color .3s var(--ease)}
+.rv-tab:hover{color:rgb(var(--ink))}
+.rv-tab[aria-current="true"]{color:rgb(var(--paper))}
+.rv-sec{padding-top:3.5rem;scroll-margin-top:calc(var(--hh) + 80px)}
+.faq-bubble .post-link{color:#fff;text-decoration-color:#FF9A3C}
+.faq-bubble strong{font-weight:700;color:#fff}
+/* Zalo mark on an orange button: a white disc behind it keeps the blue bubble crisp */
+.ct-zalo{display:grid;place-items:center;flex:none;width:30px;height:30px;margin-left:-6px;border-radius:10px;background:#fff;box-shadow:0 4px 10px -4px rgb(1 44 121/.4)}
