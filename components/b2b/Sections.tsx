@@ -71,7 +71,7 @@ export function Pricing() {
         <table>
           <caption className="sr-only">Dịch vụ lẻ và cách tính giá</caption>
           <thead><tr><th scope="col">Dịch vụ lẻ</th><th scope="col">Cách tính giá</th><th scope="col">Thời gian</th></tr></thead>
-          <tbody>{SINGLE_SERVICES.map(([a, b, c]) => <tr key={a}><th scope="row">{a}</th><td className="!font-sans !text-[15px]">{b}</td><td>{c}</td></tr>)}</tbody>
+          <tbody>{SINGLE_SERVICES.map(([a, b, c]) => <tr key={a}><th scope="row">{a}</th><td data-label="Cách tính giá" className="!font-sans !text-[15px]">{b}</td><td data-label="Thời gian">{c}</td></tr>)}</tbody>
         </table>
       </div>
     </B2BSection>

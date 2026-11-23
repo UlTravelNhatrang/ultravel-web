@@ -49,7 +49,7 @@ const TEMPLATES = [
 /** Demo switcher links; the page you are on is underlined. */
 function TemplateLinks({ current }: { current?: string }) {
   return TEMPLATES.map(t => (
-    <Link key={t.href} href={t.href} className={current === t.href ? 'font-semibold underline underline-offset-2' : 'hover:text-red'}>{t.label}</Link>
+    <Link key={t.href} href={t.href} className={`inline-block py-1.5 px-1 ${current === t.href ? 'font-semibold underline underline-offset-2' : 'hover:text-red'}`}>{t.label}</Link>
   ));
 }
 
@@ -148,7 +148,7 @@ export function Header() {
           )}
         </nav>
 
-        <div className="ml-auto xl:ml-0 flex items-center gap-2">
+        <div className="ml-auto xl:ml-0 flex items-center gap-2 shrink-0">
           <button type="button" onClick={search} className="search-pill" aria-label="Tìm kiếm (phím /)">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5" /><path d="M15.5 15.5 21 21" /></svg>
             <span className="hidden 2xl:inline">Tìm kiếm</span><kbd className="hidden 2xl:grid">/</kbd>
@@ -169,7 +169,7 @@ export function Header() {
       </nav>
 
       {/* Template switcher (only for reviewing the demo) */}
-      <div className="border-t border-ink bg-white/30 mono text-[10px] px-4 py-1 flex flex-wrap gap-x-4 gap-y-1 justify-center">
+      <div className="border-t border-ink bg-white/30 mono text-[10px] px-4 py-0.5 flex flex-wrap items-center gap-x-3 justify-center">
         <span className="text-ink2">Xem mẫu:</span>
         {/* The pathname is request data on unknown routes, so it sits behind Suspense. */}
         <Suspense fallback={<TemplateLinks />}><CurrentTemplateLinks /></Suspense>

@@ -82,6 +82,19 @@ ol.post-list li::before{content:counter(pl);position:absolute;left:0;top:.2em;fo
 .post-table td:nth-child(2){font-family:var(--font-plex),monospace;font-size:13.5px;white-space:nowrap;color:rgb(var(--ink))}
 .post-table td:last-child{color:rgb(var(--ink2))}
 .post-table tbody tr:hover{background:rgb(247 128 10/.05)}
+/* Phones: each row becomes a small card (label left, value right) instead of a sideways-scrolling table. */
+@media (max-width:639px){
+  .post-table{overflow:visible}
+  .post-table table{min-width:0}
+  .post-table thead{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+  .post-table table,.post-table tbody,.post-table tr{display:block}
+  .post-table tbody tr{padding:14px 16px;border-top:1px solid rgb(var(--ink)/.08)}
+  .post-table tbody tr:first-child{border-top:0}
+  .post-table tbody th{display:block;padding:0 0 6px;border:0;font-size:15.5px}
+  .post-table td{display:flex;justify-content:space-between;align-items:baseline;gap:12px;padding:3px 0;border:0;white-space:normal!important;text-align:right}
+  .post-table td:empty{display:none}
+  .post-table td::before{content:attr(data-label);flex:none;font:500 10.5px/1.4 var(--font-plex),monospace;letter-spacing:.06em;text-transform:uppercase;color:rgb(var(--ink2));text-align:left}
+}
 
 /* Day plan: time pills on a dotted rail */
 .post-timeline{position:relative;display:grid;gap:22px;padding:6px 0 6px 0}

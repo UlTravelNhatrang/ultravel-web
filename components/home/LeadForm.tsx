@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, type FormEvent } from 'react';
+import { useEffect, useRef, useState, type FormEvent } from 'react';
 
 type Field = 'name' | 'contact';
 const FIELDS: { id: Field; label: string; error: string; autoComplete?: string }[] = [
@@ -16,6 +16,17 @@ const DESTINATIONS = ['Nha Trang', 'Đà Lạt', 'Phú Quốc'];
 export function LeadForm() {
   const [errors, setErrors] = useState<Record<Field, boolean>>({ name: false, contact: false });
   const [sent, setSent] = useState(false);
+  const formRef = useRef<HTMLFormElement>(null);
+
+  // The button's shine loops forever: run it only while the form is on screen (it keeps the page
+  // re-rendering every frame otherwise).
+  useEffect(() => {
+    const form = formRef.current;
+    if (!form) return;
+    const io = new IntersectionObserver(([e]) => form.classList.toggle('is-off', !e.isIntersecting));
+    io.observe(form);
+    return () => io.disconnect();
+  }, []);
 
   const onSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -34,7 +45,7 @@ export function LeadForm() {
   };
 
   return (
-    <form id="leadForm" className="lead" noValidate onSubmit={onSubmit}>
+    <form ref={formRef} id="leadForm" className="lead" noValidate onSubmit={onSubmit}>
       <div className="relative p-6">
         <div className="flex items-center justify-between gap-3">
           <div className="flex items-center gap-2.5">

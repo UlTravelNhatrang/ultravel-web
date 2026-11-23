@@ -83,7 +83,7 @@ export function Tours() {
 
   return (
     <Section labelledBy="tourTitle">
-      <SectionHeader label="07 — Tour & combo" aside={<AsideLink href={ROUTES.services}>Xem tất cả <Arrow /></AsideLink>} />
+      <SectionHeader label="07 — Tour & combo" aside={<AsideLink href={ROUTES.services} label="Xem tất cả tour và combo">Xem tất cả <Arrow /></AsideLink>} />
       <SectionTitle id="tourTitle">Tour chọn lọc</SectionTitle>
       <div ref={wrapRef} id="toursWrap" className="relative">
         <div className="hidden md:grid grid-cols-[5rem_1fr_9rem_10rem_4rem] gap-6 mono text-ink2 pb-2 border-b-2 border-ink">

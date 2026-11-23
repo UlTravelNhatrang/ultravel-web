@@ -61,7 +61,7 @@ function Block({ block: b }: { block: PostBlock }) {
           <table>
             <caption className="sr-only">{b.caption}</caption>
             <thead><tr>{b.head.map((h, i) => <th key={i} scope="col">{h}</th>)}</tr></thead>
-            <tbody>{b.rows.map((row, r) => <tr key={r}>{row.map((c, i) => (i === 0 ? <th key={i} scope="row">{c}</th> : <td key={i}>{c}</td>))}</tr>)}</tbody>
+            <tbody>{b.rows.map((row, r) => <tr key={r}>{row.map((c, i) => (i === 0 ? <th key={i} scope="row">{c}</th> : <td key={i} data-label={b.head[i]}>{c}</td>))}</tr>)}</tbody>
           </table>
         </div>
       );

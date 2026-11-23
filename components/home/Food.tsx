@@ -10,7 +10,7 @@ import { ROUTES } from '@/lib/routes';
 export function Food() {
   return (
     <Section labelledBy="foodTitle">
-      <SectionHeader label="05 — Ẩm thực / Đặc sản" aside={<AsideLink href={ROUTES.food}>Xem tất cả <Arrow /></AsideLink>} />
+      <SectionHeader label="05 — Ẩm thực / Đặc sản" aside={<AsideLink href={ROUTES.food} label="Xem tất cả món ăn và đặc sản">Xem tất cả <Arrow /></AsideLink>} />
       <SectionTitle id="foodTitle" className="mt-6 mb-8 max-w-[24ch]">Món phải thử &amp; đặc sản làm quà</SectionTitle>
       <div id="food" className="grid-ink grid-cols-2 lg:grid-cols-6 lg:grid-rows-[repeat(2,17rem)] grid-flow-dense">
         {FOOD.map(([name, category], k) => {

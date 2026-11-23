@@ -10,6 +10,15 @@ import { useEffect, useRef } from 'react';
 export function Spotlight() {
   const spotRef = useRef<HTMLDivElement>(null);
 
+  // The idle sweep repaints the masked logo every frame: pause it while the footer is off screen.
+  useEffect(() => {
+    const spot = spotRef.current;
+    if (!spot) return;
+    const io = new IntersectionObserver(([e]) => spot.classList.toggle('is-off', !e.isIntersecting));
+    io.observe(spot);
+    return () => io.disconnect();
+  }, []);
+
   useEffect(() => {
     const spot = spotRef.current;
     if (!spot || !matchMedia('(hover: hover)').matches) return;

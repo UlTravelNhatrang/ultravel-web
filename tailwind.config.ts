@@ -5,6 +5,9 @@ const token = (name: string) => `rgb(var(--${name}) / <alpha-value>)`;
 
 const config: Config = {
   content: ['./app/**/*.{ts,tsx}', './components/**/*.{ts,tsx}', './content/**/*.ts'],
+  // Plain words in article text and code ("table", "filter", "transform"…) that Tailwind would otherwise
+  // turn into utilities no element uses. Only the bare class is blocked; variants like `sm:inline` still work.
+  blocklist: ['container', 'visible', 'static', 'fixed', 'inline', 'table', 'contents', 'shrink', 'transform', 'resize', 'filter'],
   theme: {
     extend: {
       colors: {

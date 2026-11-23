@@ -25,9 +25,10 @@ export function AsideNote({ children }: { children: ReactNode }) {
   return <span className="mono text-ink2">{children}</span>;
 }
 
-export function AsideLink({ href, children }: { href: string; children: ReactNode }) {
+/** `label` names the destination for screen readers when the visible text is generic ("Xem tất cả"). */
+export function AsideLink({ href, label, children }: { href: string; label?: string; children: ReactNode }) {
   return (
-    <Link href={href} className="mono font-semibold hover:text-red">
+    <Link href={href} aria-label={label} className="mono font-semibold hover:text-red">
       {children}
     </Link>
   );

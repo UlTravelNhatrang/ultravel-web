@@ -18,7 +18,7 @@ export function Footer() {
               <p className="mt-5 mono text-paper/55">Tên pháp nhân / MST<br />Địa chỉ / Hotline / Email</p>
             </div>
             <div className="md:col-span-2 bg-deep p-6">
-              <h4 className="mono font-semibold mb-4 text-paper/60">Chuyên mục</h4>
+              <h3 className="mono font-semibold mb-4 text-paper/60">Chuyên mục</h3>
               <ul className="space-y-2 text-sm">
                 <li><Link className={linkCls} href={ROUTES.guides}>Cẩm nang</Link></li>
                 <li><Link className={linkCls} href={ROUTES.food}>Ẩm thực</Link></li>
@@ -27,7 +27,7 @@ export function Footer() {
               </ul>
             </div>
             <div className="md:col-span-2 bg-deep p-6">
-              <h4 className="mono font-semibold mb-4 text-paper/60">Dịch vụ</h4>
+              <h3 className="mono font-semibold mb-4 text-paper/60">Dịch vụ</h3>
               <ul className="space-y-2 text-sm">
                 <li><Link className={linkCls} href={ROUTES.services}>Tour &amp; lưu trú</Link></li>
                 <li><Link className={linkCls} href={ROUTES.b2b}>Marketing du lịch</Link></li>
@@ -35,7 +35,7 @@ export function Footer() {
               </ul>
             </div>
             <div className="col-span-2 md:col-span-3 bg-deep p-6">
-              <h4 className="mono font-semibold mb-4 text-paper/60">Pháp lý &amp; MXH</h4>
+              <h3 className="mono font-semibold mb-4 text-paper/60">Pháp lý &amp; MXH</h3>
               <ul className="space-y-2 text-sm">
                 <li><a className={linkCls} href="#">Về chúng tôi</a></li>
                 <li><a className={linkCls} href="#">Chính sách bảo mật</a></li>

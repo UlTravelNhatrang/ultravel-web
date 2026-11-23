@@ -27,7 +27,10 @@
 .lead-cta{position:relative;overflow:hidden;width:100%;height:56px;display:flex;align-items:center;justify-content:space-between;padding:0 8px 0 22px;border-radius:99px;
   background:rgb(var(--red));color:rgb(var(--ink));font-weight:700;font-size:15px;box-shadow:0 16px 30px -12px rgb(247 128 10/.75),inset 0 1px 0 rgb(255 255 255/.25);transition:transform .3s var(--ease),background-color .3s}
 .lead-cta::after{content:"";position:absolute;top:0;bottom:0;width:40%;left:-60%;transform:skewX(-20deg);background:linear-gradient(90deg,transparent,rgb(255 255 255/.35),transparent);animation:shine 4s ease-in-out infinite}
-@keyframes shine{0%,60%{left:-60%}100%{left:130%}}
+/* Moves with transform (runs on the compositor), not `left` (layout + repaint every frame).
+   475% of its own 40% width = the 190% of the button the old left:-60%→130% covered. */
+@keyframes shine{0%,60%{transform:translateX(0) skewX(-20deg)}100%{transform:translateX(475%) skewX(-20deg)}}
+.is-off .lead-cta::after{animation-play-state:paused}
 .lead-cta .cta-dot{width:40px;height:40px}
 .lead-cta:hover{background:#FF9124}.lead-cta:hover .cta-dot{transform:translateX(3px) rotate(-45deg)}
 .lead-cta:active{transform:scale(.98)}
@@ -51,12 +54,13 @@
 html body .text-red,html body .hover\:text-red:hover,html body .group:hover .group-hover\:text-red{color:rgb(var(--red-t))}
 html body .bg-ink .text-red,html body .bg-deep .text-red,html body footer .text-red{color:#FF9A3C}
 .lede .q-red i{color:rgb(var(--ink)/.7)}
-html body :is(h1,h2,.hd,.mega,.num-xl,[class*="text-[clamp"]) .text-red{color:rgb(var(--red))}
+html body :is(h1,h2,.hd,.mega,[class*="text-[clamp"]) .text-red{color:rgb(var(--red))}
 /* Footer spotlight: a ghost logo that lights up in full colour under the cursor */
 @property --mx{syntax:'<percentage>';inherits:true;initial-value:50%}
 @property --my{syntax:'<percentage>';inherits:true;initial-value:50%}
 @property --rad{syntax:'<length>';inherits:true;initial-value:150px}
 .spot{position:relative;width:min(78vw,620px);cursor:crosshair;--mx:15%;--my:55%;animation:sweep 7s ease-in-out infinite alternate}
+.spot.is-off{animation-play-state:paused}
 .spot.is-live{animation:none;transition:--rad .5s var(--ease)}
 .spot img{display:block;width:100%;height:auto;user-select:none;-webkit-user-drag:none}
 .spot-ghost{opacity:.09;filter:grayscale(1)}
