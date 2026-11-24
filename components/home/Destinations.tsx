@@ -92,12 +92,30 @@ export function Destinations() {
     const onScroll = () => { left = track.scrollLeft; queue(); };
     const remeasure = () => { measure(); left = track.scrollLeft; queue(); };
 
-    // Mouse drag (touch already swipes natively).
-    let down = false, moved = false, startX = 0, startL = 0;
+    // Mouse drag with momentum (touch already swipes natively). Snapping stays off from the first move
+    // until the release glide lands exactly on a card, so the browser never yanks the track mid-way.
+    let down = false, moved = false, startX = 0, startL = 0, glide = 0;
+    let samples: { x: number; t: number }[] = [];
+    const stopGlide = () => { cancelAnimationFrame(glide); glide = 0; };
+    const glideTo = (target: number) => {
+      const from = track.scrollLeft, dist = target - from;
+      if (!motionOK() || Math.abs(dist) < 1) { track.scrollLeft = target; track.classList.remove('dragging'); return; }
+      // Longer trips get a little more time; ease-out so it settles softly.
+      const dur = Math.min(650, 320 + Math.abs(dist) * 0.35), t0 = performance.now();
+      const tick = (now: number) => {
+        const k = Math.min(1, (now - t0) / dur), e = 1 - Math.pow(1 - k, 3);
+        track.scrollLeft = from + dist * e;
+        if (k < 1) glide = requestAnimationFrame(tick);
+        else { glide = 0; track.classList.remove('dragging'); }
+      };
+      glide = requestAnimationFrame(tick);
+    };
     const onDown = (e: PointerEvent) => {
       restart(); // any touch or drag starts the wait over
       if (e.pointerType !== 'mouse' || e.button !== 0) return;
+      stopGlide(); // grabbing mid-glide catches the track where it is
       down = true; moved = false; startX = e.clientX; startL = track.scrollLeft;
+      samples = [{ x: e.clientX, t: e.timeStamp }];
       sync();
       // Window listeners only for the length of a drag.
       addEventListener('pointermove', onMove);
@@ -106,18 +124,31 @@ export function Destinations() {
     const onMove = (e: PointerEvent) => {
       if (!down) return;
       const dx = e.clientX - startX;
-      if (!moved && Math.abs(dx) > 6) { moved = true; track.classList.add('dragging'); }
-      if (moved) track.scrollLeft = startL - dx;
+      if (!moved && Math.abs(dx) > 4) { moved = true; track.classList.add('dragging'); }
+      if (!moved) return;
+      track.scrollLeft = startL - dx;
+      samples.push({ x: e.clientX, t: e.timeStamp });
+      if (samples.length > 6) samples.shift();
     };
-    const onUp = () => {
+    const onUp = (e: PointerEvent) => {
       removeEventListener('pointermove', onMove);
       if (!down) return;
       down = false;
       sync();
-      if (moved) {
-        track.classList.remove('dragging');
-        track.scrollTo({ left: Math.round(track.scrollLeft / step()) * step(), behavior: behavior() });
-      }
+      if (!moved) { track.classList.remove('dragging'); return; }
+      // Release speed over the last ~100ms (px/ms; positive = dragging left = moving forward).
+      const recent = samples.filter(s => e.timeStamp - s.t < 100);
+      const first = recent[0] ?? samples[0];
+      const v = recent.length > 1 ? (first.x - e.clientX) / Math.max(1, e.timeStamp - first.t) : 0;
+      const st = step() || 1, max = track.scrollWidth - track.clientWidth;
+      const dragged = track.scrollLeft - startL;
+      // Where a flick would carry the track, then the card nearest that point…
+      let i = Math.round((track.scrollLeft + v * 260) / st);
+      // …but any deliberate drag (or flick) moves at least one card in its direction.
+      const from = Math.round(startL / st);
+      if ((dragged > 40 || v > 0.3) && i <= from) i = from + 1;
+      if ((dragged < -40 || v < -0.3) && i >= from) i = from - 1;
+      glideTo(Math.max(0, Math.min(max, i * st)));
     };
     // A drag should not also open the card under the pointer.
     const onClick = (e: MouseEvent) => { if (moved) { e.preventDefault(); e.stopPropagation(); moved = false; } };
@@ -144,6 +175,7 @@ export function Destinations() {
 
     return () => {
       cancelAnimationFrame(raf);
+      stopGlide();
       ro.disconnect();
       io.disconnect();
       anim.onfinish = null;

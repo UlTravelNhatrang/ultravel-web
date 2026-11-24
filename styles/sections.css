@@ -106,3 +106,35 @@ html body :is(h1,h2,.hd,.mega,[class*="text-[clamp"]) .text-red{color:rgb(var(--
 .brand-bg{position:absolute;left:0;right:0;top:.12em;bottom:.02em;border-radius:.28em .4em .32em .45em;background:rgb(255 255 255/.75);box-shadow:0 10px 24px -12px rgb(1 44 121/.35);transform-origin:0 50%}
 .brand-wave{position:absolute;left:4%;width:92%;bottom:-.22em;height:.3em;overflow:visible}
 .brand-wave path{fill:none;stroke:rgb(var(--red));stroke-width:3.2;stroke-linecap:round;vector-effect:non-scaling-stroke;stroke-dasharray:1;stroke-dashoffset:0}
+
+/* Home hero data strip: one navy receipt, perforated dividers, a small picture per figure */
+.hero-stats{margin-top:var(--card-gap);display:grid;grid-template-columns:repeat(2,minmax(0,1fr));border-radius:var(--card-r);color:rgb(var(--paper));background:rgb(var(--ink));background-image:radial-gradient(60% 140% at 100% 0%,rgb(0 120 224/.35),transparent 60%),radial-gradient(40% 120% at 0% 100%,rgb(247 128 10/.14),transparent 70%);box-shadow:0 30px 60px -35px rgb(1 44 121/.75)}
+.hs{position:relative;display:grid;grid-template-rows:auto auto 1fr;gap:8px;padding:18px 16px 20px;min-width:0}
+.hs:nth-child(even){border-left:1.5px dashed rgb(255 255 255/.16)}
+.hs:nth-child(n+3){border-top:1.5px dashed rgb(255 255 255/.16)}
+.hs-k{display:flex;align-items:center;gap:8px;font-size:11px;color:rgb(var(--paper)/.62)}
+@media (max-width:1023px){.hs-k{align-items:flex-start;min-height:2.7em}}
+.hs-code{display:grid;place-items:center;flex:none;width:18px;height:18px;border-radius:5px;background:rgb(var(--red));color:rgb(var(--ink));font-weight:700;font-size:10px}
+.hs-n{font-size:clamp(1.9rem,6.4vw,3.3rem);line-height:.95}
+.hs-v{align-self:end;margin-top:6px;min-height:28px}
+.hs-viz{width:min(100%,120px);height:26px;overflow:visible}
+.hs-viz path{stroke:rgb(255 255 255/.5);stroke-width:2.2;stroke-linecap:round;fill:none}
+.hs-viz .hs-slash{stroke:#FF9A3C}
+.hs-viz rect{fill:rgb(255 255 255/.24)}
+.hs-viz .hs-hot{fill:#FF9A3C}
+.hs-range{position:relative;height:30px;max-width:180px}
+.hs-range::before{content:"";position:absolute;left:0;right:0;top:6px;height:4px;border-radius:4px;background:rgb(255 255 255/.15)}
+.hs-range-fill{position:absolute;top:6px;height:4px;border-radius:4px;background:linear-gradient(90deg,#FFB347,rgb(var(--red)))}
+.hs-range-dot{position:absolute;top:2px;width:12px;height:12px;margin-left:-6px;border-radius:99px;background:#fff;box-shadow:0 0 0 3px rgb(var(--red))}
+.hs-range-scale{position:absolute;left:0;right:0;top:18px;display:flex;justify-content:space-between;font-size:10px;color:rgb(var(--paper)/.5)}
+.hs-stamp{display:inline-block;padding:4px 9px;border:2px solid #FF9A3C;border-radius:8px;color:#FF9A3C;font-size:10px;line-height:1.15;font-weight:700;letter-spacing:.08em;text-transform:uppercase;rotate:-7deg;box-shadow:inset 0 0 0 1px rgb(255 154 60/.35)}
+@media (min-width:1024px){
+  .hero-stats{grid-template-columns:repeat(4,minmax(0,1fr))}
+  .hs{padding:22px 26px 24px}
+  .hs:nth-child(n+3){border-top:0}
+  .hs+.hs{border-left:1.5px dashed rgb(255 255 255/.16)}
+  /* ticket notches where each divider meets the edges */
+  .hs+.hs::before,.hs+.hs::after{content:"";position:absolute;left:-8px;width:14px;height:14px;border-radius:99px;background:rgb(var(--paper))}
+  .hs+.hs::before{top:-7px}
+  .hs+.hs::after{bottom:-7px}
+}

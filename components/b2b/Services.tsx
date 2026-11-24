@@ -1,29 +1,73 @@
-import { ArrowRight, PuzzlePiece } from '@phosphor-icons/react/dist/ssr';
-import { SERVICES } from '@/content/b2b';
-import { B2BSection, ServiceIcon } from './parts';
+'use client';
 
-/** Seven services and a "build your own" card: an even 4 × 2 grid on desktop. */
+import Image from 'next/image';
+import { useState } from 'react';
+import { SERVICES } from '@/content/b2b';
+import { B2BSection } from './parts';
+
+const total = String(SERVICES.length).padStart(2, '0');
+const code = (i: number) => String(i + 1).padStart(2, '0');
+
+/**
+ * Services as an index + showcase. Desktop: a tight one-line-per-service index on the left; hovering or
+ * picking a row swaps the photo panel on the right. Phones: the same index works as an accordion
+ * (the active row opens in place; the photo panel isn't shown).
+ */
 export function Services() {
+  const [active, setActive] = useState(0);
+  const s = SERVICES[active];
+
   return (
     <B2BSection id="dich-vu" label="Dịch vụ" title="Một đội ngũ, đủ 7 mảng marketing du lịch">
-      <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-[var(--card-gap)]">
-        {SERVICES.map((s, i) => (
-          <article key={s.key} className="b2b-svc soft-card float-in">
-            <div className="flex items-start justify-between">
-              <span className="b2b-svc-ico"><ServiceIcon k={s.key} /></span>
-              <span className="mono text-ink/30">{String(i + 1).padStart(2, '0')}</span>
-            </div>
-            <h3 className="font-display font-extrabold text-xl tracking-[-0.02em] mt-5">{s.title}</h3>
-            <p className="text-[15px] text-ink/75 leading-relaxed mt-2">{s.text}</p>
-            <p className="mono text-ink2 mt-auto pt-5">Hợp với: {s.fit}</p>
-          </article>
-        ))}
-        <a href="#lien-he" className="b2b-svc b2b-svc-combo float-in group">
-          <span className="b2b-svc-ico"><PuzzlePiece size={22} weight="duotone" aria-hidden="true" /></span>
-          <span className="font-display font-extrabold text-xl tracking-[-0.02em] mt-5 block">Combo theo ngân sách</span>
-          <span className="text-[15px] text-paper/75 leading-relaxed mt-2 block">Ghép các mảng bạn cần, bỏ phần chưa cần. Báo giá sau buổi audit.</span>
-          <span className="mono font-semibold mt-auto pt-5 inline-flex items-center gap-2 text-[#FF9A3C]">Nhận tư vấn <ArrowRight size={14} weight="bold" className="transition-transform group-hover:translate-x-1" aria-hidden="true" /></span>
-        </a>
+      <div className="svc float-in">
+        <div className="svc-index">
+          <ol>
+            {SERVICES.map((x, i) => {
+              const on = i === active;
+              return (
+                <li key={x.key} className={on ? 'is-on' : undefined}>
+                  <button
+                    type="button"
+                    className="svc-row"
+                    aria-expanded={on}
+                    aria-controls={`svc-more-${x.key} svc-show`}
+                    onClick={() => setActive(i)}
+                    onPointerEnter={e => { if (e.pointerType === 'mouse') setActive(i); }}
+                  >
+                    <span className="svc-code mono">S-{code(i)}</span>
+                    <span className="svc-name">{x.title}</span>
+                    <span className="svc-fit mono">{x.fit}</span>
+                    <span className="svc-arr" aria-hidden="true">→</span>
+                  </button>
+                  {/* Phones: the description opens under its row. */}
+                  <div id={`svc-more-${x.key}`} className="svc-more" hidden={!on}>
+                    <p>{x.text}</p>
+                    <p className="mono text-ink2 mt-2">Hợp với: {x.fit}</p>
+                  </div>
+                </li>
+              );
+            })}
+          </ol>
+          <a href="#lien-he" className="svc-combo group">
+            <span className="svc-code mono">S-+</span>
+            <span>Không cần đủ 7 mảng? <strong>Ghép combo theo ngân sách</strong></span>
+            <span className="svc-arr" aria-hidden="true">→</span>
+          </a>
+        </div>
+
+        {/* Desktop showcase: every photo is stacked and the active one fades in, so switching never waits on a download. */}
+        <div id="svc-show" className="svc-show" aria-live="polite">
+          {SERVICES.map((x, i) => (
+            <Image key={x.key} src={x.photo} alt="" fill sizes="(min-width: 1024px) 44vw, 100vw" className={`svc-img ${i === active ? 'is-on' : ''}`} />
+          ))}
+          <span className="svc-big" aria-hidden="true">{code(active)}<small>/{total}</small></span>
+          <div className="svc-body" key={s.key}>
+            <p className="mono text-paper/75"><span className="text-[#FF9A3C] font-semibold">S-{code(active)}</span> · Hợp với: {s.fit}</p>
+            <h3 className="font-display font-extrabold text-[clamp(1.7rem,2.6vw,2.3rem)] leading-[1.05] tracking-[-0.03em] mt-2">{s.title}</h3>
+            <p className="text-paper/85 text-[15.5px] leading-relaxed mt-2 max-w-[42ch]">{s.text}</p>
+            <a href="#lien-he" className="svc-cta mono">Tư vấn mảng này <span aria-hidden="true">→</span></a>
+          </div>
+        </div>
       </div>
     </B2BSection>
   );

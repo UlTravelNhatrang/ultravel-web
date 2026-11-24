@@ -1,13 +1,4 @@
 import type { ReactNode } from 'react';
-import { Bed, Browser, FilmSlate, MagnifyingGlass, MapPinArea, Megaphone, Printer } from '@phosphor-icons/react/dist/ssr';
-import type { ServiceKey } from '@/content/b2b';
-
-const ICONS = { seo: MagnifyingGlass, maps: MapPinArea, media: FilmSlate, ads: Megaphone, web: Browser, print: Printer, ota: Bed } as const;
-
-export function ServiceIcon({ k, size = 22 }: { k: ServiceKey; size?: number }) {
-  const Icon = ICONS[k];
-  return <Icon size={size} weight="duotone" aria-hidden="true" />;
-}
 
 /** A B2B page section: anchor for the tabs, small label, big title with the orange full stop. */
 export function B2BSection({ id, label, title, aside, className = '', children }: { id: string; label: string; title: ReactNode; aside?: ReactNode; className?: string; children: ReactNode }) {

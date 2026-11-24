@@ -5,11 +5,47 @@ import { HeroSearch } from './HeroSearch';
 const HERO_PHOTO =
   'https://thumb.wikimedia.org/wikipedia/commons/thumb/f/fd/Nha_Trang_skyline.jpg/1280px-Nha_Trang_skyline.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail';
 
-const STATS: { value: ReactNode; label: string }[] = [
-  { value: <span className="count" data-to="312">312</span>, label: 'Quán đã ăn thử' },
-  { value: <span className="count" data-to="480">480</span>, label: 'Bài viết thực địa' },
-  { value: <>25K<span className="text-red">/</span>450K</>, label: 'Khoảng giá một bữa' },
-  { value: '12.11', label: 'Lần kiểm tra giá cuối' },
+/** Tally marks in groups of five, like a field notebook. */
+function Tally() {
+  return (
+    <svg className="hs-viz" viewBox="0 0 120 26" aria-hidden="true">
+      {[0, 1, 2].map(g => (
+        <g key={g} transform={`translate(${g * 40} 0)`}>
+          {[0, 1, 2, 3].map(i => <path key={i} d={`M${4 + i * 7} 3v20`} />)}
+          <path d="M1 19 30 6" className="hs-slash" />
+        </g>
+      ))}
+    </svg>
+  );
+}
+
+/** Small rising bars: posts piling up month by month. */
+function Bars() {
+  const h = [6, 9, 8, 12, 14, 13, 17, 20, 24];
+  return (
+    <svg className="hs-viz" viewBox="0 0 120 26" aria-hidden="true">
+      {h.map((v, i) => <rect key={i} x={i * 13.5} y={26 - v} width="8" height={v} rx="2" className={i === h.length - 1 ? 'hs-hot' : undefined} />)}
+    </svg>
+  );
+}
+
+/** Where 25K and 450K sit on a 0 to 500K scale. */
+function PriceRange() {
+  return (
+    <div className="hs-range" aria-hidden="true">
+      <span className="hs-range-fill" style={{ left: '5%', right: '10%' }} />
+      <span className="hs-range-dot" style={{ left: '5%' }} />
+      <span className="hs-range-dot" style={{ left: '90%' }} />
+      <span className="hs-range-scale mono"><span>Bình dân</span><span>Cao cấp</span></span>
+    </div>
+  );
+}
+
+const STATS: { value: ReactNode; label: string; code: string; viz: ReactNode }[] = [
+  { code: 'A', value: <span className="count" data-to="312">312</span>, label: 'Quán đã ăn thử', viz: <Tally /> },
+  { code: 'B', value: <span className="count" data-to="480">480</span>, label: 'Bài viết thực địa', viz: <Bars /> },
+  { code: 'C', value: <>25K<span className="text-red">/</span>450K</>, label: 'Khoảng giá một bữa', viz: <PriceRange /> },
+  { code: 'D', value: '12.11', label: 'Lần kiểm tra giá cuối', viz: <span className="hs-stamp mono" aria-hidden="true">Đã<br />kiểm tra</span> },
 ];
 
 export function Hero() {
@@ -51,15 +87,16 @@ export function Hero() {
         </figure>
       </div>
 
-      {/* Data strip */}
-      <div className="grid-ink grid-cols-2 lg:grid-cols-4 border-t-0">
+      {/* Data strip: one navy "receipt" with perforated dividers; each figure carries a small picture of what it means. */}
+      <dl className="hero-stats">
         {STATS.map(s => (
-          <div key={s.label} className="p-4 md:p-5">
-            <div className="num text-[clamp(1.75rem,7.4vw,3rem)]">{s.value}</div>
-            <p className="mono mt-2 text-ink2">{s.label}</p>
+          <div key={s.label} className="hs">
+            <dt className="mono hs-k"><span className="hs-code">{s.code}</span>{s.label}</dt>
+            <dd className="num hs-n">{s.value}</dd>
+            <dd className="hs-v">{s.viz}</dd>
           </div>
         ))}
-      </div>
+      </dl>
     </section>
   );
 }

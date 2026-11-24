@@ -5,14 +5,14 @@ import type { FaqItem } from '@/types/content';
 
 export type ServiceKey = 'seo' | 'maps' | 'media' | 'ads' | 'web' | 'print' | 'ota';
 
-export const SERVICES: { key: ServiceKey; title: string; text: string; fit: string }[] = [
-  { key: 'maps', title: 'Google Maps', text: 'Tối ưu hồ sơ, ảnh, đánh giá và bài đăng để có thêm cuộc gọi và lượt chỉ đường.', fit: 'Nhà hàng · Cafe · Spa' },
-  { key: 'seo', title: 'SEO Local', text: 'Lên top cho từ khóa “quán + khu vực”, viết nội dung và gắn dữ liệu có cấu trúc.', fit: 'Mọi ngành' },
-  { key: 'media', title: 'Review & Media', text: 'Review thực tế, ảnh và video ngắn, đăng trên Ultravel và mạng xã hội.', fit: 'Nhà hàng · Khách sạn' },
-  { key: 'ads', title: 'Quảng cáo', text: 'Google, Facebook, TikTok Ads theo mục tiêu đặt bàn, đặt phòng hoặc lead tour.', fit: 'Mọi ngành' },
-  { key: 'web', title: 'Website', text: 'Website và landing page tải nhanh, chuẩn SEO, có nút đặt chỗ và Zalo.', fit: 'Khách sạn · Lữ hành' },
-  { key: 'print', title: 'Ấn phẩm', text: 'Menu, poster, standee và banner đồng bộ nhận diện, in xong giao tận nơi.', fit: 'Nhà hàng · Cafe' },
-  { key: 'ota', title: 'OTA Setup', text: 'Booking, Agoda, Traveloka, Google Hotels: tạo hồ sơ, ảnh, giá và tối ưu hạng.', fit: 'Khách sạn · Homestay' },
+export const SERVICES: { key: ServiceKey; title: string; text: string; fit: string; photo: string }[] = [
+  { key: 'maps', title: 'Google Maps', text: 'Tối ưu hồ sơ, ảnh, đánh giá và bài đăng để có thêm cuộc gọi và lượt chỉ đường.', fit: 'Nhà hàng · Cafe · Spa', photo: PHOTOS.place2[0] },
+  { key: 'seo', title: 'SEO Local', text: 'Lên top cho từ khóa “quán + khu vực”, viết nội dung và gắn dữ liệu có cấu trúc.', fit: 'Mọi ngành', photo: PHOTOS.hub[0] },
+  { key: 'media', title: 'Review & Media', text: 'Review thực tế, ảnh và video ngắn, đăng trên Ultravel và mạng xã hội.', fit: 'Nhà hàng · Khách sạn', photo: PHOTOS.food[0] },
+  { key: 'ads', title: 'Quảng cáo', text: 'Google, Facebook, TikTok Ads theo mục tiêu đặt bàn, đặt phòng hoặc lead tour.', fit: 'Mọi ngành', photo: PHOTOS.place3[3] },
+  { key: 'web', title: 'Website', text: 'Website và landing page tải nhanh, chuẩn SEO, có nút đặt chỗ và Zalo.', fit: 'Khách sạn · Lữ hành', photo: PHOTOS.hub[2] },
+  { key: 'print', title: 'Ấn phẩm', text: 'Menu, poster, standee và banner đồng bộ nhận diện, in xong giao tận nơi.', fit: 'Nhà hàng · Cafe', photo: PHOTOS.place2[3] },
+  { key: 'ota', title: 'OTA Setup', text: 'Booking, Agoda, Traveloka, Google Hotels: tạo hồ sơ, ảnh, giá và tối ưu hạng.', fit: 'Khách sạn · Homestay', photo: PHOTOS.place3[1] },
 ];
 
 export const SERVICE_LABEL: Record<ServiceKey, string> = { seo: 'SEO', maps: 'Maps', media: 'Media', ads: 'Ads', web: 'Website', print: 'Ấn phẩm', ota: 'OTA' };
