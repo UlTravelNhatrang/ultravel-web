@@ -26,14 +26,10 @@ export function ReviewDialog({ placeName }: { placeName: string }) {
       e.preventDefault();
       setSent(false);
       setErrors({});
-      window.__lenis?.stop();
       ref.current?.showModal();
     };
-    const dialog = ref.current;
-    const onClose = () => window.__lenis?.start();
     document.addEventListener('click', open);
-    dialog?.addEventListener('close', onClose);
-    return () => { document.removeEventListener('click', open); dialog?.removeEventListener('close', onClose); };
+    return () => document.removeEventListener('click', open);
   }, []);
 
   const onSubmit = (e: FormEvent<HTMLFormElement>) => {

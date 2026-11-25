@@ -4,7 +4,6 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { Suspense } from 'react';
 import { ArrowRight, Storefront } from '@phosphor-icons/react/dist/ssr';
-import { MotionProvider } from '@/components/motion/MotionProvider';
 import { ContactCard } from '@/components/review/ContactCard';
 import { Faq } from '@/components/review/Faq';
 import { Gallery } from '@/components/review/Gallery';
@@ -169,7 +168,6 @@ async function ReviewContent({ params }: Pick<Props, 'params'>) {
       </main>
       <MobileActionBar review={r} />
       <ReviewDialog placeName={r.name} />
-      <MotionProvider />
     </>
   );
 }

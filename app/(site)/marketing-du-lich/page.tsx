@@ -6,7 +6,6 @@ import { Industries } from '@/components/b2b/Industries';
 import { B2BSection } from '@/components/b2b/parts';
 import { Cases, Pricing, Process } from '@/components/b2b/Sections';
 import { Services } from '@/components/b2b/Services';
-import { MotionProvider } from '@/components/motion/MotionProvider';
 import { Breadcrumb } from '@/components/ui/Breadcrumb';
 import { FaqBoard } from '@/components/ui/FaqBoard';
 import { plain } from '@/components/ui/Rich';
@@ -107,7 +106,6 @@ export default function B2BPage() {
         </section>
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(JSON_LD).replace(/</g, '\\u003c') }} />
       </main>
-      <MotionProvider />
     </>
   );
 }

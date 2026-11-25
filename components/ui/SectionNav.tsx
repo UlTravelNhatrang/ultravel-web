@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
-import { gsap, headerHeight, motionOK, smoothTo } from '@/lib/motion';
+import { headerHeight, motionOK, placeBlob, smoothTo } from '@/lib/motion';
 
 export type SectionLink = { id: string; label: string };
 
@@ -39,14 +39,11 @@ export function SectionNav({ sections }: { sections: SectionLink[] }) {
     const nav = navRef.current, blob = blobRef.current;
     const tab = nav?.querySelector<HTMLElement>(`[data-id="${active}"]`);
     if (!nav || !blob || !tab) return;
-    const props = { x: tab.offsetLeft, width: tab.offsetWidth, opacity: 1 };
-    if (motionOK()) gsap.to(blob, { ...props, duration: 0.55, ease: 'elastic.out(1,.8)', overwrite: true });
-    else gsap.set(blob, props);
+    placeBlob(blob, tab.offsetLeft, tab.offsetWidth);
     const left = tab.offsetLeft - nav.clientWidth / 2 + tab.offsetWidth / 2;
     nav.scrollTo({ left, behavior: motionOK() ? 'smooth' : 'auto' });
   }, [active]);
 
-  // Pass Lenis a pixel position: given an element it also applies the section's scroll-margin and lands short.
   const go = (id: string) => {
     const el = document.getElementById(id);
     if (!el) return;

@@ -1,17 +1,12 @@
-/* Design tokens, page canvas, smooth-scroll hooks. */
+/* Design tokens and page canvas. */
 :root{
   --paper:241 245 251; --paper2:222 232 247; --ink:1 44 121; --ink2:74 90 130; --red:247 128 10; --red-t:196 82 0; --deep:1 26 77;
   --hh:120px; color-scheme:light;
+  --font-display:var(--font-vietnam);
 }
 html{scroll-padding-top:calc(var(--hh) + 12px)}
-/* Native smooth anchors only when Lenis is off (reduced motion); with Lenis, page changes must jump to the top instantly. */
-html:not(.lenis){scroll-behavior:smooth}
-/* Lenis inertia scroll. No scroll anchoring: when streamed content replaces a skeleton the browser would
-   otherwise jump the page to keep some element in place, and Lenis would then hold that wrong position. */
-html.lenis,html.lenis body{height:auto}
-html.lenis{overflow-anchor:none}
-.lenis.lenis-smooth{scroll-behavior:auto!important}
-.lenis.lenis-stopped{overflow:hidden}
+/* Native smooth scrolling for in-page anchors; Next turns it off during route changes (data-scroll-behavior on <html>). */
+html{scroll-behavior:smooth}
 body{background:linear-gradient(180deg,#f7f9fd 0,#f0f4fa 900px,#ebf1f9 100%);color:rgb(var(--ink));font-family:var(--font-vietnam),system-ui,sans-serif;-webkit-font-smoothing:antialiased}
 p{text-wrap:pretty}
 ::selection{background:rgb(var(--red));color:rgb(var(--paper))}
