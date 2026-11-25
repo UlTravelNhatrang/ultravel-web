@@ -4,7 +4,7 @@
 .nf-card>*{position:relative}
 @media (min-width:768px){.nf-card{padding:40px 36px 28px}}
 
-.nf-code{display:flex;align-items:center;justify-content:center;gap:clamp(6px,1.5vw,18px);font:900 clamp(7rem,15vw,12.5rem)/.82 var(--font-archivo),sans-serif;letter-spacing:-.06em}
+.nf-code{display:flex;align-items:center;justify-content:center;gap:clamp(6px,1.5vw,18px);font:900 clamp(7rem,15vw,12.5rem)/.82 var(--font-display),sans-serif;letter-spacing:-.06em}
 .nf-code .hero-line{padding-top:.08em}
 .nf-compass{width:.82em;height:.82em;flex:none;overflow:visible}
 .nf-ring{fill:rgb(255 255 255/.06);stroke:rgb(var(--red));stroke-width:5}
@@ -29,7 +29,7 @@
 .nf-boat path{fill:none;stroke:rgb(var(--paper));stroke-width:2;stroke-linejoin:round;stroke-linecap:round}
 .nf-boat path:first-child{fill:rgb(var(--paper))}
 .nf-q{fill:rgb(var(--red))}
-.nf-q-t{font:800 18px var(--font-archivo),sans-serif;fill:rgb(var(--ink))}
+.nf-q-t{font:800 18px var(--font-display),sans-serif;fill:rgb(var(--ink))}
 .nf-coord{margin-top:12px;font-size:11px;color:rgb(var(--paper)/.5)}
 
 .nf-ways{display:grid;gap:8px}
@@ -42,17 +42,7 @@
 .nf-way:hover .nf-way-arr{color:rgb(var(--red-t));translate:3px 0}
 
 @media (prefers-reduced-motion:no-preference){
-  /* Needle spins, then keeps hunting for north. */
-  .nf-needle{animation:nf-spin 1.6s cubic-bezier(.2,.8,.2,1) .4s both,nf-hunt 3.2s ease-in-out 2s infinite}
-  .nf-route{animation:nf-march 1.4s linear infinite}
-  .nf-boat{animation:nf-bob 2.6s ease-in-out infinite}
-  .nf-swell{animation:nf-swell 6s linear infinite}
-  .nf-swell:nth-of-type(2){animation-duration:8s}
-  .nf-you-ring{animation:nf-ping 1.8s ease-out infinite;transform-box:fill-box;transform-origin:center}
+  /* One spin of the needle on arrival; nothing keeps looping. */
+  .nf-needle{animation:nf-spin 1.6s cubic-bezier(.2,.8,.2,1) .4s both}
 }
 @keyframes nf-spin{from{rotate:-540deg}to{rotate:28deg}}
-@keyframes nf-hunt{0%,100%{rotate:28deg}30%{rotate:-36deg}60%{rotate:14deg}80%{rotate:-8deg}}
-@keyframes nf-march{to{stroke-dashoffset:-.03}}
-@keyframes nf-bob{0%,100%{translate:0 0;rotate:-3deg}50%{translate:0 -5px;rotate:3deg}}
-@keyframes nf-swell{to{translate:-40px 0}}
-@keyframes nf-ping{from{scale:.6;opacity:.7}to{scale:1.6;opacity:0}}

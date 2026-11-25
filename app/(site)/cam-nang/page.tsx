@@ -1,7 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { Clock } from '@phosphor-icons/react/dist/ssr';
-import { MotionProvider } from '@/components/motion/MotionProvider';
 import { Breadcrumb } from '@/components/ui/Breadcrumb';
 import { Photo } from '@/components/ui/Photo';
 import { GUIDES } from '@/content/home';
@@ -85,7 +84,6 @@ export default function GuidesPage() {
         )}
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(JSON_LD).replace(/</g, '\\u003c') }} />
       </main>
-      <MotionProvider />
     </>
   );
 }

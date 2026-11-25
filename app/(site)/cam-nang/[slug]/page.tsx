@@ -3,7 +3,6 @@ import { NOT_FOUND_META } from '@/components/layout/NotFoundView';
 import { notFound } from 'next/navigation';
 import { Suspense } from 'react';
 import { LeadForm } from '@/components/home/LeadForm';
-import { MotionProvider } from '@/components/motion/MotionProvider';
 import { PostBody } from '@/components/post/PostBody';
 import { PostHero } from '@/components/post/PostHero';
 import { AuthorCard, Conclusion, MobileToc, RelatedPosts, Tags, Takeaways } from '@/components/post/PostParts';
@@ -129,7 +128,6 @@ async function PostContent({ params }: Pick<Props, 'params'>) {
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd(p)).replace(/</g, '\\u003c') }} />
       </main>
       <ReadingProgress articleId={ARTICLE_ID} />
-      <MotionProvider />
     </>
   );
 }

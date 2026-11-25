@@ -3,25 +3,11 @@ import { memo } from 'react';
 import { Photo } from '@/components/ui/Photo';
 import { reviewHrefForPlace } from '@/lib/reviews';
 import { PHOTOS } from '@/content/photos';
-import type { GuideCard, Place } from '@/types/content';
+import type { Place } from '@/types/content';
 import { isOpenAt, pad } from '@/lib/format';
 import { legacy } from '@/lib/routes';
 
 const placePhotos = [PHOTOS.place1, PHOTOS.place2, PHOTOS.place3] as const;
-
-/** Tab 01: four guide articles. */
-export function GuideCardItem({ card: [title, kicker], index }: { card: GuideCard; index: number }) {
-  return (
-    <a href="#" className="hub-card group flex flex-col">
-      <Photo src={PHOTOS.hub[index]} alt={title} width={800} height={600} className="aspect-[4/3]" />
-      <div className="p-4 md:p-5 flex-1 flex flex-col">
-        <p className="mono text-ink2">H-{pad(index + 1)} / {kicker}</p>
-        <h3 className="font-display font-bold text-[16px] md:text-xl leading-tight tracking-[-0.01em] mt-2 group-hover:text-red">{title}</h3>
-        <span className="mono font-semibold mt-auto pt-4">Đọc <span className="arr">→</span></span>
-      </div>
-    </a>
-  );
-}
 
 type PlaceCardProps = {
   place: Place;

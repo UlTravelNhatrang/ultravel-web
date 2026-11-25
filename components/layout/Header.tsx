@@ -6,7 +6,7 @@ import { usePathname, useRouter } from 'next/navigation';
 import { Suspense, useEffect, useRef, useState } from 'react';
 import { BookOpenText, BowlFood, CalendarBlank, MapPin, Megaphone, SuitcaseRolling, type Icon } from '@phosphor-icons/react';
 import { todayLabel } from '@/lib/format';
-import { gsap, motionOK, smoothTo } from '@/lib/motion';
+import { placeBlob, smoothTo } from '@/lib/motion';
 import { SONG_XANH_CAFE } from '@/content/reviews/song-xanh-cafe';
 import { reviewPath } from '@/lib/reviews';
 import { postPath } from '@/lib/posts';
@@ -80,19 +80,13 @@ export function Header() {
     return () => ro.disconnect();
   }, []);
 
-  // A white bubble glides under whichever nav link you point at.
+  // A white bubble glides under whichever nav link you point at (CSS transition on transform/width).
   useEffect(() => {
     const nav = navRef.current, blob = blobRef.current;
     if (!nav || !blob) return;
-    const smooth = motionOK();
     const links = [...nav.querySelectorAll<HTMLAnchorElement>('.nl')];
-    const go = (el: HTMLElement) => {
-      const r = el.getBoundingClientRect(), n = nav.getBoundingClientRect();
-      const props = { x: r.left - n.left, width: r.width, opacity: 1 };
-      if (smooth) gsap.to(blob, { ...props, duration: 0.55, ease: 'elastic.out(1,.75)', overwrite: true });
-      else gsap.set(blob, props);
-    };
-    const hide = () => gsap.to(blob, { opacity: 0, duration: 0.35, ease: 'power2.out', overwrite: 'auto' });
+    const go = (el: HTMLElement) => placeBlob(blob, el.offsetLeft, el.offsetWidth);
+    const hide = () => { blob.style.opacity = '0'; };
     const handlers = links.map(a => [a, () => go(a)] as const);
     handlers.forEach(([a, fn]) => { a.addEventListener('pointerenter', fn); a.addEventListener('focus', fn); });
     const onFocusOut = (e: FocusEvent) => { if (!nav.contains(e.relatedTarget as Node)) hide(); };

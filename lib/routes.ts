@@ -11,6 +11,9 @@ export const ROUTES = {
   places: '/diem-den/',
   itineraries: '/lich-trinh/',
   services: '/dich-vu/',
+  // Hotel and tour pages arrive in phase 5 of the redesign; the home page already links to them.
+  hotels: '/khach-san',
+  tours: '/tour',
   b2b: '/marketing-du-lich',
   b2bContact: '/marketing-du-lich#lien-he',
 } as const;

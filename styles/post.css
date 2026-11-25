@@ -4,7 +4,7 @@
 .post-kicker{display:inline-flex;align-items:center;padding:6px 12px;border-radius:99px;background:rgb(var(--ink));color:rgb(var(--paper));font:600 11px/1 var(--font-plex),monospace;letter-spacing:.06em;text-transform:uppercase;transition:background-color .3s var(--ease)}
 .post-kicker:hover{background:rgb(var(--red));color:rgb(var(--ink))}
 .post-sapo{font-size:clamp(1.05rem,1.35vw,1.25rem);line-height:1.65;color:rgb(var(--ink)/.82);max-width:60ch}
-.post-avatar{display:grid;place-items:center;flex:none;width:44px;height:44px;border-radius:14px;background:rgb(var(--ink));color:#fff;font:800 15px/1 var(--font-archivo),sans-serif;letter-spacing:-.02em;box-shadow:0 0 0 3px rgb(var(--red)/.9)}
+.post-avatar{display:grid;place-items:center;flex:none;width:44px;height:44px;border-radius:14px;background:rgb(var(--ink));color:#fff;font:800 15px/1 var(--font-display),sans-serif;letter-spacing:-.02em;box-shadow:0 0 0 3px rgb(var(--red)/.9)}
 .post-avatar.is-lg{width:64px;height:64px;border-radius:20px;font-size:21px}
 .post-cover{position:relative;aspect-ratio:4/5;max-height:36rem;width:100%;border-radius:var(--card-r);overflow:hidden;box-shadow:0 30px 60px -40px rgb(1 44 121/.7)}
 .post-cover-cap{position:absolute;left:14px;bottom:14px;z-index:2;padding:6px 12px;border-radius:99px;background:rgb(255 255 255/.9);color:rgb(var(--ink))}
@@ -45,7 +45,7 @@
 .post-body{display:grid;grid-template-columns:minmax(0,1fr);gap:3.5rem}
 .post-sec{scroll-margin-top:calc(var(--hh) + 24px)}
 .post-sec>*+*{margin-top:1.25rem}
-.post-h2{display:flex;align-items:baseline;gap:14px;font:800 clamp(1.6rem,2.6vw,2.25rem)/1.12 var(--font-archivo),sans-serif;letter-spacing:-.03em;text-wrap:balance}
+.post-h2{display:flex;align-items:baseline;gap:14px;font:800 clamp(1.6rem,2.6vw,2.25rem)/1.12 var(--font-display),sans-serif;letter-spacing:-.03em;text-wrap:balance}
 .post-h2>.mono{flex:none;font-size:13px;letter-spacing:0;color:rgb(var(--red-t));padding:4px 9px;border-radius:99px;background:rgb(247 128 10/.12);translate:0 -.35em}
 .post-sec>p{font-size:17.5px;line-height:1.75;color:rgb(var(--ink)/.86);max-width:68ch}
 .post-sec strong{font-weight:650;color:rgb(var(--ink))}

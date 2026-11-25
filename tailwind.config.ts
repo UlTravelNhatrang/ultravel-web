@@ -21,7 +21,7 @@ const config: Config = {
         deep: token('deep'),
       },
       fontFamily: {
-        display: ['var(--font-archivo)', 'Arial Black', 'sans-serif'],
+        display: ['var(--font-display)', 'Arial Black', 'sans-serif'],
         sans: ['var(--font-vietnam)', 'system-ui', 'sans-serif'],
         mono: ['var(--font-plex)', 'ui-monospace', 'monospace'],
       },

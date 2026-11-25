@@ -1,14 +1,13 @@
 import type { Metadata, Viewport } from 'next';
-import { Archivo, Be_Vietnam_Pro, IBM_Plex_Mono } from 'next/font/google';
-import Script from 'next/script';
+import { Be_Vietnam_Pro, IBM_Plex_Mono, Lora } from 'next/font/google';
 import { SITE_URL } from '@/lib/site';
 import './globals.css';
 
-// Vietnamese text needs only 'latin' (ASCII and à-ý) plus 'vietnamese' (ă đ ĩ ơ ư and the stacked tones);
-// 'latin-ext' added ~100KB on every page without covering anything we write. Archivo ships weight-only (no
-// width axis): the axis nearly doubled its files for one hover effect.
-const archivo = Archivo({ subsets: ['latin', 'vietnamese'], variable: '--font-archivo', display: 'swap' });
-const vietnam = Be_Vietnam_Pro({ subsets: ['latin', 'vietnamese'], weight: ['400', '500', '600', '700'], variable: '--font-vietnam', display: 'swap' });
+// Vietnamese text needs only 'latin' (ASCII and à-ý) plus 'vietnamese' (ă đ ĩ ơ ư and the stacked tones).
+// Be Vietnam Pro is drawn for Vietnamese, so stacked tone marks stay clear even in heavy display sizes:
+// it sets body and headings. Lora italic is the accent for the second phrase of a heading.
+const vietnam = Be_Vietnam_Pro({ subsets: ['latin', 'vietnamese'], weight: ['400', '500', '600', '700', '800'], variable: '--font-vietnam', display: 'swap' });
+const lora = Lora({ subsets: ['latin', 'vietnamese'], style: ['italic'], weight: ['500', '600'], variable: '--font-serif', display: 'swap' });
 // Glyphs Plex lacks (→ ↑ ★ ●) must fall through to the system monospace (Consolas on Windows), not Next's Arial-based fallback.
 const plex = IBM_Plex_Mono({
   subsets: ['latin', 'vietnamese'],
@@ -40,16 +39,10 @@ export const viewport: Viewport = {
   colorScheme: 'light',
 };
 
-// Hero type starts masked only when motion is allowed; the fallback reveals it if animation never boots.
-// js-motion: hide what the entrance animations will reveal. boot: first page of the browser session gets the
-// curtain loader (components/layout/Curtain). Both are removed if the app hasn't started, so nothing stays hidden.
-const MOTION_FLAG = `(function(){var d=document.documentElement;if(!matchMedia('(prefers-reduced-motion: no-preference)').matches)return;d.classList.add('js-motion');try{if(!sessionStorage.getItem('ut-boot')){sessionStorage.setItem('ut-boot','1');d.classList.add('boot')}}catch(e){}setTimeout(function(){if(!window.__motion)d.classList.remove('js-motion')},3000);setTimeout(function(){if(!window.__curtainReveal)d.classList.remove('boot')},4000)})();`;
-
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="vi" className={`${archivo.variable} ${vietnam.variable} ${plex.variable}`} suppressHydrationWarning>
+    <html lang="vi" data-scroll-behavior="smooth" className={`${vietnam.variable} ${lora.variable} ${plex.variable}`} suppressHydrationWarning>
       <body>
-        <Script id="motion-flag" strategy="beforeInteractive">{MOTION_FLAG}</Script>
         {children}
       </body>
     </html>

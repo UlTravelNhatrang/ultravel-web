@@ -39,7 +39,6 @@ function Lightbox({ photos, start, total, onClose }: { photos: Review['photos'];
   useEffect(() => {
     const previous = document.activeElement as HTMLElement | null;
     closeRef.current?.focus();
-    window.__lenis?.stop();
     document.documentElement.style.overflow = 'hidden';
     const onKey = (e: KeyboardEvent) => {
       if (e.key === 'Escape') onClose();
@@ -50,7 +49,6 @@ function Lightbox({ photos, start, total, onClose }: { photos: Review['photos'];
     return () => {
       removeEventListener('keydown', onKey);
       document.documentElement.style.overflow = '';
-      window.__lenis?.start();
       previous?.focus();
     };
   }, [go, onClose]);

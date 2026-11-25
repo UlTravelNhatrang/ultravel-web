@@ -5,19 +5,10 @@ import { useEffect, useRef } from 'react';
 
 /**
  * Footer logo as a ghost that lights up in full colour under the cursor.
- * When the pointer leaves the row, the light goes back to sweeping on its own (CSS animation).
+ * When the pointer leaves the row, the light rests where the sweep starts (no idle animation).
  */
 export function Spotlight() {
   const spotRef = useRef<HTMLDivElement>(null);
-
-  // The idle sweep repaints the masked logo every frame: pause it while the footer is off screen.
-  useEffect(() => {
-    const spot = spotRef.current;
-    if (!spot) return;
-    const io = new IntersectionObserver(([e]) => spot.classList.toggle('is-off', !e.isIntersecting));
-    io.observe(spot);
-    return () => io.disconnect();
-  }, []);
 
   useEffect(() => {
     const spot = spotRef.current;
