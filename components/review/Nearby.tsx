@@ -1,8 +1,7 @@
 import type { ReactNode } from 'react';
-import { MapPin, ForkKnife, Camera } from '@phosphor-icons/react/dist/ssr';
-import { MAP_BACKGROUND, NhaTrangMap } from '@/components/ui/NhaTrangMap';
-import { directionsUrl } from '@/lib/reviews';
+import { Camera, ForkKnife } from '@phosphor-icons/react/dist/ssr';
 import type { NearbyPlace, Review } from '@/types/review';
+import { LocationCard } from './LocationCard';
 import { ReviewSection } from './ReviewSection';
 
 function NearbyList({ title, icon, items }: { title: string; icon: ReactNode; items: NearbyPlace[] }) {
@@ -21,22 +20,14 @@ function NearbyList({ title, icon, items }: { title: string; icon: ReactNode; it
   );
 }
 
-/** Location on the shared illustrated map, plus what is within walking distance. */
+/** What is within walking distance, side by side. The map lives in the sidebar (phones: on top of this section). */
 export function Nearby({ review: r }: { review: Review }) {
   return (
     <ReviewSection id="vi-tri" title="Vị trí & xung quanh">
-      <div className="grid md:grid-cols-[1fr_1.1fr] gap-[var(--card-gap)]">
-        <div className="relative soft-card overflow-hidden min-h-[20rem]" style={{ background: MAP_BACKGROUND }}>
-          <NhaTrangMap pins={[{ x: r.map.x, y: r.map.y, label: '★', active: true }]} label={`Vị trí ${r.name} trên bản đồ minh họa`} className="absolute inset-x-0 top-0 bottom-12 w-full h-[calc(100%-3rem)]" />
-          <div className="absolute left-3 right-3 bottom-3 flex justify-between items-center gap-3 mono bg-white/85 rounded-full pl-4 pr-1.5 py-1.5">
-            <span className="text-ink2 truncate inline-flex items-center gap-1.5"><MapPin size={14} aria-hidden="true" />{r.address}</span>
-            <a href={directionsUrl(r)} target="_blank" rel="noopener noreferrer" className="shrink-0 text-ink font-semibold hover:text-red bg-white rounded-full px-3 py-1.5">Google Maps <span className="arr">→</span></a>
-          </div>
-        </div>
-        <div className="grid gap-[var(--card-gap)] content-start">
-          <NearbyList title="Quán ăn gần đây" icon={<ForkKnife size={18} aria-hidden="true" />} items={r.nearbyFood} />
-          <NearbyList title="Điểm tham quan gần đây" icon={<Camera size={18} aria-hidden="true" />} items={r.nearbySights} />
-        </div>
+      <div className="lg:hidden mb-[var(--card-gap)]"><LocationCard review={r} /></div>
+      <div className="grid md:grid-cols-2 gap-[var(--card-gap)] items-start">
+        <NearbyList title="Quán ăn gần đây" icon={<ForkKnife size={18} aria-hidden="true" />} items={r.nearbyFood} />
+        <NearbyList title="Điểm tham quan gần đây" icon={<Camera size={18} aria-hidden="true" />} items={r.nearbySights} />
       </div>
     </ReviewSection>
   );

@@ -32,14 +32,16 @@
 .faq::details-content{block-size:0;overflow:hidden;transition:block-size .5s var(--ease),content-visibility .5s allow-discrete}
 .faq[open]::details-content{block-size:auto}
 
-.faq-a{display:grid;grid-template-columns:32px 1fr;gap:12px;padding:0 18px 22px 18px}
-.faq-avatar{width:32px;height:32px;border-radius:10px;box-shadow:0 0 0 2px #fff,0 6px 14px -6px rgb(1 44 121/.5);margin-top:18px}
-.faq-bubble{position:relative;display:inline-block;max-width:60ch;padding:12px 16px;border-radius:4px 18px 18px 18px;background:rgb(var(--ink));color:rgb(var(--paper));line-height:1.6;box-shadow:0 14px 28px -18px rgb(1 44 121/.7)}
+/* Flex, not grid: avatar fixed, answer takes the rest (a grid here collapsed the answer to one word per line in some browsers) */
+.faq-a{display:flex;align-items:flex-start;gap:12px;padding:0 18px 22px 18px}
+.faq-a>.faq-body{flex:1 1 0%;min-width:0}
+.faq-avatar{flex:none;width:32px;height:32px;border-radius:10px;box-shadow:0 0 0 2px #fff,0 6px 14px -6px rgb(1 44 121/.5);margin-top:18px}
+.faq-bubble{position:relative;display:block;width:fit-content;max-width:min(100%,62ch);padding:12px 16px;border-radius:4px 18px 18px 18px;background:rgb(var(--ink));color:rgb(var(--paper));line-height:1.6;box-shadow:0 14px 28px -18px rgb(1 44 121/.7)}
 .faq-typing{position:absolute;left:16px;top:50%;translate:0 -50%;display:flex;gap:4px;opacity:0}
 .faq-typing i{width:6px;height:6px;border-radius:99px;background:rgb(var(--paper)/.8)}
 @media (min-width:768px){
   .faq summary{padding:22px 26px;gap:20px}
-  .faq-a{grid-template-columns:36px 1fr;gap:14px;padding:0 26px 26px calc(26px + 1.6rem)}
+  .faq-a{gap:14px;padding:0 26px 26px calc(26px + 1.6rem)}
   .faq-avatar{width:36px;height:36px}
 }
 /* Each time a question opens: the bubble pops up, dots type for a beat, then the answer appears. */
@@ -69,7 +71,7 @@
 .rv-tab{position:relative;z-index:1;flex:none;padding:.6rem 1.05rem;border-radius:99px;font-size:14px;font-weight:500;white-space:nowrap;color:rgb(var(--ink)/.75);transition:color .3s var(--ease)}
 .rv-tab:hover{color:rgb(var(--ink))}
 .rv-tab[aria-current="true"]{color:rgb(var(--paper))}
-.rv-sec{padding-top:3.5rem;scroll-margin-top:calc(var(--hh) + 80px)}
+.rv-sec{padding-top:3rem;scroll-margin-top:calc(var(--hh) + 80px)}
 .faq-bubble .post-link{color:#fff;text-decoration-color:#FF9A3C}
 .faq-bubble strong{font-weight:700;color:#fff}
 /* Zalo mark on an orange button: a white disc behind it keeps the blue bubble crisp */

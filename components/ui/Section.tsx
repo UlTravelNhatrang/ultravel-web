@@ -37,7 +37,7 @@ export function AsideLink({ href, label, children }: { href: string; label?: str
 /** Big section heading that ends in the brand-orange full stop. */
 export function SectionTitle({ id, className = 'mt-6 mb-8', children }: { id: string; className?: string; children: ReactNode }) {
   return (
-    <h2 id={id} className={`hd text-4xl md:text-6xl ${className}`}>
+    <h2 id={id} className={`hd text-3xl md:text-[2.75rem] ${className}`}>
       {children}
       <span className="text-red">.</span>
     </h2>

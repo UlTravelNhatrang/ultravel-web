@@ -21,10 +21,10 @@ export function PlaceHero({ review: r }: { review: Review }) {
       />
 
       <div className="grid-ink lg:grid-cols-12 mt-4">
-        <div className="lg:col-span-8 p-5 md:p-8 lg:p-10 flex flex-col justify-between gap-8">
+        <div className="lg:col-span-8 p-5 md:p-7 lg:p-8 flex flex-col justify-between gap-6">
           <div>
             <p className="mono text-ink2 hero-fade">{r.kind} / {CITY_LABEL[r.city]}</p>
-            <h1 className="mega text-[clamp(2.6rem,6.4vw,6.2rem)] mt-3">
+            <h1 className="mega text-[clamp(2rem,3.8vw,3.4rem)] mt-2">
               <span className="hero-line"><span>{r.name}<span className="text-red">.</span></span></span>
             </h1>
           </div>
@@ -42,13 +42,13 @@ export function PlaceHero({ review: r }: { review: Review }) {
         </div>
 
         {/* Ultravel's own verdict: the trust signal, so it sits at the top. */}
-        <aside className="lg:col-span-4 !bg-ink text-paper p-6 md:p-8 flex flex-col gap-6 score-card" aria-label="Ultravel chấm điểm">
+        <aside className="lg:col-span-4 !bg-ink text-paper p-6 md:p-7 flex flex-col gap-4 score-card" aria-label="Ultravel chấm điểm">
           <div className="flex items-center justify-between mono text-paper/70"><span>Ultravel chấm</span><span>Kiểm tra {r.score.checkedAt}</span></div>
           <div>
-            <p className="num text-[clamp(4.5rem,8vw,6.5rem)] leading-none text-[#FF9A3C]" aria-label={`${r.score.total} trên 5`}>
+            <p className="num text-[clamp(3.25rem,5vw,4.5rem)] leading-none text-[#FF9A3C]" aria-label={`${r.score.total} trên 5`}>
               <span data-count={r.score.total} data-decimals="1">{r.score.total.toFixed(1).replace('.', ',')}</span><span className="text-paper/40 text-[.4em] align-top ml-1">/5</span>
             </p>
-            <p className="hd text-2xl mt-2">{r.score.verdict}</p>
+            <p className="hd text-xl mt-2">{r.score.verdict}</p>
           </div>
           <p className="text-sm text-paper/75 leading-relaxed">{r.score.method}. Không nhận tài trợ từ quán.</p>
           <a href="#cham-diem" className="mono font-semibold text-paper mt-auto hover:text-[#FF9A3C]">Xem chi tiết chấm điểm <span className="arr">↓</span></a>

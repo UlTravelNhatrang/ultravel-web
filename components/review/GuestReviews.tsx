@@ -19,7 +19,7 @@ export function GuestReviews({ review: r }: { review: Review }) {
     <ReviewSection id="danh-gia" title="Đánh giá từ khách" aside={<button type="button" data-open-review className="act-btn act-btn-hot">Viết đánh giá</button>}>
       <div className="soft-card p-5 md:p-6 grid md:grid-cols-[12rem_1fr] gap-6 items-center">
         <div>
-          <p className="num text-6xl leading-none">{r.rating.toFixed(1).replace('.', ',')}</p>
+          <p className="num text-5xl leading-none">{r.rating.toFixed(1).replace('.', ',')}</p>
           <div className="mt-2"><Stars value={r.rating} size={18} /></div>
           <p className="mono text-ink2 mt-2">{r.reviewCount} đánh giá</p>
         </div>

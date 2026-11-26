@@ -69,7 +69,7 @@ export default function GuidesPage() {
 
         {upcoming.length > 0 && (
           <section className="max-w-[1440px] mx-auto px-4 md:px-6 mt-16 md:mt-20 mb-24 md:mb-32" aria-labelledby="sap-dang-t">
-            <h2 id="sap-dang-t" className="hd text-3xl md:text-[2.6rem]">Sắp đăng<span className="text-red">.</span></h2>
+            <h2 id="sap-dang-t" className="hd text-2xl md:text-[2rem]">Sắp đăng<span className="text-red">.</span></h2>
             <p className="text-ink2 mt-2">Thổ địa đang đi thực tế cho các bài này.</p>
             <ul className="grid sm:grid-cols-2 lg:grid-cols-4 gap-[var(--card-gap)] mt-6">
               {upcoming.map(([title, kicker]) => (

@@ -41,9 +41,10 @@ function Card({ href, photo, alt, badge, children }: { href: string; photo: stri
   );
 }
 
-export function HotelCard({ h }: { h: Hotel }) {
+/** `base`: the listing the card opens under (hotels by default, resorts pass ROUTES.resorts). */
+export function HotelCard({ h, base = ROUTES.hotels }: { h: Hotel; base?: string }) {
   return (
-    <Card href={`${ROUTES.hotels}/${h.slug}`} photo={h.photo} alt={h.name} badge={h.badge}>
+    <Card href={`${base}/${h.slug}`} photo={h.photo} alt={h.name} badge={h.badge}>
       <p className="pcard-meta"><span>{h.kind} · {'★'.repeat(h.stars)}</span><Rating value={h.rating} count={h.reviews} /></p>
       <h3 className="pcard-title">{h.name}</h3>
       <p className="pcard-sub">{h.area}</p>

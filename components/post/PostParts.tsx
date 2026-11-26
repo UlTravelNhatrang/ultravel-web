@@ -88,7 +88,7 @@ export function RelatedPosts({ post: p }: { post: Post }) {
   return (
     <section className="max-w-[1440px] mx-auto px-4 md:px-6 mt-20 md:mt-28" aria-labelledby="lien-quan-t">
       <div className="flex items-end justify-between gap-4 mb-6">
-        <h2 id="lien-quan-t" className="hd text-3xl md:text-[2.6rem]">Đọc tiếp<span className="text-red">.</span></h2>
+        <h2 id="lien-quan-t" className="hd text-2xl md:text-[2rem]">Đọc tiếp<span className="text-red">.</span></h2>
         <Link href="/cam-nang" className="mono font-semibold hover:text-red">Tất cả cẩm nang <span className="arr">→</span></Link>
       </div>
       <div className="grid sm:grid-cols-3 gap-[var(--card-gap)]">

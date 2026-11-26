@@ -23,7 +23,7 @@ export function FaqBoard({ items, byline, ask }: { items: FaqItem[]; byline: str
           </summary>
           <div className="faq-a">
             <Image src="/assets/ultravel-icon-64.png" alt="" width={36} height={36} className="faq-avatar" />
-            <div className="min-w-0">
+            <div className="faq-body">
               <p className="mono text-[10px] text-ink2 mb-1.5">{byline}</p>
               <div className="faq-bubble">
                 <span className="faq-typing" aria-hidden="true"><i /><i /><i /></span>

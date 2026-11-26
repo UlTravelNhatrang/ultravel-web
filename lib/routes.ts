@@ -16,4 +16,10 @@ export const ROUTES = {
   tours: '/tour',
   b2b: '/marketing-du-lich',
   b2bContact: '/marketing-du-lich#lien-he',
+  resorts: '/resort',
+  restaurants: '/nha-hang',
+  partner: '/hop-tac-du-lich',
+  about: '/ve-chung-toi',
+  policy: '/chinh-sach',
+  contact: '/lien-he',
 } as const;

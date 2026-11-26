@@ -37,7 +37,6 @@ a:hover .arr,button:hover .arr,.group:hover .arr{transform:translateX(5px)}
 .field:focus{outline:none;box-shadow:inset 0 0 0 1.5px rgb(var(--red));border-color:rgb(var(--red))}
 .field[aria-invalid="true"]{border-color:rgb(var(--red))}
 
-.barcode{height:34px;background-repeat:no-repeat}
 .snap::-webkit-scrollbar{display:none}.snap{scrollbar-width:none}
 
 /* Hero line mask: padding keeps stacked diacritics inside the mask */

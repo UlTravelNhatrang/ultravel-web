@@ -51,9 +51,6 @@ a,button{transition:background-color .45s var(--ease),color .3s var(--ease),bord
 
 .hero-img>span,.ht+span,figure span.mono{border-radius:999px}
 
-.coupon{border-radius:var(--r);overflow:hidden;background:rgb(255 255 255/.5)}
-.coupon:hover{background:rgb(255 255 255/.8)}
-.coupon .ht{border-radius:18px}
 
 @media (prefers-reduced-motion: reduce){
   .unit .rule{animation:none!important}

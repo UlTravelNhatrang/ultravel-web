@@ -6,9 +6,11 @@ const mono = { fontFamily: 'var(--font-plex), monospace' };
 export type MapPin = { x: number; y: number; label: string; active?: boolean };
 
 /** Illustrated Nha Trang coastline (land left, sea right) with numbered pins. Used by the hub and review pages. */
-export function NhaTrangMap({ pins, label = 'Bản đồ minh họa Nha Trang', className = '' }: { pins: MapPin[]; label?: string; className?: string }) {
+/** `focusY`: crop to a 200-unit band around this y and fill the frame (for short, wide frames). */
+export function NhaTrangMap({ pins, label = 'Bản đồ minh họa Nha Trang', className = '', focusY }: { pins: MapPin[]; label?: string; className?: string; focusY?: number }) {
+  const viewBox = focusY === undefined ? '0 0 400 460' : `0 ${Math.max(0, Math.min(260, focusY - 100))} 400 200`;
   return (
-    <svg viewBox="0 0 400 460" preserveAspectRatio="xMidYMid meet" className={className} role="img" aria-label={label}>
+    <svg viewBox={viewBox} preserveAspectRatio={focusY === undefined ? 'xMidYMid meet' : 'xMidYMid slice'} className={className} role="img" aria-label={label}>
       <defs>
         <pattern id="map-grid" width="20" height="20" patternUnits="userSpaceOnUse"><path d="M20 0H0V20" fill="none" stroke="rgb(1 44 121/.08)" strokeWidth="1" /></pattern>
       </defs>

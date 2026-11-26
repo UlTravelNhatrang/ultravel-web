@@ -19,7 +19,7 @@
 .gallery-more{position:absolute;right:12px;bottom:12px;padding:8px 14px;border-radius:99px;background:rgb(255 255 255/.9);color:rgb(var(--ink));font-weight:600}
 @media (min-width:768px){.gallery{margin-inline:0;padding-inline:0}.gallery-cell{flex-basis:46%}}
 @media (min-width:1024px){
-  .gallery{display:grid;grid-template-columns:2fr 1fr 1fr;grid-template-rows:repeat(2,13.5rem);overflow:visible}
+  .gallery{display:grid;grid-template-columns:2fr 1fr 1fr;grid-template-rows:repeat(2,11rem);overflow:visible}
   .gallery-cell{aspect-ratio:auto}
   .gallery-cell.is-big{grid-row:span 2}
 }
@@ -86,19 +86,11 @@
 .ct-secondary{display:flex;align-items:center;justify-content:center;gap:6px;height:40px;border-radius:99px;font-weight:600;font-size:13.5px;background:rgb(255 255 255/.75);box-shadow:inset 0 0 0 1px rgb(var(--ink)/.14);transition:background-color .3s var(--ease),box-shadow .3s var(--ease)}
 .ct-secondary:hover{background:#fff;box-shadow:inset 0 0 0 1.5px rgb(var(--ink)/.5)}
 
-/* Compact voucher: a tear-off ticket with side notches on the perforation line. */
-.vticket-btn{display:block;width:100%;text-align:left;color:rgb(var(--ink));filter:drop-shadow(0 16px 22px rgb(196 82 0/.28));transition:translate .45s var(--ease)}
-.vticket{--notch:11px;--cut:calc(100% - 78px);position:relative;display:block;overflow:hidden;background:rgb(var(--red));border-radius:var(--card-r);
-  -webkit-mask:radial-gradient(circle var(--notch) at 0 var(--cut),#0000 98%,#000) left/51% 100% no-repeat,radial-gradient(circle var(--notch) at 100% var(--cut),#0000 98%,#000) right/51% 100% no-repeat;
-  mask:radial-gradient(circle var(--notch) at 0 var(--cut),#0000 98%,#000) left/51% 100% no-repeat,radial-gradient(circle var(--notch) at 100% var(--cut),#0000 98%,#000) right/51% 100% no-repeat;
-}
-.vticket::after{content:"";position:absolute;left:calc(var(--notch) + 8px);right:calc(var(--notch) + 8px);top:var(--cut);border-top:2px dashed rgb(var(--ink)/.3)}
-.vticket-top{display:block;padding:18px 20px 16px;background:radial-gradient(120% 90% at 100% 0,#FFA24A 0,rgb(var(--red)) 60%)}
-.vticket-stub{display:flex;align-items:flex-end;justify-content:space-between;gap:12px;height:78px;padding:12px 20px 14px;background:#FFB15F}
-.vticket-copy{display:inline-flex;align-items:center;gap:6px;padding:7px 12px;border-radius:99px;background:rgb(var(--ink));color:#fff;font-size:11px;transition:background-color .3s var(--ease)}
-.vticket-btn.is-copied .vticket-copy{background:#0f7a5a}
-.vticket-btn:hover{translate:0 -3px}
-.vticket-btn:active{translate:0 0}
+/* Location card in the sidebar: the illustrated map, address and a directions link */
+.loc-card{position:relative;overflow:hidden;padding:0}
+.loc-map{position:relative;height:11.5rem}
+.loc-map svg{position:absolute;inset:0;width:100%;height:100%}
+.loc-foot{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 14px 12px 16px;border-top:1px solid rgb(var(--ink)/.07)}
 
 .owner-card{display:grid;grid-template-columns:44px 1fr 34px;align-items:center;gap:14px;padding:16px;border-radius:var(--card-r);background:rgb(255 255 255/.45);box-shadow:inset 0 0 0 1px rgb(var(--ink)/.1);transition:background-color .35s var(--ease),box-shadow .35s var(--ease)}
 .owner-ico{display:grid;place-items:center;width:44px;height:44px;border-radius:13px;background:rgb(var(--ink));color:#fff}

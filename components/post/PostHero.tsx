@@ -13,18 +13,18 @@ export function PostHero({ post: p }: { post: Post }) {
     <section className="max-w-[1440px] mx-auto px-4 md:px-6 pt-6 md:pt-8">
       <Breadcrumb items={[{ label: 'Trang chủ', href: '/' }, { label: cat.label, href: cat.href }, { label: p.shortTitle }]} />
 
-      <div className="grid lg:grid-cols-12 gap-8 lg:gap-12 mt-6 md:mt-8 items-end">
-        <div className="lg:col-span-7">
+      <div className="grid lg:grid-cols-12 gap-8 lg:gap-12 mt-5 md:mt-6 items-stretch">
+        <div className="lg:col-span-7 flex flex-col justify-center">
           <p className="hero-fade flex flex-wrap items-center gap-2">
             <a href={cat.href} className="post-kicker">{cat.label}</a>
             <span className="mono text-ink2 inline-flex items-center gap-1.5"><Clock size={14} aria-hidden="true" />{p.readMinutes} phút đọc</span>
           </p>
-          <h1 className="mega text-[clamp(2.3rem,4.6vw,4.4rem)] mt-5 [text-wrap:balance]">
+          <h1 className="mega text-[clamp(2rem,3.6vw,3.25rem)] mt-4 [text-wrap:balance]">
             <span className="hero-line"><span>{p.title}<span className="text-red">.</span></span></span>
           </h1>
-          <p className="hero-fade post-sapo mt-6">{p.sapo}</p>
+          <p className="hero-fade post-sapo mt-5">{p.sapo}</p>
 
-          <div className="hero-fade flex flex-wrap items-center gap-x-5 gap-y-4 mt-8">
+          <div className="hero-fade flex flex-wrap items-center gap-x-5 gap-y-4 mt-6">
             <a href="#tac-gia" className="flex items-center gap-3 group">
               <span className="post-avatar" aria-hidden="true">{p.author.initials}</span>
               <span className="leading-tight">
@@ -41,7 +41,7 @@ export function PostHero({ post: p }: { post: Post }) {
           </div>
         </div>
 
-        <figure className="lg:col-span-5 relative">
+        <figure className="lg:col-span-5 relative min-h-0">
           <div className="hero-img post-cover">
             <Photo src={p.cover.src} alt={p.cover.alt} width={1200} height={1400} priority className="absolute inset-0" />
           </div>

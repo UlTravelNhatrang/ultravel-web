@@ -8,6 +8,7 @@ import { ContactCard } from '@/components/review/ContactCard';
 import { Faq } from '@/components/review/Faq';
 import { Gallery } from '@/components/review/Gallery';
 import { GuestReviews } from '@/components/review/GuestReviews';
+import { LocationCard } from '@/components/review/LocationCard';
 import { MenuList } from '@/components/review/MenuList';
 import { MobileActionBar } from '@/components/review/MobileActionBar';
 import { Nearby } from '@/components/review/Nearby';
@@ -17,7 +18,6 @@ import { ReviewDialog } from '@/components/review/ReviewDialog';
 import { ScoreBreakdown } from '@/components/review/ScoreBreakdown';
 import { SectionNav } from '@/components/ui/SectionNav';
 import { SimilarPlaces } from '@/components/review/SimilarPlaces';
-import { VoucherCoupon } from '@/components/review/VoucherCoupon';
 import { CATEGORY_LABEL, CITY_LABEL, getReview, reviewParams, reviewPath } from '@/lib/reviews';
 import { ROUTES } from '@/lib/routes';
 import { absUrl, breadcrumbLd } from '@/lib/site';
@@ -144,15 +144,14 @@ async function ReviewContent({ params }: Pick<Props, 'params'>) {
             <Overview review={r} />
             <ScoreBreakdown review={r} />
             <MenuList review={r} />
-            {r.voucher && <VoucherCoupon voucher={r.voucher} />}
             <GuestReviews review={r} />
             <Nearby review={r} />
             <Faq review={r} />
           </div>
-          <aside className="hidden lg:block lg:col-span-4" aria-label="Thông tin liên hệ">
+          <aside className="hidden lg:block lg:col-span-4" aria-label="Liên hệ và vị trí">
             <div className="sticky grid gap-[var(--card-gap)]" style={{ top: 'calc(var(--hh) + 20px)' }}>
               <ContactCard review={r} />
-              {r.voucher && <VoucherCoupon voucher={r.voucher} compact />}
+              <LocationCard review={r} />
               <OwnerCard />
             </div>
           </aside>
