@@ -112,8 +112,8 @@ export const LICH_TRINH_3N2D: Post = {
   ],
   tags: ['lịch trình Nha Trang', 'du lịch tự túc', 'tour 4 đảo', 'Tháp Bà Ponagar'],
   related: [
-    { title: 'Ăn gì ở Nha Trang: 15 món nhất định phải thử', kicker: 'Ẩm thực', photo: PHOTOS.food[1] },
+    { title: 'Ăn gì ở Nha Trang: 15 món nên thử', kicker: 'Ẩm thực', photo: PHOTOS.food[1] },
     { title: 'Di chuyển từ sân bay Cam Ranh vào trung tâm', kicker: 'Cẩm nang', photo: PHOTOS.hub[0] },
-    { title: 'Cách mua vé VinWonders rẻ nhất', kicker: 'Vui chơi', photo: PHOTOS.place3[3] },
+    { title: 'So sánh giá vé VinWonders: quầy, đại lý và combo', kicker: 'Vui chơi', photo: PHOTOS.place3[3] },
   ],
 };

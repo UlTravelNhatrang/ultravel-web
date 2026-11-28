@@ -17,14 +17,14 @@ export function FaqBoard({ items, byline, ask }: { items: FaqItem[]; byline: str
       {items.map((f, i) => (
         <details key={f.q} className="faq" open={i === 0}>
           <summary>
-            <span className="faq-n mono" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
+            <span className="faq-n caption" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
             <span className="faq-q">{f.q}</span>
             <span className="faq-icon" aria-hidden="true" />
           </summary>
           <div className="faq-a">
-            <Image src="/assets/ultravel-icon-64.png" alt="" width={36} height={36} className="faq-avatar" />
+            <Image src="/assets/ultravel-icon.svg" alt="" width={36} height={36} className="faq-avatar" />
             <div className="min-w-0">
-              <p className="mono text-[10px] text-ink2 mb-1.5">{byline}</p>
+              <p className="caption text-[12px] text-ink/70 mb-1.5">{byline}</p>
               <div className="faq-bubble">
                 <span className="faq-typing" aria-hidden="true"><i /><i /><i /></span>
                 <p><Rich text={f.a} /></p>
@@ -37,8 +37,8 @@ export function FaqBoard({ items, byline, ask }: { items: FaqItem[]; byline: str
       {ask && (
         <div className="faq-ask">
           <div>
-            <p className="font-display font-extrabold text-lg tracking-[-0.02em]">{ask.title}</p>
-            <p className="text-sm text-ink2 mt-0.5">{ask.text}</p>
+            <p className=" font-extrabold text-lg tracking-[-0.02em]">{ask.title}</p>
+            <p className="text-base text-ink/75 mt-0.5">{ask.text}</p>
           </div>
           <a href={ask.href} target={ask.href.startsWith('http') ? '_blank' : undefined} rel={ask.href.startsWith('http') ? 'noopener noreferrer' : undefined} className="faq-ask-btn">
             {ask.href.includes('zalo.me') ? <span className="ct-zalo"><ZaloIcon size={20} /></span> : <ChatCircleDots size={18} weight="fill" aria-hidden="true" />}

@@ -12,8 +12,8 @@ const serverNow = () => null;
 /** "● Đang mở · đến 22:00". Rendered in the browser only, because it depends on the visitor's clock. */
 export function OpenStatus({ hours, className = '' }: { hours: OpeningHours[]; className?: string }) {
   const minute = useSyncExternalStore(subscribe, minuteNow, serverNow);
-  if (minute === null) return <span className={`${className} text-ink2`}>Giờ mở cửa</span>;
+  if (minute === null) return <span className={`${className} text-ink/70`}>Giờ mở cửa</span>;
   const s = openStatus(hours, new Date(minute * 60_000));
   // data-open lets a container style the status (e.g. the contact card's pill) without re-checking the clock.
-  return <span data-open={s.open} className={`${className} ${s.open ? 'text-[#0f7a5a] font-semibold' : 'text-ink2'}`}>{s.open ? '● ' : ''}{s.text}</span>;
+  return <span data-open={s.open} className={`${className} ${s.open ? 'text-[#1688E8] font-semibold' : 'text-ink/70'}`}>{s.open ? '● ' : ''}{s.text}</span>;
 }

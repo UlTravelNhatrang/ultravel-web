@@ -8,10 +8,10 @@ export function barcodeStyle(code: string): CSSProperties {
     const c = ch.charCodeAt(0);
     const bar = 1 + ((c + i) % 3);
     const gap = 1 + ((c * 7 + i) % 3);
-    stops.push(`#012C79 ${x}px ${x + bar}px`, `transparent ${x + bar}px ${x + bar + gap}px`);
+    stops.push(`#07327D ${x}px ${x + bar}px`, `transparent ${x + bar}px ${x + bar + gap}px`);
     x += bar + gap;
     if (i % 2) {
-      stops.push(`#012C79 ${x}px ${x + 1}px`, `transparent ${x + 1}px ${x + 3}px`);
+      stops.push(`#07327D ${x}px ${x + 1}px`, `transparent ${x + 1}px ${x + 3}px`);
       x += 3;
     }
   });

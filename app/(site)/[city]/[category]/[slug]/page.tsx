@@ -95,8 +95,8 @@ function OwnerCard() {
     <Link href={ROUTES.b2b} className="owner-card group">
       <span className="owner-ico" aria-hidden="true"><Storefront size={22} weight="duotone" /></span>
       <span className="min-w-0">
-        <span className="font-display font-extrabold text-[1.05rem] tracking-[-0.02em] block">Bạn là chủ quán?</span>
-        <span className="text-[13px] text-ink2 leading-snug block mt-0.5">Nhận hồ sơ, trả lời đánh giá và đưa quán lên vị trí nổi bật.</span>
+        <span className=" font-extrabold text-[1.05rem] tracking-[-0.02em] block">Bạn là chủ quán?</span>
+        <span className="text-[13px] text-ink/70 leading-snug block mt-0.5">Nhận hồ sơ, trả lời đánh giá và đưa quán lên vị trí nổi bật.</span>
       </span>
       <span className="owner-arr" aria-hidden="true"><ArrowRight size={16} weight="bold" /></span>
     </Link>
@@ -107,10 +107,10 @@ function OwnerCard() {
 function ReviewSkeleton() {
   return (
     <main id="main" className="max-w-[1440px] mx-auto px-4 md:px-6 pt-8 grid gap-[var(--card-gap)]" aria-busy="true" aria-label="Đang tải review">
-      <div className="h-4 w-72 rounded-full bg-ink/10" />
+      <div className="h-4 w-72 rounded-full bg-navy/10" />
       <div className="grid lg:grid-cols-12 gap-[var(--card-gap)]">
         <div className="soft-card lg:col-span-8 h-72 animate-pulse" />
-        <div className="lg:col-span-4 h-72 rounded-[var(--card-r)] bg-ink/80 animate-pulse" />
+        <div className="lg:col-span-4 h-72 rounded-[var(--card-r)] bg-navy/80 animate-pulse" />
       </div>
       <div className="soft-card h-[27rem] animate-pulse" />
     </main>
@@ -161,7 +161,7 @@ async function ReviewContent({ params }: Pick<Props, 'params'>) {
         <SimilarPlaces review={r} />
         <div className="lg:hidden max-w-[1440px] mx-auto px-4 md:px-6 mt-10"><OwnerCard /></div>
         <div className="max-w-[1440px] mx-auto px-4 md:px-6 mt-10 mb-24 md:mb-32">
-          <Link href="/" className="bx px-5 py-3 mono text-[11px] font-semibold">← Về trang chủ</Link>
+          <Link href="/" className="bx px-5 py-3 caption text-[12px] font-semibold">← Về trang chủ</Link>
         </div>
         {/* Kept at the end: Next scrolls to a new page's first element, and a <script> has no position. */}
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd(r)).replace(/</g, '\\u003c') }} />

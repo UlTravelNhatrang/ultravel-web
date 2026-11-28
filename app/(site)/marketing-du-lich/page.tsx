@@ -83,9 +83,9 @@ export default function B2BPage() {
               </div>
               {/* The trust promise sits beside the questions it answers. */}
               <aside className="lg:col-span-4 b2b-promise">
-                <p className="mono text-[#FF9A3C]">Cam kết của Ultravel</p>
-                <p className="font-display font-extrabold text-2xl leading-tight tracking-[-0.02em] mt-3">Gói dịch vụ không mua được điểm chấm.</p>
-                <p className="text-paper/75 mt-3 leading-relaxed">Review vẫn do thổ địa đi thực tế và tự trả tiền. Đối tác được thấy nhiều hơn, không được chấm cao hơn.</p>
+                <p className="caption text-[#FF8A00]">Cam kết của Ultravel</p>
+                <p className=" font-extrabold text-2xl leading-tight tracking-[-0.02em] mt-3">Gói dịch vụ không mua được điểm chấm.</p>
+                <p className="text-cloud/75 mt-3 leading-relaxed">Review vẫn do thổ địa đi thực tế và tự trả tiền. Đối tác được thấy nhiều hơn, không được chấm cao hơn.</p>
               </aside>
             </div>
           </B2BSection>
@@ -94,9 +94,9 @@ export default function B2BPage() {
         <section id="lien-he" className="b2b-lead rv-sec" aria-labelledby="lien-he-t">
           <div className="max-w-[1440px] mx-auto px-4 md:px-6 grid lg:grid-cols-12 gap-10 lg:gap-14 items-start">
             <div className="lg:col-span-5 lg:sticky" style={{ top: 'calc(var(--hh) + 90px)' }}>
-              <p className="mono text-[#FF9A3C]">Nhận audit</p>
-              <h2 id="lien-he-t" className="mega text-[clamp(2.3rem,4.4vw,4rem)] mt-4">Audit miễn phí trong 24 giờ<span className="text-[#FF9A3C]">.</span></h2>
-              <p className="text-paper/75 mt-5 text-[1.05rem] leading-relaxed max-w-[44ch]">Chúng tôi xem hồ sơ Google Maps, website và hiện diện online của bạn, rồi gửi lại những việc nên làm trước.</p>
+              <p className="caption text-[#FF8A00]">Nhận audit</p>
+              <h2 id="lien-he-t" className="mega text-h2 mt-4">Audit miễn phí trong 24 giờ<span className="text-[#FF8A00]">.</span></h2>
+              <p className="text-cloud/75 mt-5 text-[1.05rem] leading-relaxed max-w-[44ch]">Chúng tôi xem hồ sơ Google Maps, website và hiện diện online của bạn, rồi gửi lại những việc nên làm trước.</p>
               <ul className="grid gap-3 mt-7">
                 {PROMISES.map(p => <li key={p} className="flex items-center gap-3"><span className="b2b-check is-light"><Check size={12} weight="bold" aria-hidden="true" /></span>{p}</li>)}
               </ul>

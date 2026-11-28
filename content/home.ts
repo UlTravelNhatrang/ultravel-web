@@ -1,7 +1,7 @@
 import type { Area, GuideCard, Place } from '@/types/content';
 
 /** Tab 01: evergreen guide articles. */
-export const GUIDES: GuideCard[] = [['Kinh nghiệm du lịch Nha Trang 2026','Mẹo tiết kiệm'],['Lịch trình 3N2Đ tự túc','Chi tiết từng ngày'],['Thời điểm đẹp nhất để đi','Theo mùa'],['Di chuyển từ sân bay Cam Ranh','Taxi, xe buýt, shuttle']];
+export const GUIDES: GuideCard[] = [['Kinh nghiệm du lịch Nha Trang 2026','Mẹo tiết kiệm'],['Lịch trình 3N2Đ tự túc','Chi tiết từng ngày'],['Nên đi Nha Trang tháng nào','Theo mùa'],['Di chuyển từ sân bay Cam Ranh','Taxi, xe buýt, shuttle']];
 
 /** Tabs 02-04: places to eat, drink and do. */
 export const PLACES: Record<1 | 2 | 3, Place[]> = {

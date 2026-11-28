@@ -9,7 +9,7 @@ import { Header } from './Header';
 export function SiteShell({ children }: { children: ReactNode }) {
   return (
     <>
-      <a href="#main" className="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[70] bg-ink text-paper px-4 py-2 mono">Bỏ qua đến nội dung</a>
+      <a href="#main" className="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[70] bg-navy text-cloud px-4 py-2 caption">Bỏ qua đến nội dung</a>
       <Header />
       {children}
       <Footer />

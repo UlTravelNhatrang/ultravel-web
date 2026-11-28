@@ -15,20 +15,20 @@ export function SectionHeader({ label, aside }: { label: string; aside?: ReactNo
   return (
     <div className="unit">
       <span className="rule" />
-      <span className="mono dec">{label}</span>
+      <span className="caption dec">{label}</span>
       {aside}
     </div>
   );
 }
 
 export function AsideNote({ children }: { children: ReactNode }) {
-  return <span className="mono text-ink2">{children}</span>;
+  return <span className="caption text-ink/70">{children}</span>;
 }
 
 /** `label` names the destination for screen readers when the visible text is generic ("Xem tất cả"). */
 export function AsideLink({ href, label, children }: { href: string; label?: string; children: ReactNode }) {
   return (
-    <Link href={href} aria-label={label} className="mono font-semibold hover:text-red">
+    <Link href={href} aria-label={label} className="text-[15px] font-semibold text-blue hover:text-navy">
       {children}
     </Link>
   );
@@ -37,9 +37,9 @@ export function AsideLink({ href, label, children }: { href: string; label?: str
 /** Big section heading that ends in the brand-orange full stop. */
 export function SectionTitle({ id, className = 'mt-6 mb-8', children }: { id: string; className?: string; children: ReactNode }) {
   return (
-    <h2 id={id} className={`hd text-4xl md:text-6xl ${className}`}>
+    <h2 id={id} className={`hd text-h2 ${className}`}>
       {children}
-      <span className="text-red">.</span>
+      <span className="text-orange">.</span>
     </h2>
   );
 }

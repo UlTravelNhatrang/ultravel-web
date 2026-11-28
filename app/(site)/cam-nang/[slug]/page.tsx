@@ -67,14 +67,14 @@ function jsonLd(p: Post) {
 function PostSkeleton() {
   return (
     <main id="main" className="max-w-[1440px] mx-auto px-4 md:px-6 pt-8 grid gap-6" aria-busy="true" aria-label="Đang tải bài viết">
-      <div className="h-4 w-60 rounded-full bg-ink/10" />
+      <div className="h-4 w-60 rounded-full bg-navy/10" />
       <div className="grid lg:grid-cols-12 gap-8">
         <div className="lg:col-span-7 grid gap-4 content-end">
-          <div className="h-16 rounded-2xl bg-ink/10 animate-pulse" />
-          <div className="h-16 w-4/5 rounded-2xl bg-ink/10 animate-pulse" />
-          <div className="h-24 rounded-2xl bg-ink/5 animate-pulse" />
+          <div className="h-16 rounded-2xl bg-navy/10 animate-pulse" />
+          <div className="h-16 w-4/5 rounded-2xl bg-navy/10 animate-pulse" />
+          <div className="h-24 rounded-2xl bg-navy/5 animate-pulse" />
         </div>
-        <div className="lg:col-span-5 aspect-[4/5] max-h-[34rem] rounded-[var(--card-r)] bg-ink/10 animate-pulse" />
+        <div className="lg:col-span-5 aspect-[4/5] max-h-[34rem] rounded-[var(--card-r)] bg-navy/10 animate-pulse" />
       </div>
     </main>
   );
@@ -106,7 +106,7 @@ async function PostContent({ params }: Pick<Props, 'params'>) {
             <PostBody post={p} />
             <Conclusion post={p} />
             <section id="hoi-dap" className="post-sec" aria-labelledby="hoi-dap-t" tabIndex={-1}>
-              <h2 id="hoi-dap-t" className="post-h2"><span className="mono" aria-hidden="true">?</span>Câu hỏi thường gặp</h2>
+              <h2 id="hoi-dap-t" className="post-h2"><span className="caption" aria-hidden="true">?</span>Câu hỏi thường gặp</h2>
               <FaqBoard items={p.faq} byline={`${p.author.name} · ${p.author.role}`} />
             </section>
             <Tags tags={p.tags} />

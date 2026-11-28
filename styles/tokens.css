@@ -1,13 +1,24 @@
-/* Design tokens and page canvas. */
+/* Design tokens and page canvas, from Ultravel_Brand_Guideline_V1.pdf (03 Color palette, 04 Typography).
+   Navy is the identity colour; white and Soft Cloud make space; Travel Blue supports hierarchy and links;
+   Journey Orange is an accent only (CTA, marker, highlight). Body text is Ink on light backgrounds. */
 :root{
-  --paper:241 245 251; --paper2:222 232 247; --ink:1 44 121; --ink2:74 90 130; --red:247 128 10; --red-t:196 82 0; --deep:1 26 77;
+  --navy:7 50 125;     /* Ultravel Navy  #07327D: brand, headings, navigation, icon backgrounds */
+  --blue:22 136 232;   /* Travel Blue    #1688E8: links, secondary brand, digital highlights */
+  --orange:255 138 0;  /* Journey Orange #FF8A00: accent, CTA, plane motif, emphasis */
+  --cloud:243 247 252; /* Soft Cloud     #F3F7FC: cards, backgrounds, editorial sections */
+  --ink:23 32 51;      /* Ink            #172033: body text on light backgrounds */
   --hh:120px; color-scheme:light;
-  --font-display:var(--font-vietnam);
 }
 html{scroll-padding-top:calc(var(--hh) + 12px)}
 /* Native smooth scrolling for in-page anchors; Next turns it off during route changes (data-scroll-behavior on <html>). */
 html{scroll-behavior:smooth}
-body{background:linear-gradient(180deg,#f7f9fd 0,#f0f4fa 900px,#ebf1f9 100%);color:rgb(var(--ink));font-family:var(--font-vietnam),system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+body{background:rgb(var(--cloud));color:rgb(var(--ink));font-family:var(--font-sans),system-ui,sans-serif;font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased}
 p{text-wrap:pretty}
-::selection{background:rgb(var(--red));color:rgb(var(--paper))}
-:focus-visible{outline:2px solid rgb(var(--red));outline-offset:2px}
+
+/* Type hierarchy (guideline 04): H1 Bold 32-48px, H2 Bold 24-32px, H3 SemiBold 18-24px, body Regular 16-18px.
+   Headings are navy on light backgrounds and inherit white inside navy panels. */
+:where(h1,h2,h3,h4,h5,h6){color:rgb(var(--navy));text-wrap:balance}
+:where(.bg-navy,.text-white,.text-cloud,footer,.hh,.news,.tsum,.lead,.post-takeaways,.post-conclusion,.b2b-hero,.b2b-plan.is-hot,.b2b-lead,.b2b-promise,.nf-card,.svc-show,.dcard,.hz,.faq-bubble) :where(h1,h2,h3,h4,h5,h6){color:inherit}
+
+::selection{background:rgb(var(--navy));color:#fff}
+:focus-visible{outline:2px solid rgb(var(--blue));outline-offset:2px}

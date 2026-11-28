@@ -12,12 +12,12 @@ export function Takeaways({ post: p }: { post: Post }) {
   return (
     <section className="post-takeaways" aria-labelledby="tom-tat-t">
       <div>
-        <p id="tom-tat-t" className="mono text-[#FF9A3C]">Đọc nhanh trong 30 giây</p>
+        <p id="tom-tat-t" className="caption text-[#FF8A00]">Đọc nhanh trong 30 giây</p>
         <ol className="mt-4 grid gap-4">
           {p.takeaways.map((t, i) => (
             <li key={t} className="flex gap-4">
-              <span className="num text-2xl leading-none text-[#FF9A3C] w-8 shrink-0">{pad(i + 1)}</span>
-              <span className="text-[16px] leading-snug text-paper/90">{t}</span>
+              <span className="num text-2xl leading-none text-[#FF8A00] w-8 shrink-0">{pad(i + 1)}</span>
+              <span className="text-[16px] leading-snug text-cloud/90">{t}</span>
             </li>
           ))}
         </ol>
@@ -25,7 +25,7 @@ export function Takeaways({ post: p }: { post: Post }) {
       <dl className="post-facts">
         {p.facts.map(f => (
           <div key={f.label}>
-            <dt className="mono">{f.label}</dt>
+            <dt className="caption">{f.label}</dt>
             <dd>{f.value}</dd>
           </div>
         ))}
@@ -38,9 +38,9 @@ export function Takeaways({ post: p }: { post: Post }) {
 export function MobileToc({ items }: { items: TocItem[] }) {
   return (
     <details className="post-mtoc soft-card lg:hidden">
-      <summary><span className="font-semibold">Mục lục</span><span className="mono text-ink2">{items.length} phần</span></summary>
+      <summary><span className="font-semibold">Mục lục</span><span className="caption text-ink/70">{items.length} phần</span></summary>
       <ol>
-        {items.map((it, i) => <li key={it.id}><a href={`#${it.id}`}><span className="mono">{pad(i + 1)}</span>{it.label}</a></li>)}
+        {items.map((it, i) => <li key={it.id}><a href={`#${it.id}`}><span className="caption">{pad(i + 1)}</span>{it.label}</a></li>)}
       </ol>
     </details>
   );
@@ -49,9 +49,9 @@ export function MobileToc({ items }: { items: TocItem[] }) {
 export function Conclusion({ post: p }: { post: Post }) {
   return (
     <section className="post-conclusion float-in" aria-label="Kết luận">
-      <p className="mono text-paper/60">Tóm lại</p>
-      <p className="font-display font-bold text-[clamp(1.3rem,2.2vw,1.75rem)] leading-[1.3] tracking-[-0.02em] mt-3 [text-wrap:pretty]">{p.conclusion.text}</p>
-      <Link href={p.conclusion.cta.href} className="ct-primary mt-7 w-fit">
+      <p className="caption text-cloud/75">Tóm lại</p>
+      <p className="text-body-lg font-semibold mt-3 [text-wrap:pretty]">{p.conclusion.text}</p>
+      <Link href={p.conclusion.cta.href} className="ct-primary is-light mt-7 w-fit">
         <span className="flex-1">{p.conclusion.cta.label}</span>
         <span className="ct-primary-arr" aria-hidden="true"><ArrowRight size={14} weight="bold" /></span>
       </Link>
@@ -63,7 +63,7 @@ export function Tags({ tags }: { tags: string[] }) {
   return (
     <ul className="flex flex-wrap gap-2" aria-label="Từ khóa">
       {tags.map(t => (
-        <li key={t}><span className="tag-chip gap-1"><Hash size={13} className="text-red-t" aria-hidden="true" />{t}</span></li>
+        <li key={t}><span className="tag-chip gap-1"><Hash size={13} className="text-navy" aria-hidden="true" />{t}</span></li>
       ))}
     </ul>
   );
@@ -74,10 +74,10 @@ export function AuthorCard({ post: p }: { post: Post }) {
     <section id="tac-gia" className="post-author soft-card" aria-label="Tác giả">
       <span className="post-avatar is-lg" aria-hidden="true">{p.author.initials}</span>
       <div className="min-w-0">
-        <p className="mono text-ink2">Viết bởi</p>
-        <p className="font-display font-extrabold text-xl tracking-[-0.02em] mt-0.5">{p.author.name}</p>
+        <p className="caption text-ink/70">Viết bởi</p>
+        <p className=" font-extrabold text-xl tracking-[-0.02em] mt-0.5">{p.author.name}</p>
         <p className="text-ink/80 mt-2 leading-relaxed">{p.author.bio}</p>
-        <p className="mono text-ink2 mt-3">{p.author.role} · đi thực tế, tự trả tiền</p>
+        <p className="caption text-ink/70 mt-3">{p.author.role} · đi thực tế, tự trả tiền</p>
       </div>
     </section>
   );
@@ -88,16 +88,16 @@ export function RelatedPosts({ post: p }: { post: Post }) {
   return (
     <section className="max-w-[1440px] mx-auto px-4 md:px-6 mt-20 md:mt-28" aria-labelledby="lien-quan-t">
       <div className="flex items-end justify-between gap-4 mb-6">
-        <h2 id="lien-quan-t" className="hd text-3xl md:text-[2.6rem]">Đọc tiếp<span className="text-red">.</span></h2>
-        <Link href="/cam-nang" className="mono font-semibold hover:text-red">Tất cả cẩm nang <span className="arr">→</span></Link>
+        <h2 id="lien-quan-t" className="hd text-h2">Đọc tiếp<span className="text-orange">.</span></h2>
+        <Link href="/cam-nang" className="text-[15px] font-semibold text-blue hover:text-navy">Tất cả cẩm nang <span className="arr">→</span></Link>
       </div>
       <div className="grid sm:grid-cols-3 gap-[var(--card-gap)]">
         {p.related.map((r, i) => (
           <SmartLink key={i} href={r.href ?? legacy('post')} className="post-rel group float-in">
             <Photo src={r.photo} alt={r.title} width={720} height={540} className="aspect-[4/3]" />
             <span className="p-5 block">
-              <span className="mono text-ink2">{r.kicker}</span>
-              <span className="font-display font-bold text-xl leading-snug tracking-[-0.015em] block mt-2 group-hover:text-red-t transition-colors [text-wrap:balance]">{r.title}</span>
+              <span className="caption text-ink/70">{r.kicker}</span>
+              <span className=" font-bold text-xl leading-snug tracking-[-0.015em] block mt-2 group-hover:text-navy transition-colors [text-wrap:balance]">{r.title}</span>
             </span>
           </SmartLink>
         ))}

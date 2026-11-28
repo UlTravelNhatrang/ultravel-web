@@ -44,17 +44,17 @@ export function Industries() {
 
       <div id="ind-panel" role="tabpanel" aria-labelledby={`ind-tab-${ind.key}`} className="b2b-ind soft-card mt-[var(--card-gap)]" key={ind.key}>
         <Photo src={ind.photo} alt={ind.label} width={900} height={700} className="b2b-ind-img" />
-        <div className="grid sm:grid-cols-3 gap-px bg-ink/10 rounded-[14px] overflow-hidden self-center">
+        <div className="grid sm:grid-cols-3 gap-px bg-navy/10 rounded-[14px] overflow-hidden self-center">
           <div className="b2b-ind-cell">
-            <p className="mono text-ink2 flex items-center gap-1.5"><Crosshair size={14} aria-hidden="true" />Mục tiêu</p>
-            <p className="font-display font-bold text-lg leading-snug tracking-[-0.01em] mt-2">{ind.goal}</p>
+            <p className="caption text-ink/70 flex items-center gap-1.5"><Crosshair size={14} aria-hidden="true" />Mục tiêu</p>
+            <p className=" font-bold text-lg leading-snug tracking-[-0.01em] mt-2">{ind.goal}</p>
           </div>
           <div className="b2b-ind-cell">
-            <p className="mono text-ink2 flex items-center gap-1.5"><Stack size={14} aria-hidden="true" />Bắt đầu với</p>
+            <p className="caption text-ink/70 flex items-center gap-1.5"><Stack size={14} aria-hidden="true" />Bắt đầu với</p>
             <ul className="flex flex-wrap gap-1.5 mt-2.5">{ind.plan.map(k => <li key={k} className="tag-chip !text-[13px]">{SERVICE_LABEL[k]}</li>)}</ul>
           </div>
           <div className="b2b-ind-cell">
-            <p className="mono text-ink2 flex items-center gap-1.5"><TrendUp size={14} aria-hidden="true" />KPI theo dõi</p>
+            <p className="caption text-ink/70 flex items-center gap-1.5"><TrendUp size={14} aria-hidden="true" />KPI theo dõi</p>
             <p className="font-medium leading-snug mt-2">{ind.kpi}</p>
           </div>
         </div>

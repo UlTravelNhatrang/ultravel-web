@@ -6,7 +6,7 @@ import { ReviewSection } from './ReviewSection';
 /** The place's Q&A, answered by Ultravel's local; unanswered questions go to the café on Zalo. */
 export function Faq({ review: r }: { review: Review }) {
   return (
-    <ReviewSection id="hoi-dap" title="Hỏi & đáp" aside={<span className="mono text-ink2">{r.faq.length} câu · thổ địa trả lời</span>}>
+    <ReviewSection id="hoi-dap" title="Hỏi & đáp" aside={<span className="caption text-ink/70">{r.faq.length} câu · thổ địa trả lời</span>}>
       <FaqBoard
         items={r.faq}
         byline={`Thổ địa Ultravel · đã kiểm tra ${r.score.checkedAt}`}

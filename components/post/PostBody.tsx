@@ -12,15 +12,15 @@ function PlaceCard({ slug, note }: { slug: string; note: string }) {
   if (!r) return null;
   return (
     <Link href={reviewPath(r)} className="post-place group">
-      {photo ? <Photo src={photo.src} alt={photo.alt} width={480} height={360} sizes="(max-width: 767px) 40vw, 240px" className="post-place-img" /> : <span className="post-place-img bg-paper2" aria-hidden="true" />}
+      {photo ? <Photo src={photo.src} alt={photo.alt} width={480} height={360} sizes="(max-width: 767px) 40vw, 240px" className="post-place-img" /> : <span className="post-place-img bg-white" aria-hidden="true" />}
       <span className="p-4 md:p-5 min-w-0 flex flex-col justify-center">
-        <span className="mono text-ink2 text-[10px]">{note}</span>
-        <span className="font-display font-extrabold text-xl tracking-[-0.02em] mt-1 group-hover:text-red-t transition-colors">{r.name}</span>
-        <span className="text-sm text-ink2 mt-1 flex flex-wrap items-center gap-x-2">
-          <span className="inline-flex items-center gap-1 text-ink font-semibold"><Star size={14} weight="fill" className="text-red" aria-hidden="true" />{r.rating.toFixed(1).replace('.', ',')}</span>
+        <span className="caption text-ink/70 text-[12px]">{note}</span>
+        <span className=" font-extrabold text-xl tracking-[-0.02em] mt-1 group-hover:text-navy transition-colors">{r.name}</span>
+        <span className="text-sm text-ink/70 mt-1 flex flex-wrap items-center gap-x-2">
+          <span className="inline-flex items-center gap-1 text-navy font-semibold"><Star size={14} weight="fill" className="text-orange" aria-hidden="true" />{r.rating.toFixed(1).replace('.', ',')}</span>
           · {r.kind} · Ultravel chấm {r.score.total.toFixed(1).replace('.', ',')}/5
         </span>
-        <span className="mono font-semibold mt-3">Xem review chi tiết <span className="arr">→</span></span>
+        <span className="caption font-semibold mt-3">Xem review chi tiết <span className="arr">→</span></span>
       </span>
     </Link>
   );
@@ -38,21 +38,21 @@ function Block({ block: b }: { block: PostBlock }) {
       return (
         <figure className="post-figure float-in">
           <Photo src={b.src} alt={b.alt} width={1280} height={800} className="aspect-[16/10]" />
-          <figcaption className="mono">{b.caption}</figcaption>
+          <figcaption className="caption">{b.caption}</figcaption>
         </figure>
       );
     case 'tip':
       return (
         <aside className="post-callout is-tip">
           <span className="post-callout-ico" aria-hidden="true"><Lightbulb size={18} weight="fill" /></span>
-          <div><p className="post-callout-t mono">Mẹo thổ địa</p><p><Rich text={b.text} /></p></div>
+          <div><p className="post-callout-t caption">Mẹo thổ địa</p><p><Rich text={b.text} /></p></div>
         </aside>
       );
     case 'note':
       return (
         <aside className="post-callout is-note">
           <span className="post-callout-ico" aria-hidden="true"><Info size={18} weight="bold" /></span>
-          <div><p className="post-callout-t mono">Lưu ý</p><p><Rich text={b.text} /></p></div>
+          <div><p className="post-callout-t caption">Lưu ý</p><p><Rich text={b.text} /></p></div>
         </aside>
       );
     case 'table':
@@ -70,9 +70,9 @@ function Block({ block: b }: { block: PostBlock }) {
         <ol className="post-timeline">
           {b.items.map((it, i) => (
             <li key={i}>
-              <span className="post-time mono">{it.time}</span>
+              <span className="post-time caption">{it.time}</span>
               <div>
-                <p className="font-display font-bold text-[1.1rem] tracking-[-0.01em]">{it.title}</p>
+                <p className=" font-bold text-[1.1rem] tracking-[-0.01em]">{it.title}</p>
                 <p className="text-ink/80 mt-1"><Rich text={it.text} /></p>
               </div>
             </li>
@@ -92,7 +92,7 @@ export function PostBody({ post: p }: { post: Post }) {
         // tabIndex -1: the contents list moves keyboard focus here after scrolling.
         <section key={s.id} id={s.id} className="post-sec" aria-labelledby={`${s.id}-t`} tabIndex={-1}>
           <h2 id={`${s.id}-t`} className="post-h2">
-            <span className="mono" aria-hidden="true">{pad(i + 1)}</span>
+            <span className="caption" aria-hidden="true">{pad(i + 1)}</span>
             {s.title}
           </h2>
           {s.blocks.map((b, k) => <Block key={k} block={b} />)}

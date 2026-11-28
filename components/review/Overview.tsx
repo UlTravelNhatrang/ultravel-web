@@ -8,7 +8,7 @@ export function Overview({ review: r }: { review: Review }) {
       <dl className="grid sm:grid-cols-2 gap-[var(--card-gap)] mt-6">
         {r.facts.map(f => (
           <div key={f.label} className="soft-card p-4">
-            <dt className="mono text-ink2">{f.label}</dt>
+            <dt className="caption text-ink/70">{f.label}</dt>
             <dd className="font-semibold mt-1">{f.value}</dd>
           </div>
         ))}

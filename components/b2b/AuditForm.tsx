@@ -46,8 +46,8 @@ export function AuditForm() {
     return (
       <div className="hz hz-sent" role="status">
         <p className="hz-label">Đã nhận yêu cầu</p>
-        <p className="font-display font-bold text-[1.6rem] leading-tight tracking-[-0.02em] mt-3">Cảm ơn {sentTo}.</p>
-        <p className="text-paper/70 mt-3 leading-relaxed max-w-[44ch]">Đội Ultravel sẽ nhắn Zalo cho bạn trong giờ hành chính để hẹn buổi audit.</p>
+        <p className=" font-bold text-[1.6rem] leading-tight tracking-[-0.02em] mt-3">Cảm ơn {sentTo}.</p>
+        <p className="text-cloud/75 mt-3 leading-relaxed max-w-[44ch]">Đội Ultravel sẽ nhắn Zalo cho bạn trong giờ hành chính để hẹn buổi audit.</p>
         <button type="button" onClick={() => setSentTo(null)} className="hz-link mt-8">Gửi yêu cầu khác</button>
       </div>
     );
@@ -99,7 +99,7 @@ export function AuditForm() {
 
       <div className="hz-foot">
         <button type="submit" className="hz-send">Gửi yêu cầu audit <span aria-hidden="true">→</span></button>
-        <p className="text-[13px] leading-relaxed text-paper/50">Miễn phí, không ràng buộc. Phản hồi trong 24 giờ làm việc; số điện thoại chỉ dùng để hẹn buổi audit.</p>
+        <p className="text-[14px] leading-relaxed text-cloud/75">Miễn phí, không ràng buộc. Phản hồi trong 24 giờ làm việc; số điện thoại chỉ dùng để hẹn buổi audit.</p>
       </div>
     </form>
   );

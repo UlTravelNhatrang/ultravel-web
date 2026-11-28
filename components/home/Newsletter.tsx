@@ -30,7 +30,7 @@ export function Newsletter() {
               <button type="submit">Đăng ký</button>
             </form>
           )}
-          {state === 'error' && <p id="news-err" className="news-note !text-[#ffb4a8]">Nhập email hoặc số Zalo hợp lệ.</p>}
+          {state === 'error' && <p id="news-err" className="news-note !text-[#FF8A00]">Nhập email hoặc số Zalo hợp lệ.</p>}
           {state === 'idle' && <p className="news-note">Hoặc nhắn Zalo OA Ultravel để nhận ưu đãi nhanh hơn.</p>}
         </div>
       </div>

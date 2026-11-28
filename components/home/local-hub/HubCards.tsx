@@ -36,19 +36,19 @@ export const PlaceCard = memo(function PlaceCard({ place, index, photoIndex, tab
       <Photo src={placePhotos[tab - 1][photoIndex]} alt={name} width={128} height={128} sizes="128px" className="w-28 h-28 xl:w-32 xl:h-32 shrink-0 rounded-2xl" />
       <div className="min-w-0 flex-1 flex flex-col py-0.5">
         <div className="flex items-start gap-2">
-          <span className="num w-6 h-6 rounded-full bg-ink text-paper text-[11px] grid place-items-center shrink-0 mt-0.5">{pad(index + 1)}</span>
-          <h3 className="font-display font-bold text-[17px] leading-tight group-hover:text-red">
+          <span className="num w-6 h-6 rounded-full bg-navy text-cloud text-[12px] grid place-items-center shrink-0 mt-0.5">{pad(index + 1)}</span>
+          <h3 className="text-navy font-semibold text-[18px] leading-tight group-hover:text-blue">
             {reviewHref ? <Link href={reviewHref}>{name}</Link> : <a className="orig" href={legacy('review')}>{name}</a>}
           </h3>
         </div>
-        <div className="flex justify-between gap-2 mono text-ink2 mt-1.5"><span className="truncate">{kind} / {area}</span><span className="shrink-0">★ {rating}</span></div>
-        <p className="text-[13px] leading-snug mt-1.5 text-ink/80 line-clamp-2">{tip}</p>
-        <div className="flex justify-between gap-2 mono mt-auto pt-2">
+        <div className="flex justify-between gap-2 caption text-ink/70 mt-1.5"><span className="truncate">{kind} / {area}</span><span className="shrink-0">★ {rating}</span></div>
+        <p className="text-base leading-[1.5] mt-1.5 text-ink line-clamp-2">{tip}</p>
+        <div className="flex justify-between gap-2 caption mt-auto pt-2">
           <span className="font-semibold">{price}</span>
           {hour === null ? (
-            <span className="text-ink2">{hours}</span>
+            <span className="text-ink/70">{hours}</span>
           ) : (
-            <span className={open ? 'font-semibold text-[#0f7a5a]' : 'text-ink2 line-through'}>{open ? '● Mở' : 'Đóng'} {hours}</span>
+            <span className={open ? 'font-semibold text-[#1688E8]' : 'text-ink/70 line-through'}>{open ? '● Mở' : 'Đóng'} {hours}</span>
           )}
         </div>
       </div>

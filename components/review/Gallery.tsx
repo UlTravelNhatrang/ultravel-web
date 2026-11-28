@@ -21,7 +21,7 @@ export function Gallery({ photos, total }: { photos: Review['photos']; total: nu
         {shown.map((p, i) => (
           <button key={p.src} type="button" onClick={() => setOpen(i)} className={`gallery-cell ${i === 0 ? 'hero-img is-big' : ''}`} data-cursor="Xem ảnh" aria-label={`Xem ảnh: ${p.alt}`}>
             <Image src={p.src} alt={p.alt} width={i ? 600 : 1200} height={i ? 450 : 900} sizes={i ? '(max-width: 767px) 50vw, 25vw' : '(max-width: 767px) 100vw, 50vw'} preload={!i} loading={i ? 'lazy' : 'eager'} fetchPriority={i ? undefined : 'high'} draggable={false} />
-            {i === shown.length - 1 && <span className="gallery-more mono">Xem {total} ảnh</span>}
+            {i === shown.length - 1 && <span className="gallery-more caption">Xem {total} ảnh</span>}
           </button>
         ))}
       </div>
@@ -69,13 +69,13 @@ function Lightbox({ photos, start, total, onClose }: { photos: Review['photos'];
         touchX.current = null;
       }}
     >
-      <div className="lightbox-bar mono">
+      <div className="lightbox-bar caption">
         <span>{i + 1} / {photos.length} <span className="opacity-60">(xem trước {photos.length} trên {total} ảnh)</span></span>
         <button ref={closeRef} type="button" onClick={onClose} className="lb-btn" aria-label="Đóng"><X size={20} /></button>
       </div>
       <figure className="lightbox-figure">
         <img key={p.src} src={p.src} alt={p.alt} />
-        <figcaption className="mono">{p.alt}</figcaption>
+        <figcaption className="caption">{p.alt}</figcaption>
       </figure>
       <button type="button" className="lb-btn lb-prev" onClick={() => go(-1)} aria-label="Ảnh trước"><ArrowLeft size={20} /></button>
       <button type="button" className="lb-btn lb-next" onClick={() => go(1)} aria-label="Ảnh tiếp theo"><ArrowRight size={20} /></button>

@@ -1,41 +1,47 @@
-/* Structural system: type scale, hairline grids, photos, section strips, buttons. */
-/* Macro type: heavy, tight, uppercase. Leading stays at .95 so stacked Vietnamese marks (Ẩ, Ễ) never collide. */
-.mega{font-family:var(--font-display),sans-serif;font-weight:800;text-transform:uppercase;letter-spacing:-.045em;line-height:.95}
-.hd{font-family:var(--font-display),sans-serif;font-weight:850;text-transform:uppercase;letter-spacing:-.03em;line-height:.98}
-/* Micro type: mono, uppercase, typewriter tracking */
-.mono{font-family:var(--font-plex),ui-monospace,monospace;text-transform:uppercase;letter-spacing:.08em;font-size:11px;line-height:1.35}
-.mono button,button.mono{text-transform:uppercase}
-.num{font-family:var(--font-display),sans-serif;font-weight:800;letter-spacing:-.025em;font-variant-numeric:tabular-nums lining-nums}
+/* Structural system from Ultravel_Brand_Guideline_V1: type, cards, photos, buttons, fields.
+   Graphic language (05): moderate rounded corners, light borders, orange only as dots, lines and markers. */
+:root{--r:16px;--r-sm:10px;--card-r:14px;--card-gap:14px;--ease:cubic-bezier(.22,1,.36,1)}
+@media (max-width:767px){:root{--card-r:12px;--card-gap:10px}}
 
-/* Hairline grids: gap-px on an ink parent = perfect 1px rules */
-.grid-ink{display:grid;gap:1px;background:rgb(var(--ink));border:1px solid rgb(var(--ink))}
-.grid-ink>*{background:rgb(var(--paper))}
+/* Headline helpers. Sentence case only; no all-caps (guideline 04). */
+.mega,.hd{font-family:var(--font-sans),sans-serif;font-weight:700;letter-spacing:-.02em;line-height:1.15}
+/* Caption: Inter, small, for metadata (dates, codes, labels). Short labels only. */
+.caption{font-family:var(--font-sans),sans-serif;font-size:12px;font-weight:500;letter-spacing:.01em;line-height:1.4}
+.num{font-family:var(--font-sans),sans-serif;font-weight:700;letter-spacing:-.01em;font-variant-numeric:tabular-nums lining-nums}
 
-/* Photos: full colour, extra contrast, halftone dot screen on top */
-.ht{position:relative;overflow:hidden;background:rgb(var(--ink))}
-.ht img{filter:contrast(1.14) saturate(1.1)}
-.ht::after{content:"";position:absolute;inset:0;pointer-events:none;z-index:1;opacity:.5;mix-blend-mode:multiply;
-  background-image:radial-gradient(rgb(1 44 121/.6) .9px,transparent 1.3px);background-size:4px 4px}
+/* Cards (guideline 07): white background, light border, moderate radius. */
+.grid-ink{display:grid;gap:var(--card-gap)}
+.grid-ink+.grid-ink{margin-top:var(--card-gap)}
+.grid-ink>*{background:#fff;border-radius:var(--card-r);overflow:hidden;box-shadow:inset 0 0 0 1px rgb(var(--navy)/.1);transition:box-shadow .4s var(--ease),translate .4s var(--ease)}
+/* Hover lift uses `translate`, so it composes with any transform a card already has */
+@media (hover:hover){.grid-ink>a:hover,.grid-ink>.ticket:hover{translate:0 -3px;box-shadow:inset 0 0 0 1px rgb(var(--navy)/.18)}}
 
-/* Paper grain over everything (fixed layer, never on scrolling content) */
-body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:60;opacity:.07;mix-blend-mode:multiply;
-  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+/* Photos (guideline 05): natural light and true colour, so no filters and no tint over the image. */
+.ht{position:relative;overflow:hidden;background:rgb(var(--cloud))}
 
-/* Unit header strip that opens every section */
-.unit{position:relative;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:.5rem 1.5rem;padding:.6rem 0;border-top:2px solid rgb(var(--ink))}
-.unit .rule{position:absolute;left:0;right:0;top:-2px;height:2px;background:rgb(var(--red));transform-origin:0 50%;transform:scaleX(0)}
+/* Unit strip that opens a section: a light rule with a short orange line. */
+.unit{position:relative;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:.5rem 1.5rem;padding:1rem 0 .6rem;border-top:1px solid rgb(var(--navy)/.12)}
+.unit .rule{position:absolute;left:0;right:0;top:-1px;height:2px;background:rgb(var(--orange));clip-path:inset(0 100% 0 0)}
 
-/* Buttons: square, inverted on hover with a stepped (mechanical) change */
-.bx{display:inline-flex;align-items:center;justify-content:center;gap:.6rem;border:1.5px solid rgb(var(--ink));transition:background-color .5s cubic-bezier(.22,1,.36,1),color .5s cubic-bezier(.22,1,.36,1)}
-.bx:hover{background:rgb(var(--ink));color:rgb(var(--paper))}
-.bx:active{transform:translateY(1px)}
+/* Buttons (guideline 07):
+   primary   = navy background, white text
+   secondary = white background, navy text and border
+   accent    = orange, only for the one CTA that needs to stand out; navy text (no small white text on orange). */
+.btn,.bx{display:inline-flex;align-items:center;justify-content:center;gap:.6rem;min-height:44px;padding:0 1.25rem;border-radius:10px;font-weight:600;font-size:15px;white-space:nowrap;transition:background-color .3s var(--ease),color .3s var(--ease),border-color .3s var(--ease),transform .3s var(--ease)}
+.btn:active,.bx:active{transform:translateY(1px)}
+.btn-primary{background:rgb(var(--navy));color:#fff}
+.btn-primary:hover{background:rgb(var(--blue))}
+.btn-secondary,.bx{background:#fff;color:rgb(var(--navy));box-shadow:inset 0 0 0 1.5px rgb(var(--navy))}
+.btn-secondary:hover,.bx:hover{background:rgb(var(--navy));color:#fff}
+.btn-accent{background:rgb(var(--orange));color:rgb(var(--navy))}
+.btn-accent:hover{background:rgb(var(--navy));color:#fff}
 
-.arr{display:inline-block;transition:transform .5s cubic-bezier(.22,1,.36,1)}
+.arr{display:inline-block;transition:transform .5s var(--ease)}
 a:hover .arr,button:hover .arr,.group:hover .arr{transform:translateX(5px)}
 
-.field{width:100%;background:rgb(var(--paper));border:1.5px solid rgb(var(--ink));padding:.7rem .85rem;font-size:.95rem;color:rgb(var(--ink))}
-.field:focus{outline:none;box-shadow:inset 0 0 0 1.5px rgb(var(--red));border-color:rgb(var(--red))}
-.field[aria-invalid="true"]{border-color:rgb(var(--red))}
+.field{width:100%;background:#fff;border:1px solid rgb(var(--navy)/.2);border-radius:var(--r-sm);padding:.7rem .85rem;font-size:16px;color:rgb(var(--ink))}
+.field:focus{outline:none;border-color:rgb(var(--blue));box-shadow:0 0 0 3px rgb(var(--blue)/.15)}
+.field[aria-invalid="true"]{border-color:rgb(var(--orange))}
 
 .barcode{height:34px;background-repeat:no-repeat}
 .snap::-webkit-scrollbar{display:none}.snap{scrollbar-width:none}
@@ -45,12 +51,34 @@ a:hover .arr,button:hover .arr,.group:hover .arr{transform:translateX(5px)}
 .hero-line>span{display:inline-block}
 
 /* Tabs */
-#tabs button[aria-selected="true"]{background:rgb(var(--ink));color:rgb(var(--paper))}
+#tabs{border-radius:10px;padding:4px;gap:4px;background:#fff;box-shadow:inset 0 0 0 1px rgb(var(--navy)/.1)}
+#tabs button{border:0!important;border-radius:8px}
+#tabs button[aria-selected="true"]{background:rgb(var(--navy));color:#fff}
 
 /* Map pins */
-.pin{transform-box:fill-box;transform-origin:center;transition:transform .5s cubic-bezier(.22,1,.36,1)}
+.pin{transform-box:fill-box;transform-origin:center;transition:transform .5s var(--ease)}
 .pin.on{transform:scale(1.35)}
-.pin.on rect{fill:rgb(var(--red))!important}
+.pin rect{rx:999px}
+.pin.on rect{fill:rgb(var(--orange))!important}
 
-/* Heading accent: the second phrase of a title in Lora italic ("Nha Trang chậm lại. <em class="it">Nhớ lâu hơn.</em>") */
-.it{font-family:var(--font-serif),Georgia,serif;font-style:italic;font-weight:500;letter-spacing:-.01em}
+/* Heading accent: the second phrase of a title ("Nha Trang chậm lại. <em class="it">Nhớ lâu hơn.</em>").
+   Same typeface and style; Travel Blue marks it on light backgrounds, white keeps it on navy. */
+.it{font-style:normal;color:rgb(var(--blue))}
+:where(.bg-navy,.hh,.news,.tsum,.lead,.post-takeaways,.post-conclusion,.b2b-hero,.b2b-lead,.b2b-promise,.nf-card,.svc-show,footer) .it{color:inherit}
+
+html body .border-navy{--tw-border-opacity:.14}
+html body .border-t-2{border-width:0;border-style:solid;border-top-width:1px}
+html body .hover\:bg-navy:hover{background-color:#fff;color:rgb(var(--navy))}
+a,button{transition:background-color .3s var(--ease),color .3s var(--ease),border-color .3s var(--ease),opacity .3s var(--ease)}
+
+#feed .ht{border-radius:var(--card-r)}
+.caption .bg-navy{border-radius:6px}
+.hero-img>span,.ht+span,figure span.caption{border-radius:8px}
+
+.coupon{border-radius:var(--r);overflow:hidden;background:#fff;box-shadow:inset 0 0 0 1px rgb(var(--navy)/.1)}
+.coupon:hover{box-shadow:inset 0 0 0 1px rgb(var(--navy)/.2)}
+.coupon .ht{border-radius:var(--card-r)}
+
+@media (prefers-reduced-motion: reduce){
+  .unit .rule{animation:none!important}
+}

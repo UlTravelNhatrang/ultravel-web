@@ -19,16 +19,16 @@ export function GuestReviews({ review: r }: { review: Review }) {
     <ReviewSection id="danh-gia" title="Đánh giá từ khách" aside={<button type="button" data-open-review className="act-btn act-btn-hot">Viết đánh giá</button>}>
       <div className="soft-card p-5 md:p-6 grid md:grid-cols-[12rem_1fr] gap-6 items-center">
         <div>
-          <p className="num text-6xl leading-none">{r.rating.toFixed(1).replace('.', ',')}</p>
+          <p className="num text-5xl leading-none">{r.rating.toFixed(1).replace('.', ',')}</p>
           <div className="mt-2"><Stars value={r.rating} size={18} /></div>
-          <p className="mono text-ink2 mt-2">{r.reviewCount} đánh giá</p>
+          <p className="caption text-ink/70 mt-2">{r.reviewCount} đánh giá</p>
         </div>
         <ul className="grid gap-2" aria-label="Phân bố số sao">
           {r.histogram.map((n, i) => (
-            <li key={i} className="grid grid-cols-[2.5rem_1fr_2.5rem] items-center gap-3 mono">
+            <li key={i} className="grid grid-cols-[2.5rem_1fr_2.5rem] items-center gap-3 caption">
               <span>{5 - i} ★</span>
               <span className="meter meter-thin" style={{ '--v': n / max } as CSSProperties}><i /></span>
-              <span className="text-right text-ink2 tabular-nums">{n}</span>
+              <span className="text-right text-ink/70 tabular-nums">{n}</span>
             </li>
           ))}
         </ul>
@@ -47,17 +47,17 @@ export function GuestReviews({ review: r }: { review: Review }) {
               <span className="avatar" aria-hidden="true">{g.name.split(' ').pop()?.[0]}</span>
               <span className="font-semibold">{g.name}</span>
               <span className="tag-chip">{g.type}</span>
-              <span className="ml-auto mono text-ink2"><time dateTime={g.date.split('.').reverse().join('-')}>{g.date}</time></span>
+              <span className="ml-auto caption text-ink/70"><time dateTime={g.date.split('.').reverse().join('-')}>{g.date}</time></span>
             </div>
             <div className="mt-3 flex items-center gap-2"><Stars value={g.stars} /><span className="sr-only">{g.stars} trên 5 sao</span></div>
             <p className="mt-2 leading-relaxed text-ink/85">{g.text}</p>
           </li>
         ))}
-        {!list.length && <li className="soft-card p-8 text-center text-ink2">Chưa có đánh giá từ nhóm khách này.</li>}
+        {!list.length && <li className="soft-card p-8 text-center text-ink/70">Chưa có đánh giá từ nhóm khách này.</li>}
       </ul>
 
       {count < list.length && (
-        <button type="button" onClick={() => setCount(c => c + PAGE)} className="bx w-full mt-5 py-3 mono text-[12px] font-semibold">
+        <button type="button" onClick={() => setCount(c => c + PAGE)} className="bx w-full mt-5 py-3 caption text-[12px] font-semibold">
           Xem thêm đánh giá ({list.length - count})
         </button>
       )}

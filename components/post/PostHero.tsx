@@ -17,10 +17,10 @@ export function PostHero({ post: p }: { post: Post }) {
         <div className="lg:col-span-7">
           <p className="hero-fade flex flex-wrap items-center gap-2">
             <a href={cat.href} className="post-kicker">{cat.label}</a>
-            <span className="mono text-ink2 inline-flex items-center gap-1.5"><Clock size={14} aria-hidden="true" />{p.readMinutes} phút đọc</span>
+            <span className="caption text-ink/70 inline-flex items-center gap-1.5"><Clock size={14} aria-hidden="true" />{p.readMinutes} phút đọc</span>
           </p>
-          <h1 className="mega text-[clamp(2.3rem,4.6vw,4.4rem)] mt-5 [text-wrap:balance]">
-            <span className="hero-line"><span>{p.title}<span className="text-red">.</span></span></span>
+          <h1 className="mega text-h1 mt-5 [text-wrap:balance]">
+            <span className="hero-line"><span>{p.title}<span className="text-orange">.</span></span></span>
           </h1>
           <p className="hero-fade post-sapo mt-6">{p.sapo}</p>
 
@@ -28,13 +28,13 @@ export function PostHero({ post: p }: { post: Post }) {
             <a href="#tac-gia" className="flex items-center gap-3 group">
               <span className="post-avatar" aria-hidden="true">{p.author.initials}</span>
               <span className="leading-tight">
-                <span className="font-semibold block group-hover:text-red-t">{p.author.name}</span>
-                <span className="text-sm text-ink2">{p.author.role}</span>
+                <span className="font-semibold block group-hover:text-navy">{p.author.name}</span>
+                <span className="text-sm text-ink/70">{p.author.role}</span>
               </span>
             </a>
-            <span className="hidden sm:block w-px h-9 bg-ink/15" aria-hidden="true" />
-            <p className="mono text-ink2 leading-relaxed">
-              Cập nhật <time dateTime={isoDate(p.updatedAt)} className="text-ink font-semibold">{p.updatedAt}</time><br />
+            <span className="hidden sm:block w-px h-9 bg-navy/15" aria-hidden="true" />
+            <p className="caption text-ink/70 leading-relaxed">
+              Cập nhật <time dateTime={isoDate(p.updatedAt)} className="text-navy font-semibold">{p.updatedAt}</time><br />
               Đăng <time dateTime={isoDate(p.publishedAt)}>{p.publishedAt}</time>
             </p>
             <div className="sm:ml-auto"><ShareButton title={p.title} /></div>
@@ -45,7 +45,7 @@ export function PostHero({ post: p }: { post: Post }) {
           <div className="hero-img post-cover">
             <Photo src={p.cover.src} alt={p.cover.alt} width={1200} height={1400} priority className="absolute inset-0" />
           </div>
-          <figcaption className="post-cover-cap mono">{p.cover.caption}</figcaption>
+          <figcaption className="post-cover-cap caption">{p.cover.caption}</figcaption>
         </figure>
       </div>
     </section>

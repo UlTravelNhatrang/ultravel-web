@@ -49,21 +49,21 @@ export function ReviewDialog({ placeName }: { placeName: string }) {
       <div className="p-6 md:p-8">
         <div className="flex items-start justify-between gap-4">
           <div>
-            <p className="mono text-ink2">{placeName}</p>
-            <h2 id="rv-dialog-title" className="hd text-3xl mt-1">Viết đánh giá<span className="text-red">.</span></h2>
+            <p className="caption text-ink/70">{placeName}</p>
+            <h2 id="rv-dialog-title" className="hd text-h2 mt-1">Viết đánh giá<span className="text-orange">.</span></h2>
           </div>
-          <button type="button" onClick={() => ref.current?.close()} className="lb-btn !bg-ink/5 !text-ink" aria-label="Đóng"><X size={18} /></button>
+          <button type="button" onClick={() => ref.current?.close()} className="lb-btn !bg-navy/5 !text-ink" aria-label="Đóng"><X size={18} /></button>
         </div>
 
         {sent ? (
           <div className="lead-ok !text-ink mt-6" role="status">
             Đã nhận đánh giá của bạn. Ultravel sẽ kiểm tra và đăng trong 24 giờ.
-            <button type="button" onClick={() => ref.current?.close()} className="block mt-4 bx px-5 py-2.5 mono text-[12px] font-semibold">Đóng</button>
+            <button type="button" onClick={() => ref.current?.close()} className="block mt-4 bx px-5 py-2.5 caption text-[12px] font-semibold">Đóng</button>
           </div>
         ) : (
           <form noValidate onSubmit={onSubmit} className="grid gap-5 mt-6">
             <fieldset>
-              <legend className="mono text-ink2 mb-2">Bạn chấm mấy sao?</legend>
+              <legend className="caption text-ink/70 mb-2">Bạn chấm mấy sao?</legend>
               <div className="flex gap-1" onMouseLeave={() => setHover(0)}>
                 {[1, 2, 3, 4, 5].map(n => (
                   <button key={n} type="button" className="star-pick" aria-label={`${n} sao`} aria-pressed={stars === n} onMouseEnter={() => setHover(n)} onClick={() => { setStars(n); setErrors(x => ({ ...x, stars: false })); }}>
@@ -75,21 +75,21 @@ export function ReviewDialog({ placeName }: { placeName: string }) {
             </fieldset>
             <div className="grid sm:grid-cols-2 gap-4">
               <label className="grid gap-1.5">
-                <span className="mono text-ink2">Tên hiển thị</span>
+                <span className="caption text-ink/70">Tên hiển thị</span>
                 <input id="rv-name" name="name" className="field" autoComplete="name" aria-invalid={!!errors.name} />
                 {errors.name && <span className="form-err">Nhập tên để hiển thị cùng đánh giá.</span>}
               </label>
               <label className="grid gap-1.5">
-                <span className="mono text-ink2">Bạn đi cùng</span>
+                <span className="caption text-ink/70">Bạn đi cùng</span>
                 <select id="rv-type" name="type" className="field">{TYPES.map(t => <option key={t}>{t}</option>)}</select>
               </label>
             </div>
             <label className="grid gap-1.5">
-              <span className="mono text-ink2">Trải nghiệm của bạn</span>
+              <span className="caption text-ink/70">Trải nghiệm của bạn</span>
               <textarea id="rv-text" name="text" rows={4} className="field resize-y" placeholder="Đồ uống, view, giá, phục vụ… càng cụ thể càng giúp người sau." aria-invalid={!!errors.text} />
               {errors.text && <span className="form-err">Viết ít nhất {MIN_TEXT} ký tự.</span>}
             </label>
-            <button className="lead-cta"><span>Gửi đánh giá</span><span className="cta-dot" aria-hidden="true">→</span></button>
+            <button className="lead-cta"><span>Gửi đánh giá</span><span className="arr" aria-hidden="true">→</span></button>
           </form>
         )}
       </div>

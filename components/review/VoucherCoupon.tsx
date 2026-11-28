@@ -28,18 +28,18 @@ export function VoucherCoupon({ voucher, compact = false }: { voucher: NonNullab
         <span className="vticket">
           <span className="vticket-top">
             <span className="flex items-center justify-between gap-3">
-              <span className="mono text-[10px] tracking-[.12em] opacity-75">VOUCHER ULTRAVEL</span>
-              <span className="mono text-[10px] opacity-75">HSD {voucher.expires}</span>
+              <span className="caption text-[12px] tracking-[.12em] opacity-75">VOUCHER ULTRAVEL</span>
+              <span className="caption text-[12px] opacity-75">HSD {voucher.expires}</span>
             </span>
-            <span className="font-display font-extrabold text-[1.6rem] leading-[1.05] tracking-[-0.03em] block mt-2">{voucher.title}</span>
+            <span className=" font-extrabold text-[1.6rem] leading-[1.05] tracking-[-0.03em] block mt-2">{voucher.title}</span>
             <span className="text-[13px] leading-snug block mt-1.5 opacity-80">{voucher.terms}</span>
           </span>
           <span className="vticket-stub">
             <span>
-              <span className="mono text-[10px] opacity-70 block">Mã ưu đãi</span>
+              <span className="caption text-[12px] opacity-70 block">Mã ưu đãi</span>
               <span className="num text-[2rem] leading-none tracking-[.06em] block mt-1">{voucher.code}</span>
             </span>
-            <span className="vticket-copy mono" aria-live="polite">
+            <span className="vticket-copy caption" aria-live="polite">
               {copied ? <><Check size={14} weight="bold" aria-hidden="true" />Đã chép</> : copied === false ? 'Không chép được' : <><Copy size={14} aria-hidden="true" />Chạm để chép</>}
             </span>
           </span>
@@ -49,17 +49,17 @@ export function VoucherCoupon({ voucher, compact = false }: { voucher: NonNullab
   }
 
   return (
-    <div className="coupon grid sm:grid-cols-[1fr_auto] border border-ink my-12 float-in">
+    <div className="coupon grid sm:grid-cols-[1fr_auto] border border-navy my-12 float-in">
       <div className="p-5 md:px-8 md:py-6">
-        <p className="mono text-ink2">Ưu đãi chỉ có trên Ultravel</p>
-        <p className="hd text-2xl md:text-3xl mt-1">{voucher.title}</p>
-        <p className="text-sm text-ink2 mt-2">{voucher.terms} HSD {voucher.expires}.</p>
+        <p className="caption text-ink/70">Ưu đãi chỉ có trên Ultravel</p>
+        <p className="hd text-h3 mt-1">{voucher.title}</p>
+        <p className="text-sm text-ink/70 mt-2">{voucher.terms} HSD {voucher.expires}.</p>
       </div>
-      <div className="border-t sm:border-t-0 sm:border-l border-dashed border-ink px-6 md:px-8 py-5 flex flex-col justify-center min-w-[15rem]">
-        <p className="mono text-ink2">Mã ưu đãi</p>
-        <p className="num text-4xl text-red mt-1">{voucher.code}</p>
+      <div className="border-t sm:border-t-0 sm:border-l border-dashed border-navy px-6 md:px-8 py-5 flex flex-col justify-center min-w-[15rem]">
+        <p className="caption text-ink/70">Mã ưu đãi</p>
+        <p className="num text-4xl text-navy mt-1">{voucher.code}</p>
         <div className="barcode mt-2" style={barcodeStyle(voucher.code)} aria-hidden="true" />
-        <button type="button" onClick={copy} className={`mono font-semibold mt-3 text-left ${copied ? 'text-[#0f7a5a]' : 'hover:text-red'}`}>
+        <button type="button" onClick={copy} className={`caption font-semibold mt-3 text-left ${copied ? 'text-blue' : 'text-blue hover:text-navy'}`}>
           {copied ? 'Đã chép mã' : copied === false ? `Không chép được, hãy ghi lại mã ${voucher.code}` : 'Sao chép mã'} <span className="arr">→</span>
         </button>
       </div>

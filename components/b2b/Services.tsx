@@ -34,22 +34,22 @@ export function Services() {
                     onClick={() => setActive(i)}
                     onPointerEnter={e => { if (e.pointerType === 'mouse') setActive(i); }}
                   >
-                    <span className="svc-code mono">S-{code(i)}</span>
+                    <span className="svc-code caption">S-{code(i)}</span>
                     <span className="svc-name">{x.title}</span>
-                    <span className="svc-fit mono">{x.fit}</span>
+                    <span className="svc-fit caption">{x.fit}</span>
                     <span className="svc-arr" aria-hidden="true">→</span>
                   </button>
                   {/* Phones: the description opens under its row. */}
                   <div id={`svc-more-${x.key}`} className="svc-more" hidden={!on}>
                     <p>{x.text}</p>
-                    <p className="mono text-ink2 mt-2">Hợp với: {x.fit}</p>
+                    <p className="caption text-ink/70 mt-2">Hợp với: {x.fit}</p>
                   </div>
                 </li>
               );
             })}
           </ol>
           <a href="#lien-he" className="svc-combo group">
-            <span className="svc-code mono">S-+</span>
+            <span className="svc-code caption">S-+</span>
             <span>Không cần đủ 7 mảng? <strong>Ghép combo theo ngân sách</strong></span>
             <span className="svc-arr" aria-hidden="true">→</span>
           </a>
@@ -62,10 +62,10 @@ export function Services() {
           ))}
           <span className="svc-big" aria-hidden="true">{code(active)}<small>/{total}</small></span>
           <div className="svc-body" key={s.key}>
-            <p className="mono text-paper/75"><span className="text-[#FF9A3C] font-semibold">S-{code(active)}</span> · Hợp với: {s.fit}</p>
-            <h3 className="font-display font-extrabold text-[clamp(1.7rem,2.6vw,2.3rem)] leading-[1.05] tracking-[-0.03em] mt-2">{s.title}</h3>
-            <p className="text-paper/85 text-[15.5px] leading-relaxed mt-2 max-w-[42ch]">{s.text}</p>
-            <a href="#lien-he" className="svc-cta mono">Tư vấn mảng này <span aria-hidden="true">→</span></a>
+            <p className="caption text-cloud/75"><span className="text-[#FF8A00] font-semibold">S-{code(active)}</span> · Hợp với: {s.fit}</p>
+            <h3 className="text-h3 mt-2">{s.title}</h3>
+            <p className="text-cloud/90 text-base leading-relaxed mt-2 max-w-[42ch]">{s.text}</p>
+            <a href="#lien-he" className="svc-cta caption">Tư vấn mảng này <span aria-hidden="true">→</span></a>
           </div>
         </div>
       </div>

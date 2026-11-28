@@ -55,8 +55,8 @@ export function PostToc({ items, articleId }: { items: TocItem[]; articleId: str
   return (
     <nav className="post-toc soft-card" aria-label="Mục lục bài viết">
       <div className="flex items-center justify-between gap-3">
-        <p className="font-display font-extrabold text-lg tracking-[-0.02em]">Trong bài này</p>
-        <span ref={pctRef} className="mono text-ink2 tabular-nums">Đã đọc 0%</span>
+        <p className=" font-extrabold text-lg tracking-[-0.02em]">Trong bài này</p>
+        <span ref={pctRef} className="caption text-ink/70 tabular-nums">Đã đọc 0%</span>
       </div>
       <span className="post-toc-bar" aria-hidden="true"><i ref={barRef} style={{ transform: 'scaleX(0)' }} /></span>
       <ol className="mt-3">
@@ -67,7 +67,7 @@ export function PostToc({ items, articleId }: { items: TocItem[]; articleId: str
               aria-current={active === it.id ? 'true' : undefined}
               onClick={e => { e.preventDefault(); go(it.id); }}
             >
-              <span className="mono">{pad(i + 1)}</span>
+              <span className="caption">{pad(i + 1)}</span>
               {it.label}
             </a>
           </li>

@@ -1,7 +1,6 @@
 import type { CSSProperties } from 'react';
 import { Check, WarningCircle } from '@phosphor-icons/react/dist/ssr';
 import type { Review } from '@/types/review';
-import { BrandWord } from '@/components/ui/BrandWord';
 import { ReviewSection } from './ReviewSection';
 
 const fmt = (n: number) => n.toFixed(1).replace('.', ',');
@@ -9,7 +8,7 @@ const fmt = (n: number) => n.toFixed(1).replace('.', ',');
 /** Sub-scores as bars (they fill on scroll via MotionProvider), then pros and cons. */
 export function ScoreBreakdown({ review: r }: { review: Review }) {
   return (
-    <ReviewSection id="cham-diem" title={<><BrandWord /> chấm điểm</>} aside={<span className="mono text-ink2">{r.score.method} · {r.score.checkedAt}</span>}>
+    <ReviewSection id="cham-diem" title="Ultravel chấm điểm" aside={<span className="caption text-ink/70">{r.score.method} · {r.score.checkedAt}</span>}>
       <div className="soft-card p-5 md:p-6 grid gap-4">
         {r.score.parts.map(p => (
           <div key={p.label} className="grid grid-cols-[minmax(0,10rem)_1fr_2.5rem] sm:grid-cols-[12rem_1fr_3rem] items-center gap-4">

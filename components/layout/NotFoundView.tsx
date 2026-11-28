@@ -63,14 +63,14 @@ export function NotFoundView() {
               <span className="hero-line"><span>4</span></span>
             </p>
             <LostMap />
-            <p className="nf-coord mono">12°15&apos;N 109°11&apos;E · ngoài khơi, chưa có trên bản đồ</p>
+            <p className="nf-coord caption">12°15&apos;N 109°11&apos;E · ngoài khơi, chưa có trên bản đồ</p>
           </div>
         </div>
 
         <div className="lg:col-span-6 lg:order-1">
-          <p className="hero-fade mono text-red-t">Lỗi 404 · Không tìm thấy trang</p>
-          <h1 id="nf-title" className="mega text-[clamp(2.8rem,6vw,5.6rem)] mt-4">
-            <span className="hero-line"><span>Lạc đường rồi<span className="text-red">.</span></span></span>
+          <p className="hero-fade caption text-navy">Lỗi 404 · Không tìm thấy trang</p>
+          <h1 id="nf-title" className="mega text-h1 mt-4">
+            <span className="hero-line"><span>Lạc đường rồi<span className="text-orange">.</span></span></span>
           </h1>
           <p className="hero-fade text-[1.1rem] leading-relaxed text-ink/80 mt-5 max-w-[48ch]">Trang này đã đổi địa chỉ, chưa được viết, hoặc đi ra đảo chưa về. Thổ địa chỉ đường quay lại nhé.</p>
           <div className="hero-fade flex flex-wrap gap-3 mt-8">
@@ -79,13 +79,13 @@ export function NotFoundView() {
           </div>
 
           <nav className="hero-fade mt-10" aria-label="Gợi ý trang">
-            <p className="mono text-ink2">Hoặc đi tiếp tới</p>
+            <p className="caption text-ink/70">Hoặc đi tiếp tới</p>
             <ul className="nf-ways mt-3">
               {WAYS.map(({ href, label, note, Icon }) => (
                 <li key={href}>
                   <Link href={href} className="nf-way group">
                     <span className="nf-way-ico" aria-hidden="true"><Icon size={18} weight="duotone" /></span>
-                    <span className="min-w-0"><span className="font-semibold block truncate">{label}</span><span className="text-sm text-ink2">{note}</span></span>
+                    <span className="min-w-0"><span className="font-semibold block truncate">{label}</span><span className="text-sm text-ink/70">{note}</span></span>
                     <ArrowRight size={16} className="nf-way-arr" aria-hidden="true" />
                   </Link>
                 </li>

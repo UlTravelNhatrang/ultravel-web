@@ -49,7 +49,7 @@ const TEMPLATES = [
 /** Demo switcher links; the page you are on is underlined. */
 function TemplateLinks({ current }: { current?: string }) {
   return TEMPLATES.map(t => (
-    <Link key={t.href} href={t.href} className={`inline-block py-1.5 px-1 ${current === t.href ? 'font-semibold underline underline-offset-2' : 'hover:text-red'}`}>{t.label}</Link>
+    <Link key={t.href} href={t.href} className={`inline-block py-1.5 px-1 ${current === t.href ? 'font-semibold underline underline-offset-2' : 'hover:text-blue'}`}>{t.label}</Link>
   ));
 }
 
@@ -113,11 +113,11 @@ export function Header() {
   }, [router]);
 
   return (
-    <header ref={headerRef} className="sticky top-0 z-40 bg-paper/75 backdrop-blur-xl border-b border-ink" style={{ top: 'env(safe-area-inset-top,0px)' }}>
+    <header ref={headerRef} className="sticky top-0 z-40 bg-cloud/75 backdrop-blur-xl border-b border-navy" style={{ top: 'env(safe-area-inset-top,0px)' }}>
       {/* Telemetry strip */}
-      <div className="border-b border-ink">
-        <div className="max-w-[1440px] mx-auto px-4 md:px-6 h-7 flex items-center gap-6 mono text-[10px] md:text-[11px] overflow-hidden whitespace-nowrap">
-          <span className="text-red font-semibold inline-flex items-center gap-1.5"><i className="live" />Trực tiếp</span>
+      <div className="border-b border-navy">
+        <div className="max-w-[1440px] mx-auto px-4 md:px-6 h-7 flex items-center gap-6 caption text-[12px] md:text-[12px] overflow-hidden whitespace-nowrap">
+          <span className="text-navy font-semibold inline-flex items-center gap-1.5"><i className="live text-orange" />Trực tiếp</span>
           <span>Nha Trang 12°15&apos;N 109°11&apos;E</span>
           <span className="hidden sm:inline-flex items-center gap-2">29°C / Nắng nhẹ</span>
           <span className="hidden md:inline">Cập nhật <span ref={todayRef} suppressHydrationWarning>21.11.2026</span></span>
@@ -125,13 +125,13 @@ export function Header() {
         </div>
       </div>
 
-      <div className="max-w-[1440px] mx-auto px-4 md:px-6 h-[68px] flex items-center gap-4">
-        <Link href="/" className="logo flex items-center gap-3 shrink-0" aria-label="Ultravel.vn, trang chủ">
-          <Image src="/assets/ultravel-wordmark.png" alt="Ultravel.vn" width={981} height={160} sizes="200px" preload className="logo-wm h-[28px] md:h-[32px] w-auto" />
-          <span className="hidden 2xl:block mono text-[10px] leading-[1.35] text-ink2 pl-3 border-l border-ink">Cẩm nang<br />từ thổ địa</span>
+      <div className="max-w-[1440px] mx-auto px-4 md:px-6 h-[72px] md:h-[80px] flex items-center gap-4">
+        {/* Clear space (guideline 02): at least the height of the U on every side of the wordmark. */}
+        <Link href="/" className="logo flex items-center shrink-0 ml-2 md:ml-1 mr-6" aria-label="Ultravel.vn, trang chủ">
+          <Image src="/assets/ultravel-wordmark.svg" alt="Ultravel.vn" width={1743} height={272} preload className="logo-wm h-6 md:h-7 w-auto" />
         </Link>
 
-        <nav ref={navRef} id="dnav" aria-label="Menu chính" className="hidden xl:flex relative items-center mx-auto p-1.5 rounded-full">
+        <nav ref={navRef} id="dnav" aria-label="Menu chính" className="hidden xl:flex relative items-center mx-auto p-1.5 rounded-[12px]">
           <span ref={blobRef} className="nav-blob" aria-hidden="true" />
           {NAV.map(({ href, label, Icon, legacy: isLegacy }) =>
             isLegacy ? (
@@ -147,24 +147,24 @@ export function Header() {
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5" /><path d="M15.5 15.5 21 21" /></svg>
             <span className="hidden 2xl:inline">Tìm kiếm</span><kbd className="hidden 2xl:grid">/</kbd>
           </button>
-          <Link href={ROUTES.b2bContact} className="cta-pill hidden sm:inline-flex">
-            <span>Hợp tác<span className="hidden 2xl:inline"> truyền thông</span></span><span className="cta-dot" aria-hidden="true">→</span>
+          <Link href={ROUTES.b2bContact} className="btn btn-primary hidden sm:inline-flex !min-h-[42px] !text-[14px]">
+            <span>Hợp tác<span className="hidden 2xl:inline"> truyền thông</span></span><span className="arr" aria-hidden="true">→</span>
           </Link>
-          <button type="button" onClick={() => setMenuOpen(o => !o)} className="xl:hidden burger-pill mono" aria-label="Mở menu" aria-expanded={menuOpen}>
+          <button type="button" onClick={() => setMenuOpen(o => !o)} className="xl:hidden burger-pill caption" aria-label="Mở menu" aria-expanded={menuOpen}>
             {menuOpen ? 'Đóng' : 'Menu'}
           </button>
         </div>
       </div>
 
-      <nav id="mnav" className={`${menuOpen ? '' : 'hidden'} xl:hidden border-t border-ink mono text-[12px] grid`}>
-        {MOBILE_NAV.map(l => <Link key={l.href} className="px-4 py-3 border-b border-ink" href={l.href}>{l.label}</Link>)}
-        <Link className="px-4 py-3 border-b border-ink" href={ROUTES.b2b}>Marketing du lịch</Link>
-        <Link href={ROUTES.b2bContact} className="px-4 py-3 bg-red text-ink font-semibold">Hợp tác truyền thông</Link>
+      <nav id="mnav" className={`${menuOpen ? '' : 'hidden'} xl:hidden border-t border-navy text-[15px] font-medium grid`}>
+        {MOBILE_NAV.map(l => <Link key={l.href} className="px-4 py-3 border-b border-navy" href={l.href}>{l.label}</Link>)}
+        <Link className="px-4 py-3 border-b border-navy" href={ROUTES.b2b}>Marketing du lịch</Link>
+        <Link href={ROUTES.b2bContact} className="px-4 py-3 bg-navy text-white font-semibold">Hợp tác truyền thông</Link>
       </nav>
 
       {/* Template switcher (only for reviewing the demo) */}
-      <div className="border-t border-ink bg-white/30 mono text-[10px] px-4 py-0.5 flex flex-wrap items-center gap-x-3 justify-center">
-        <span className="text-ink2">Xem mẫu:</span>
+      <div className="border-t border-navy bg-white/30 caption text-[12px] px-4 py-0.5 flex flex-wrap items-center gap-x-3 justify-center">
+        <span className="text-ink/70">Xem mẫu:</span>
         {/* The pathname is request data on unknown routes, so it sits behind Suspense. */}
         <Suspense fallback={<TemplateLinks />}><CurrentTemplateLinks /></Suspense>
       </div>

@@ -10,7 +10,7 @@ export function Testimonials() {
         <div className="tsum">
           <p className="tsum-n">4,8<small>/5</small></p>
           <p className="mt-3 text-white/80 leading-relaxed">Trung bình từ 2.300+ đánh giá trên Google, Facebook và Zalo.</p>
-          <p className="mt-4 text-[#FFB347] tracking-[.2em]" aria-hidden="true">★★★★★</p>
+          <p className="mt-4 text-[#FF8A00] tracking-[.2em]" aria-hidden="true">★★★★★</p>
         </div>
         {TESTIMONIALS.map(t => (
           <figure key={t.name} className="tquote">

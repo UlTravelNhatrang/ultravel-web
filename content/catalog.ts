@@ -53,10 +53,10 @@ export const TOP_DESTINATIONS: TopDestination[] = [
 
 export const STORIES: Story[] = [
   { title: 'Lịch trình Nha Trang 3 ngày 2 đêm tự túc cho lần đầu', category: 'Lịch trình', date: '12.11.2026', read: 8, excerpt: 'Ba ngày đủ để tắm biển, ra đảo, ăn hải sản và ngắm thành phố từ trên cao mà không phải chạy sô.', photo: PHOTOS.feed[0] },
-  { title: 'Ăn gì ở Nha Trang: 15 món nhất định phải thử', category: 'Ẩm thực', date: '10.11.2026', read: 6, excerpt: 'Từ bún sứa, nem nướng Ninh Hòa đến bánh căn: thổ địa chỉ quán và giá đã kiểm tra.', photo: PHOTOS.feed[1] },
+  { title: 'Ăn gì ở Nha Trang: 15 món nên thử', category: 'Ẩm thực', date: '10.11.2026', read: 6, excerpt: 'Từ bún sứa, nem nướng Ninh Hòa đến bánh căn: thổ địa chỉ quán và giá đã kiểm tra.', photo: PHOTOS.feed[1] },
   { title: 'Di chuyển từ sân bay Cam Ranh vào trung tâm', category: 'Mẹo', date: '09.11.2026', read: 4, excerpt: 'Taxi, xe buýt, shuttle: giá thực tế và nên chọn gì theo giờ bay.', photo: PHOTOS.hub[3] },
   { title: 'Kinh nghiệm đi Đà Lạt 4N3Đ mùa khô', category: 'Lịch trình', date: '08.11.2026', read: 7, excerpt: 'Lịch trình nhẹ nhàng, chỗ ở theo ngân sách và những điểm nên tránh cuối tuần.', photo: PHOTOS.feed[2] },
-  { title: 'Cách mua vé VinWonders rẻ nhất', category: 'Mẹo', date: '05.11.2026', read: 3, excerpt: 'So sánh giá vé tại quầy, đại lý và combo kèm xe đưa đón.', photo: PHOTOS.feed[3] },
+  { title: 'So sánh giá vé VinWonders: quầy, đại lý và combo', category: 'Mẹo', date: '05.11.2026', read: 3, excerpt: 'So sánh giá vé tại quầy, đại lý và combo kèm xe đưa đón.', photo: PHOTOS.feed[3] },
 ];
 
 export const TESTIMONIALS: Testimonial[] = [

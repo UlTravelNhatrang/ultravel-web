@@ -52,7 +52,7 @@ export function ContactCard({ review: r }: { review: Review }) {
     <div className="contact-card soft-card">
       <div className="flex items-center justify-between gap-3">
         <h2 className="hd text-xl">Liên hệ</h2>
-        <OpenStatus hours={r.hours} className="status-pill mono" />
+        <OpenStatus hours={r.hours} className="status-pill caption" />
       </div>
 
       <ul className="ct-list">
@@ -78,7 +78,7 @@ export function ContactCard({ review: r }: { review: Review }) {
               return (
                 <div key={h.label} className={isToday ? 'is-today' : ''}>
                   <dt>{h.label}{isToday && <span className="sr-only"> (hôm nay)</span>}</dt>
-                  <dd className="mono tabular-nums">{h.open}–{h.close}</dd>
+                  <dd className="caption tabular-nums">{h.open}–{h.close}</dd>
                 </div>
               );
             })}
