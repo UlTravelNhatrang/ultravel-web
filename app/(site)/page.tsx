@@ -2,11 +2,12 @@ import { HomeHero } from '@/components/home/HomeHero';
 import { Newsletter } from '@/components/home/Newsletter';
 import { Offers } from '@/components/home/Offers';
 import { Recommended } from '@/components/home/Recommended';
+import { SocialFeed } from '@/components/home/SocialFeed';
 import { Stories } from '@/components/home/Stories';
 import { Testimonials } from '@/components/home/Testimonials';
 import { TopDestinations } from '@/components/home/TopDestinations';
 
-/** Home: hero + tabbed search, offers, destinations, recommendations, stories, testimonials, newsletter. */
+/** Home: hero + tabbed search, offers, destinations, recommendations, stories, testimonials, social posts, newsletter. */
 export default function HomePage() {
   return (
     <main id="main" className="overflow-x-hidden w-full max-w-full">
@@ -16,6 +17,7 @@ export default function HomePage() {
       <Recommended />
       <Stories />
       <Testimonials />
+      <SocialFeed />
       <Newsletter />
     </main>
   );

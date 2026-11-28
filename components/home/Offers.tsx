@@ -23,7 +23,7 @@ export function Offers() {
 
   return (
     <section className="wrap hsec !pt-16" aria-labelledby="offers-t">
-      <HomeHead id="offers-t" eyebrow="Ưu đãi" title={<>Mã giảm giá <em className="it">tháng này</em></>} />
+      <HomeHead id="offers-t" eyebrow="Săn ưu đãi du lịch" />
       <Carousel label="Mã giảm giá" autoplayMs={4500}>
         {OFFERS.map(o => {
           const done = copied === o.code;

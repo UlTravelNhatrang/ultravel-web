@@ -1,7 +1,6 @@
 import Link from 'next/link';
 import { Info, Lightbulb, Star } from '@phosphor-icons/react/dist/ssr';
 import { Photo } from '@/components/ui/Photo';
-import { pad } from '@/lib/format';
 import { getReviewBySlug, reviewPath } from '@/lib/reviews';
 import type { Post, PostBlock } from '@/types/post';
 import { Rich } from '@/components/ui/Rich';
@@ -88,11 +87,10 @@ function Block({ block: b }: { block: PostBlock }) {
 export function PostBody({ post: p }: { post: Post }) {
   return (
     <div className="post-body">
-      {p.sections.map((s, i) => (
+      {p.sections.map(s => (
         // tabIndex -1: the contents list moves keyboard focus here after scrolling.
         <section key={s.id} id={s.id} className="post-sec" aria-labelledby={`${s.id}-t`} tabIndex={-1}>
           <h2 id={`${s.id}-t`} className="post-h2">
-            <span className="caption" aria-hidden="true">{pad(i + 1)}</span>
             {s.title}
           </h2>
           {s.blocks.map((b, k) => <Block key={k} block={b} />)}

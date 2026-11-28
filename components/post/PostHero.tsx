@@ -13,7 +13,7 @@ export function PostHero({ post: p }: { post: Post }) {
     <section className="max-w-[1440px] mx-auto px-4 md:px-6 pt-6 md:pt-8">
       <Breadcrumb items={[{ label: 'Trang chủ', href: '/' }, { label: cat.label, href: cat.href }, { label: p.shortTitle }]} />
 
-      <div className="grid lg:grid-cols-12 gap-8 lg:gap-12 mt-6 md:mt-8 items-end">
+      <div className="grid lg:grid-cols-12 gap-8 lg:gap-12 mt-6 md:mt-8 items-center">
         <div className="lg:col-span-7">
           <p className="hero-fade flex flex-wrap items-center gap-2">
             <a href={cat.href} className="post-kicker">{cat.label}</a>

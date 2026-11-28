@@ -4,8 +4,11 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import { Suspense, useEffect, useRef, useState } from 'react';
-import { BookOpenText, BowlFood, CalendarBlank, MapPin, Megaphone, SuitcaseRolling, type Icon } from '@phosphor-icons/react';
-import { todayLabel } from '@/lib/format';
+import { BookOpenText, CaretDown, ChatCircleDots, Handshake, Megaphone, SuitcaseRolling, type Icon } from '@phosphor-icons/react';
+import { REGIONS, destinationPath } from '@/content/destinations';
+import { BOOKING_TYPES } from '@/lib/booking';
+import { msToVietnamMidnight, todayLabel } from '@/lib/format';
+import { specialDay } from '@/content/special-days';
 import { placeBlob, smoothTo } from '@/lib/motion';
 import { SONG_XANH_CAFE } from '@/content/reviews/song-xanh-cafe';
 import { reviewPath } from '@/lib/reviews';
@@ -13,24 +16,39 @@ import { postPath } from '@/lib/posts';
 import { ROUTES } from '@/lib/routes';
 import { LICH_TRINH_3N2D } from '@/content/posts/lich-trinh-nha-trang-3-ngay-2-dem';
 
-type NavItem = { href: string; label: string; Icon: Icon; legacy?: boolean };
+type NavItem = { href: string; label: string; Icon: Icon; legacy?: boolean; menu?: 'guides' | 'booking' };
 
 const NAV: NavItem[] = [
-  { href: ROUTES.guides, label: 'Cẩm nang', Icon: BookOpenText },
-  { href: ROUTES.food, label: 'Ẩm thực', Icon: BowlFood },
-  { href: ROUTES.places, label: 'Điểm đến', Icon: MapPin },
-  { href: ROUTES.itineraries, label: 'Lịch trình', Icon: CalendarBlank },
-  { href: ROUTES.services, label: 'Tour & lưu trú', Icon: SuitcaseRolling },
-  { href: ROUTES.b2b, label: 'Marketing', Icon: Megaphone },
+  { href: ROUTES.guides, label: 'Cẩm nang du lịch', Icon: BookOpenText, menu: 'guides' },
+  { href: ROUTES.tours, label: 'Booking', Icon: SuitcaseRolling, menu: 'booking' },
+  { href: ROUTES.b2bContact, label: 'Hợp tác du lịch', Icon: Handshake },
+  { href: ROUTES.b2b, label: 'Marketing du lịch', Icon: Megaphone },
 ];
 
-const MOBILE_NAV = [
-  { href: ROUTES.guides, label: 'Cẩm nang du lịch' },
-  { href: ROUTES.food, label: 'Ẩm thực & đặc sản' },
-  { href: ROUTES.places, label: 'Điểm đến & vui chơi' },
-  { href: ROUTES.itineraries, label: 'Lịch trình tự túc' },
-  { href: ROUTES.services, label: 'Tour & lưu trú' },
-];
+/** Cẩm nang mega menu: one column per region, destinations link to their archive pages. */
+function GuidesMenu() {
+  return (
+    <div className="nd-mega">
+      {REGIONS.map(r => (
+        <div key={r.key}>
+          <p className="nd-h">{r.label}</p>
+          <ul>{r.places.map(d => <li key={d.slug}><Link href={destinationPath(d)} className="nd-link">{d.name}</Link></li>)}</ul>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+/** Booking menu: the three listing pages. */
+function BookingMenu() {
+  return (
+    <ul className="nd-list">
+      {BOOKING_TYPES.map(b => (
+        <li key={b.key}><Link href={b.href} className="nd-item"><b>{b.label}</b><span>{b.intro.split('.')[0]}.</span></Link></li>
+      ))}
+    </ul>
+  );
+}
 
 /** Focus the hero search after gliding to the top (homepage); elsewhere, go home to search. */
 function openSearch(goHome: () => void) {
@@ -65,10 +83,19 @@ export function Header() {
   const navRef = useRef<HTMLElement>(null);
   const blobRef = useRef<HTMLSpanElement>(null);
   const todayRef = useRef<HTMLSpanElement>(null);
+  const eventRef = useRef<HTMLSpanElement>(null);
 
-  // Date and header height are browser-only facts.
+  // Today's date in Nha Trang, plus the special day if there is one; rolls over at Vietnam midnight.
   useEffect(() => {
-    if (todayRef.current) todayRef.current.textContent = todayLabel();
+    let timer = 0;
+    const paint = () => {
+      const today = todayLabel(), event = specialDay(today);
+      if (todayRef.current) todayRef.current.textContent = today;
+      if (eventRef.current) { eventRef.current.textContent = event ? ` · ${event}` : ''; eventRef.current.hidden = !event; }
+      timer = window.setTimeout(paint, msToVietnamMidnight());
+    };
+    paint();
+    return () => clearTimeout(timer);
   }, []);
 
   // --hh tracks the header's real height (resize, fonts, menu) without a window resize listener.
@@ -120,8 +147,12 @@ export function Header() {
           <span className="text-navy font-semibold inline-flex items-center gap-1.5"><i className="live text-orange" />Trực tiếp</span>
           <span>Nha Trang 12°15&apos;N 109°11&apos;E</span>
           <span className="hidden sm:inline-flex items-center gap-2">29°C / Nắng nhẹ</span>
-          <span className="hidden md:inline">Cập nhật <span ref={todayRef} suppressHydrationWarning>21.11.2026</span></span>
-          <span className="hidden lg:inline ml-auto">Rev 11.26 / Cẩm nang thực địa</span>
+          <span className="hidden md:inline">Ngày <span ref={todayRef} suppressHydrationWarning>21.11.2026</span><span ref={eventRef} className="text-navy font-semibold" hidden suppressHydrationWarning /></span>
+          <span className="hidden lg:inline-flex items-center gap-2 ml-auto">
+            <a href="#" className="hover:text-blue">Về chúng tôi</a>
+            <span aria-hidden="true" className="text-ink/40">|</span>
+            <a href="#" className="hover:text-blue">Chính sách</a>
+          </span>
         </div>
       </div>
 
@@ -133,9 +164,17 @@ export function Header() {
 
         <nav ref={navRef} id="dnav" aria-label="Menu chính" className="hidden xl:flex relative items-center mx-auto p-1.5 rounded-[12px]">
           <span ref={blobRef} className="nav-blob" aria-hidden="true" />
-          {NAV.map(({ href, label, Icon, legacy: isLegacy }) =>
+          {NAV.map(({ href, label, Icon, legacy: isLegacy, menu }) =>
             isLegacy ? (
               <a key={label} className="nl orig" href={href}><Icon className="ico" size={17} aria-hidden="true" />{label}</a>
+            ) : menu ? (
+              // Dropdown opens on hover and on keyboard focus (CSS :focus-within); Escape closes it.
+              <div key={label} className={`nd ${menu === 'guides' ? '' : 'is-anchored'}`} onKeyDown={e => { if (e.key === 'Escape') (document.activeElement as HTMLElement | null)?.blur(); }}>
+                <Link className="nl" href={href} aria-haspopup="true"><Icon className="ico" size={17} aria-hidden="true" />{label}<CaretDown className="nd-caret" size={12} weight="bold" aria-hidden="true" /></Link>
+                <div className={`nd-panel ${menu === 'guides' ? 'is-mega' : ''}`}>
+                  {menu === 'guides' ? <GuidesMenu /> : <BookingMenu />}
+                </div>
+              </div>
             ) : (
               <Link key={label} className="nl" href={href}><Icon className="ico" size={17} aria-hidden="true" />{label}</Link>
             ),
@@ -147,8 +186,9 @@ export function Header() {
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5" /><path d="M15.5 15.5 21 21" /></svg>
             <span className="hidden 2xl:inline">Tìm kiếm</span><kbd className="hidden 2xl:grid">/</kbd>
           </button>
-          <Link href={ROUTES.b2bContact} className="btn btn-primary hidden sm:inline-flex !min-h-[42px] !text-[14px]">
-            <span>Hợp tác<span className="hidden 2xl:inline"> truyền thông</span></span><span className="arr" aria-hidden="true">→</span>
+          <Link href={ROUTES.b2bContact} className="contact-btn hidden sm:inline-flex">
+            <span className="contact-btn-ico" aria-hidden="true"><ChatCircleDots size={18} weight="fill" /><i className="contact-btn-dot" /></span>
+            <span className="contact-btn-txt"><b>Liên hệ</b><small>Phản hồi trong 15 phút</small></span>
           </Link>
           <button type="button" onClick={() => setMenuOpen(o => !o)} className="xl:hidden burger-pill caption" aria-label="Mở menu" aria-expanded={menuOpen}>
             {menuOpen ? 'Đóng' : 'Menu'}
@@ -157,9 +197,20 @@ export function Header() {
       </div>
 
       <nav id="mnav" className={`${menuOpen ? '' : 'hidden'} xl:hidden border-t border-navy text-[15px] font-medium grid`}>
-        {MOBILE_NAV.map(l => <Link key={l.href} className="px-4 py-3 border-b border-navy" href={l.href}>{l.label}</Link>)}
-        <Link className="px-4 py-3 border-b border-navy" href={ROUTES.b2b}>Marketing du lịch</Link>
-        <Link href={ROUTES.b2bContact} className="px-4 py-3 bg-navy text-white font-semibold">Hợp tác truyền thông</Link>
+        {NAV.map(l => l.menu ? (
+          <details key={l.href} className="mnav-group border-b border-navy">
+            <summary className="px-4 py-3 flex items-center justify-between cursor-pointer">{l.label}<CaretDown size={14} weight="bold" aria-hidden="true" /></summary>
+            <div className="px-4 pb-4">
+              <Link href={l.href} className="block py-2 font-semibold text-blue">{l.menu === 'guides' ? 'Tất cả cẩm nang' : 'Tất cả dịch vụ'} →</Link>
+              {l.menu === 'guides' ? REGIONS.map(r => (
+                <div key={r.key} className="mt-3">
+                  <p className="caption font-semibold text-ink/70 uppercase">{r.label}</p>
+                  <div className="flex flex-wrap gap-x-4 gap-y-1 mt-1">{r.places.map(d => <Link key={d.slug} href={destinationPath(d)} className="py-1">{d.name}</Link>)}</div>
+                </div>
+              )) : BOOKING_TYPES.map(b => <Link key={b.key} href={b.href} className="block py-2">{b.label}</Link>)}
+            </div>
+          </details>
+        ) : <Link key={l.href} className="px-4 py-3 border-b border-navy" href={l.href}>{l.label}</Link>)}
       </nav>
 
       {/* Template switcher (only for reviewing the demo) */}

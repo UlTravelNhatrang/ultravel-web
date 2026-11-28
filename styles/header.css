@@ -21,3 +21,38 @@
 .burger-pill{padding:0 1rem;font-size:14px;font-weight:600}
 #mnav{background:#fff}
 @media (prefers-reduced-motion: reduce){.live::after{animation:none!important}}
+
+/* Contact button: primary navy (guideline 07) with a chat mark, an orange "online" dot and a reply-time line. */
+.contact-btn{height:46px;align-items:center;gap:10px;padding:0 16px 0 6px;border-radius:12px;background:rgb(var(--navy));color:#fff;white-space:nowrap;transition:background-color .3s var(--ease)}
+.contact-btn:hover{background:rgb(var(--blue))}
+.contact-btn:active{transform:translateY(1px)}
+.contact-btn-ico{position:relative;display:grid;place-items:center;width:34px;height:34px;border-radius:9px;background:rgb(255 255 255/.14);transition:transform .4s var(--ease)}
+.contact-btn:hover .contact-btn-ico{transform:rotate(-8deg)}
+.contact-btn-dot{position:absolute;top:-3px;right:-3px;width:10px;height:10px;border-radius:999px;background:rgb(var(--orange));box-shadow:0 0 0 2px rgb(var(--navy));transition:box-shadow .3s var(--ease)}
+.contact-btn:hover .contact-btn-dot{box-shadow:0 0 0 2px rgb(var(--blue))}
+.contact-btn-txt{display:grid;line-height:1.15;text-align:left}
+.contact-btn-txt b{font-size:15px;font-weight:700}
+.contact-btn-txt small{font-size:12px;font-weight:500;color:rgb(255 255 255/.8)}
+.contact-btn:focus-visible{outline:2px solid rgb(var(--blue));outline-offset:3px}
+
+/* Nav dropdowns (Cẩm nang mega menu, Booking list): open on hover or keyboard focus. A transparent top padding
+   bridges the gap so the pointer can travel from the link to the panel. */
+.nd{position:static;display:flex}
+.nd-caret{margin-left:2px;opacity:.6;transition:transform .3s var(--ease)}
+.nd:hover .nd-caret,.nd:focus-within .nd-caret{transform:rotate(180deg)}
+.nd-panel{position:absolute;top:100%;left:50%;z-index:50;padding-top:10px;translate:-50% 6px;opacity:0;visibility:hidden;pointer-events:none;transition:opacity .2s var(--ease),translate .25s var(--ease),visibility 0s .25s}
+.nd:hover .nd-panel,.nd:focus-within .nd-panel{opacity:1;visibility:visible;pointer-events:auto;translate:-50% 0;transition:opacity .2s var(--ease),translate .25s var(--ease)}
+.nd-panel>*{background:#fff;border-radius:14px;box-shadow:0 0 0 1px rgb(var(--navy)/.1),0 24px 48px -24px rgb(var(--navy)/.35)}
+.nd-mega{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:8px 28px;width:min(960px,calc(100vw - 48px));padding:24px 28px}
+.nd-h{margin-bottom:8px;padding-bottom:8px;border-bottom:2px solid rgb(var(--orange));font-size:13px;font-weight:700;color:rgb(var(--navy))}
+.nd-link{display:block;padding:5px 0;font-size:15px;color:rgb(var(--ink));transition:color .2s}
+.nd-link:hover,.nd-link:focus-visible{color:rgb(var(--blue))}
+.nd-list{display:grid;gap:2px;width:320px;padding:8px}
+.nd-item{display:grid;gap:2px;padding:10px 12px;border-radius:10px;transition:background-color .2s}
+.nd-item b{font-size:15px;font-weight:600;color:rgb(var(--navy))}
+.nd-item span{font-size:13px;line-height:1.45;color:rgb(var(--ink)/.72)}
+.nd-item:hover,.nd-item:focus-visible{background:rgb(var(--cloud))}
+.mnav-group summary{list-style:none}
+.mnav-group summary::-webkit-details-marker{display:none}
+.mnav-group[open] summary svg{transform:rotate(180deg)}
+.nd.is-anchored{position:relative}

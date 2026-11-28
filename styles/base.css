@@ -43,7 +43,6 @@ a:hover .arr,button:hover .arr,.group:hover .arr{transform:translateX(5px)}
 .field:focus{outline:none;border-color:rgb(var(--blue));box-shadow:0 0 0 3px rgb(var(--blue)/.15)}
 .field[aria-invalid="true"]{border-color:rgb(var(--orange))}
 
-.barcode{height:34px;background-repeat:no-repeat}
 .snap::-webkit-scrollbar{display:none}.snap{scrollbar-width:none}
 
 /* Hero line mask: padding keeps stacked diacritics inside the mask */
@@ -75,9 +74,6 @@ a,button{transition:background-color .3s var(--ease),color .3s var(--ease),borde
 .caption .bg-navy{border-radius:6px}
 .hero-img>span,.ht+span,figure span.caption{border-radius:8px}
 
-.coupon{border-radius:var(--r);overflow:hidden;background:#fff;box-shadow:inset 0 0 0 1px rgb(var(--navy)/.1)}
-.coupon:hover{box-shadow:inset 0 0 0 1px rgb(var(--navy)/.2)}
-.coupon .ht{border-radius:var(--card-r)}
 
 @media (prefers-reduced-motion: reduce){
   .unit .rule{animation:none!important}

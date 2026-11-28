@@ -46,7 +46,6 @@
 .post-sec{scroll-margin-top:calc(var(--hh) + 24px)}
 .post-sec>*+*{margin-top:1.25rem}
 .post-h2{display:flex;align-items:baseline;gap:14px;font:700 clamp(1.5rem,1.2rem + 1vw,2rem)/1.2 var(--font-sans),sans-serif;letter-spacing:-.015em;text-wrap:balance}
-.post-h2>.caption{flex:none;font-size:13px;letter-spacing:0;color:rgb(var(--navy));padding:4px 9px;border-radius:8px;background:#fff;box-shadow:inset 0 0 0 1px rgb(var(--orange));translate:0 -.25em}
 .post-sec>p{font-size:17px;line-height:1.7;color:rgb(var(--ink));max-width:68ch}
 .post-sec strong{font-weight:650;color:rgb(var(--navy))}
 /* Links: Travel Blue (guideline 03) */
@@ -102,7 +101,6 @@ ol.post-list li::before{content:counter(pl);position:absolute;left:0;top:.2em;fo
 .post-timeline::before{content:"";position:absolute;left:31px;top:14px;bottom:14px;border-left:2px dotted rgb(var(--navy)/.25)}
 .post-timeline li{position:relative;display:grid;grid-template-columns:64px 1fr;gap:16px;align-items:start}
 .post-time{position:relative;z-index:1;justify-self:start;padding:5px 9px;border-radius:8px;background:rgb(var(--navy));color:#fff;font-size:12px;font-weight:600;box-shadow:0 0 0 4px rgb(var(--cloud))}
-.post-timeline li:first-child .post-time{background:rgb(var(--orange));color:rgb(var(--navy))}
 .post-timeline p{max-width:60ch;font-size:16px;line-height:1.6}
 
 /* Place mentioned in the post */
